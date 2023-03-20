@@ -12262,6 +12262,12 @@ func (c *Glue) GetUnfilteredPartitionMetadataRequest(input *GetUnfilteredPartiti
 
 // GetUnfilteredPartitionMetadata API operation for AWS Glue.
 //
+// Retrieves partition metadata from the Data Catalog that contains unfiltered
+// metadata.
+//
+// For IAM authorization, the public IAM action associated with this API is
+// glue:GetPartition.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -12358,6 +12364,12 @@ func (c *Glue) GetUnfilteredPartitionsMetadataRequest(input *GetUnfilteredPartit
 }
 
 // GetUnfilteredPartitionsMetadata API operation for AWS Glue.
+//
+// Retrieves partition metadata from the Data Catalog that contains unfiltered
+// metadata.
+//
+// For IAM authorization, the public IAM action associated with this API is
+// glue:GetPartitions.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -12500,6 +12512,11 @@ func (c *Glue) GetUnfilteredTableMetadataRequest(input *GetUnfilteredTableMetada
 }
 
 // GetUnfilteredTableMetadata API operation for AWS Glue.
+//
+// Retrieves table metadata from the Data Catalog that contains unfiltered metadata.
+//
+// For IAM authorization, the public IAM action associated with this API is
+// glue:GetTable.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -24251,6 +24268,109 @@ func (s CancelStatementOutput) GoString() string {
 	return s.String()
 }
 
+// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+type CatalogDeltaSource struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options.
+	AdditionalDeltaOptions map[string]*string `type:"map"`
+
+	// The name of the database to read from.
+	//
+	// Database is a required field
+	Database *string `type:"string" required:"true"`
+
+	// The name of the Delta Lake data source.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies the data schema for the Delta Lake source.
+	OutputSchemas []*GlueSchema `type:"list"`
+
+	// The name of the table in the database to read from.
+	//
+	// Table is a required field
+	Table *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogDeltaSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogDeltaSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CatalogDeltaSource) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CatalogDeltaSource"}
+	if s.Database == nil {
+		invalidParams.Add(request.NewErrParamRequired("Database"))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Table == nil {
+		invalidParams.Add(request.NewErrParamRequired("Table"))
+	}
+	if s.OutputSchemas != nil {
+		for i, v := range s.OutputSchemas {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputSchemas", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalDeltaOptions sets the AdditionalDeltaOptions field's value.
+func (s *CatalogDeltaSource) SetAdditionalDeltaOptions(v map[string]*string) *CatalogDeltaSource {
+	s.AdditionalDeltaOptions = v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *CatalogDeltaSource) SetDatabase(v string) *CatalogDeltaSource {
+	s.Database = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CatalogDeltaSource) SetName(v string) *CatalogDeltaSource {
+	s.Name = &v
+	return s
+}
+
+// SetOutputSchemas sets the OutputSchemas field's value.
+func (s *CatalogDeltaSource) SetOutputSchemas(v []*GlueSchema) *CatalogDeltaSource {
+	s.OutputSchemas = v
+	return s
+}
+
+// SetTable sets the Table field's value.
+func (s *CatalogDeltaSource) SetTable(v string) *CatalogDeltaSource {
+	s.Table = &v
+	return s
+}
+
 // Specifies a table definition in the Glue Data Catalog.
 type CatalogEntry struct {
 	_ struct{} `type:"structure"`
@@ -24315,6 +24435,109 @@ func (s *CatalogEntry) SetDatabaseName(v string) *CatalogEntry {
 // SetTableName sets the TableName field's value.
 func (s *CatalogEntry) SetTableName(v string) *CatalogEntry {
 	s.TableName = &v
+	return s
+}
+
+// Specifies a Hudi data source that is registered in the Glue Data Catalog.
+type CatalogHudiSource struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options.
+	AdditionalHudiOptions map[string]*string `type:"map"`
+
+	// The name of the database to read from.
+	//
+	// Database is a required field
+	Database *string `type:"string" required:"true"`
+
+	// The name of the Hudi data source.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies the data schema for the Hudi source.
+	OutputSchemas []*GlueSchema `type:"list"`
+
+	// The name of the table in the database to read from.
+	//
+	// Table is a required field
+	Table *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogHudiSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogHudiSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CatalogHudiSource) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CatalogHudiSource"}
+	if s.Database == nil {
+		invalidParams.Add(request.NewErrParamRequired("Database"))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Table == nil {
+		invalidParams.Add(request.NewErrParamRequired("Table"))
+	}
+	if s.OutputSchemas != nil {
+		for i, v := range s.OutputSchemas {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputSchemas", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalHudiOptions sets the AdditionalHudiOptions field's value.
+func (s *CatalogHudiSource) SetAdditionalHudiOptions(v map[string]*string) *CatalogHudiSource {
+	s.AdditionalHudiOptions = v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *CatalogHudiSource) SetDatabase(v string) *CatalogHudiSource {
+	s.Database = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CatalogHudiSource) SetName(v string) *CatalogHudiSource {
+	s.Name = &v
+	return s
+}
+
+// SetOutputSchemas sets the OutputSchemas field's value.
+func (s *CatalogHudiSource) SetOutputSchemas(v []*GlueSchema) *CatalogHudiSource {
+	s.OutputSchemas = v
+	return s
+}
+
+// SetTable sets the Table field's value.
+func (s *CatalogHudiSource) SetTable(v string) *CatalogHudiSource {
+	s.Table = &v
 	return s
 }
 
@@ -25042,6 +25265,12 @@ type CodeGenConfigurationNode struct {
 	// Specifies a connector to an Amazon Athena data source.
 	AthenaConnectorSource *AthenaConnectorSource `type:"structure"`
 
+	// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+	CatalogDeltaSource *CatalogDeltaSource `type:"structure"`
+
+	// Specifies a Hudi data source that is registered in the Glue Data Catalog.
+	CatalogHudiSource *CatalogHudiSource `type:"structure"`
+
 	// Specifies an Apache Kafka data store in the Data Catalog.
 	CatalogKafkaSource *CatalogKafkaSource `type:"structure"`
 
@@ -25057,6 +25286,9 @@ type CodeGenConfigurationNode struct {
 	// Specifies a transform that uses custom code you provide to perform the data
 	// transformation. The output is a collection of DynamicFrames.
 	CustomCode *CustomCode `type:"structure"`
+
+	// Specifies the direct JDBC source connection.
+	DirectJDBCSource *DirectJDBCSource `type:"structure"`
 
 	// Specifies an Apache Kafka data store.
 	DirectKafkaSource *DirectKafkaSource `type:"structure"`
@@ -25081,7 +25313,7 @@ type CodeGenConfigurationNode struct {
 	// Specifies a custom visual transform created by a user.
 	DynamicTransform *DynamicTransform `type:"structure"`
 
-	// Specifies a DynamoDB data source in the Glue Data Catalog.
+	// Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.
 	DynamoDBCatalogSource *DynamoDBCatalogSource `type:"structure"`
 
 	// Specifies your data quality evaluation criteria.
@@ -25152,11 +25384,19 @@ type CodeGenConfigurationNode struct {
 	// Specifies a target that uses Amazon Redshift.
 	RedshiftTarget *RedshiftTarget `type:"structure"`
 
-	// Specifies a Relational database data source in the Glue Data Catalog.
+	// Specifies a relational catalog data store in the Glue Data Catalog.
 	RelationalCatalogSource *RelationalCatalogSource `type:"structure"`
 
 	// Specifies a transform that renames a single data property key.
 	RenameField *RenameField `type:"structure"`
+
+	// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+	// The data source must be stored in Amazon S3.
+	S3CatalogDeltaSource *S3CatalogDeltaSource `type:"structure"`
+
+	// Specifies a Hudi data source that is registered in the Glue Data Catalog.
+	// The data source must be stored in Amazon S3.
+	S3CatalogHudiSource *S3CatalogHudiSource `type:"structure"`
 
 	// Specifies an Amazon S3 data store in the Glue Data Catalog.
 	S3CatalogSource *S3CatalogSource `type:"structure"`
@@ -25167,12 +25407,31 @@ type CodeGenConfigurationNode struct {
 	// Specifies a command-separated value (CSV) data store stored in Amazon S3.
 	S3CsvSource *S3CsvSource `type:"structure"`
 
+	// Specifies a target that writes to a Delta Lake data source in the Glue Data
+	// Catalog.
+	S3DeltaCatalogTarget *S3DeltaCatalogTarget `type:"structure"`
+
+	// Specifies a target that writes to a Delta Lake data source in Amazon S3.
+	S3DeltaDirectTarget *S3DeltaDirectTarget `type:"structure"`
+
+	// Specifies a Delta Lake data source stored in Amazon S3.
+	S3DeltaSource *S3DeltaSource `type:"structure"`
+
 	// Specifies a data target that writes to Amazon S3.
 	S3DirectTarget *S3DirectTarget `type:"structure"`
 
 	// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
 	// storage.
 	S3GlueParquetTarget *S3GlueParquetTarget `type:"structure"`
+
+	// Specifies a target that writes to a Hudi data source in the Glue Data Catalog.
+	S3HudiCatalogTarget *S3HudiCatalogTarget `type:"structure"`
+
+	// Specifies a target that writes to a Hudi data source in Amazon S3.
+	S3HudiDirectTarget *S3HudiDirectTarget `type:"structure"`
+
+	// Specifies a Hudi data source stored in Amazon S3.
+	S3HudiSource *S3HudiSource `type:"structure"`
 
 	// Specifies a JSON data store stored in Amazon S3.
 	S3JsonSource *S3JsonSource `type:"structure"`
@@ -25247,6 +25506,16 @@ func (s *CodeGenConfigurationNode) Validate() error {
 			invalidParams.AddNested("AthenaConnectorSource", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.CatalogDeltaSource != nil {
+		if err := s.CatalogDeltaSource.Validate(); err != nil {
+			invalidParams.AddNested("CatalogDeltaSource", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.CatalogHudiSource != nil {
+		if err := s.CatalogHudiSource.Validate(); err != nil {
+			invalidParams.AddNested("CatalogHudiSource", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.CatalogKafkaSource != nil {
 		if err := s.CatalogKafkaSource.Validate(); err != nil {
 			invalidParams.AddNested("CatalogKafkaSource", err.(request.ErrInvalidParams))
@@ -25270,6 +25539,11 @@ func (s *CodeGenConfigurationNode) Validate() error {
 	if s.CustomCode != nil {
 		if err := s.CustomCode.Validate(); err != nil {
 			invalidParams.AddNested("CustomCode", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DirectJDBCSource != nil {
+		if err := s.DirectJDBCSource.Validate(); err != nil {
+			invalidParams.AddNested("DirectJDBCSource", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.DirectKafkaSource != nil {
@@ -25417,6 +25691,16 @@ func (s *CodeGenConfigurationNode) Validate() error {
 			invalidParams.AddNested("RenameField", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.S3CatalogDeltaSource != nil {
+		if err := s.S3CatalogDeltaSource.Validate(); err != nil {
+			invalidParams.AddNested("S3CatalogDeltaSource", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3CatalogHudiSource != nil {
+		if err := s.S3CatalogHudiSource.Validate(); err != nil {
+			invalidParams.AddNested("S3CatalogHudiSource", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.S3CatalogSource != nil {
 		if err := s.S3CatalogSource.Validate(); err != nil {
 			invalidParams.AddNested("S3CatalogSource", err.(request.ErrInvalidParams))
@@ -25432,6 +25716,21 @@ func (s *CodeGenConfigurationNode) Validate() error {
 			invalidParams.AddNested("S3CsvSource", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.S3DeltaCatalogTarget != nil {
+		if err := s.S3DeltaCatalogTarget.Validate(); err != nil {
+			invalidParams.AddNested("S3DeltaCatalogTarget", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3DeltaDirectTarget != nil {
+		if err := s.S3DeltaDirectTarget.Validate(); err != nil {
+			invalidParams.AddNested("S3DeltaDirectTarget", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3DeltaSource != nil {
+		if err := s.S3DeltaSource.Validate(); err != nil {
+			invalidParams.AddNested("S3DeltaSource", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.S3DirectTarget != nil {
 		if err := s.S3DirectTarget.Validate(); err != nil {
 			invalidParams.AddNested("S3DirectTarget", err.(request.ErrInvalidParams))
@@ -25440,6 +25739,21 @@ func (s *CodeGenConfigurationNode) Validate() error {
 	if s.S3GlueParquetTarget != nil {
 		if err := s.S3GlueParquetTarget.Validate(); err != nil {
 			invalidParams.AddNested("S3GlueParquetTarget", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3HudiCatalogTarget != nil {
+		if err := s.S3HudiCatalogTarget.Validate(); err != nil {
+			invalidParams.AddNested("S3HudiCatalogTarget", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3HudiDirectTarget != nil {
+		if err := s.S3HudiDirectTarget.Validate(); err != nil {
+			invalidParams.AddNested("S3HudiDirectTarget", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3HudiSource != nil {
+		if err := s.S3HudiSource.Validate(); err != nil {
+			invalidParams.AddNested("S3HudiSource", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.S3JsonSource != nil {
@@ -25517,6 +25831,18 @@ func (s *CodeGenConfigurationNode) SetAthenaConnectorSource(v *AthenaConnectorSo
 	return s
 }
 
+// SetCatalogDeltaSource sets the CatalogDeltaSource field's value.
+func (s *CodeGenConfigurationNode) SetCatalogDeltaSource(v *CatalogDeltaSource) *CodeGenConfigurationNode {
+	s.CatalogDeltaSource = v
+	return s
+}
+
+// SetCatalogHudiSource sets the CatalogHudiSource field's value.
+func (s *CodeGenConfigurationNode) SetCatalogHudiSource(v *CatalogHudiSource) *CodeGenConfigurationNode {
+	s.CatalogHudiSource = v
+	return s
+}
+
 // SetCatalogKafkaSource sets the CatalogKafkaSource field's value.
 func (s *CodeGenConfigurationNode) SetCatalogKafkaSource(v *CatalogKafkaSource) *CodeGenConfigurationNode {
 	s.CatalogKafkaSource = v
@@ -25544,6 +25870,12 @@ func (s *CodeGenConfigurationNode) SetCatalogTarget(v *BasicCatalogTarget) *Code
 // SetCustomCode sets the CustomCode field's value.
 func (s *CodeGenConfigurationNode) SetCustomCode(v *CustomCode) *CodeGenConfigurationNode {
 	s.CustomCode = v
+	return s
+}
+
+// SetDirectJDBCSource sets the DirectJDBCSource field's value.
+func (s *CodeGenConfigurationNode) SetDirectJDBCSource(v *DirectJDBCSource) *CodeGenConfigurationNode {
+	s.DirectJDBCSource = v
 	return s
 }
 
@@ -25721,6 +26053,18 @@ func (s *CodeGenConfigurationNode) SetRenameField(v *RenameField) *CodeGenConfig
 	return s
 }
 
+// SetS3CatalogDeltaSource sets the S3CatalogDeltaSource field's value.
+func (s *CodeGenConfigurationNode) SetS3CatalogDeltaSource(v *S3CatalogDeltaSource) *CodeGenConfigurationNode {
+	s.S3CatalogDeltaSource = v
+	return s
+}
+
+// SetS3CatalogHudiSource sets the S3CatalogHudiSource field's value.
+func (s *CodeGenConfigurationNode) SetS3CatalogHudiSource(v *S3CatalogHudiSource) *CodeGenConfigurationNode {
+	s.S3CatalogHudiSource = v
+	return s
+}
+
 // SetS3CatalogSource sets the S3CatalogSource field's value.
 func (s *CodeGenConfigurationNode) SetS3CatalogSource(v *S3CatalogSource) *CodeGenConfigurationNode {
 	s.S3CatalogSource = v
@@ -25739,6 +26083,24 @@ func (s *CodeGenConfigurationNode) SetS3CsvSource(v *S3CsvSource) *CodeGenConfig
 	return s
 }
 
+// SetS3DeltaCatalogTarget sets the S3DeltaCatalogTarget field's value.
+func (s *CodeGenConfigurationNode) SetS3DeltaCatalogTarget(v *S3DeltaCatalogTarget) *CodeGenConfigurationNode {
+	s.S3DeltaCatalogTarget = v
+	return s
+}
+
+// SetS3DeltaDirectTarget sets the S3DeltaDirectTarget field's value.
+func (s *CodeGenConfigurationNode) SetS3DeltaDirectTarget(v *S3DeltaDirectTarget) *CodeGenConfigurationNode {
+	s.S3DeltaDirectTarget = v
+	return s
+}
+
+// SetS3DeltaSource sets the S3DeltaSource field's value.
+func (s *CodeGenConfigurationNode) SetS3DeltaSource(v *S3DeltaSource) *CodeGenConfigurationNode {
+	s.S3DeltaSource = v
+	return s
+}
+
 // SetS3DirectTarget sets the S3DirectTarget field's value.
 func (s *CodeGenConfigurationNode) SetS3DirectTarget(v *S3DirectTarget) *CodeGenConfigurationNode {
 	s.S3DirectTarget = v
@@ -25748,6 +26110,24 @@ func (s *CodeGenConfigurationNode) SetS3DirectTarget(v *S3DirectTarget) *CodeGen
 // SetS3GlueParquetTarget sets the S3GlueParquetTarget field's value.
 func (s *CodeGenConfigurationNode) SetS3GlueParquetTarget(v *S3GlueParquetTarget) *CodeGenConfigurationNode {
 	s.S3GlueParquetTarget = v
+	return s
+}
+
+// SetS3HudiCatalogTarget sets the S3HudiCatalogTarget field's value.
+func (s *CodeGenConfigurationNode) SetS3HudiCatalogTarget(v *S3HudiCatalogTarget) *CodeGenConfigurationNode {
+	s.S3HudiCatalogTarget = v
+	return s
+}
+
+// SetS3HudiDirectTarget sets the S3HudiDirectTarget field's value.
+func (s *CodeGenConfigurationNode) SetS3HudiDirectTarget(v *S3HudiDirectTarget) *CodeGenConfigurationNode {
+	s.S3HudiDirectTarget = v
+	return s
+}
+
+// SetS3HudiSource sets the S3HudiSource field's value.
+func (s *CodeGenConfigurationNode) SetS3HudiSource(v *S3HudiSource) *CodeGenConfigurationNode {
+	s.S3HudiSource = v
 	return s
 }
 
@@ -26217,11 +26597,14 @@ func (s *ColumnImportance) SetImportance(v float64) *ColumnImportance {
 	return s
 }
 
+// A filter that uses both column-level and row-level filtering.
 type ColumnRowFilter struct {
 	_ struct{} `type:"structure"`
 
+	// A string containing the name of the column.
 	ColumnName *string `min:"1" type:"string"`
 
+	// A string containing the row-level filter expression.
 	RowFilterExpression *string `type:"string"`
 }
 
@@ -27055,8 +27438,8 @@ type Connection struct {
 	//    client key password (if the user has the Glue encrypt passwords setting
 	//    selected).
 	//
-	//    * KAFKA_SASL_MECHANISM - "SCRAM-SHA-512" or "GSSAPI". These are the two
-	//    supported SASL Mechanisms (https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml).
+	//    * KAFKA_SASL_MECHANISM - "SCRAM-SHA-512", "GSSAPI", or "AWS_MSK_IAM".
+	//    These are the supported SASL Mechanisms (https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml).
 	//
 	//    * KAFKA_SASL_SCRAM_USERNAME - A plaintext username used to authenticate
 	//    with the "SCRAM-SHA-512" mechanism.
@@ -27195,24 +27578,53 @@ type ConnectionInput struct {
 	// The type of the connection. Currently, these types are supported:
 	//
 	//    * JDBC - Designates a connection to a database through Java Database Connectivity
-	//    (JDBC).
+	//    (JDBC). JDBC Connections use the following ConnectionParameters. Required:
+	//    All of (HOST, PORT, JDBC_ENGINE) or JDBC_CONNECTION_URL. Required: All
+	//    of (USERNAME, PASSWORD) or SECRET_ID. Optional: JDBC_ENFORCE_SSL, CUSTOM_JDBC_CERT,
+	//    CUSTOM_JDBC_CERT_STRING, SKIP_CUSTOM_JDBC_CERT_VALIDATION. These parameters
+	//    are used to configure SSL with JDBC.
 	//
 	//    * KAFKA - Designates a connection to an Apache Kafka streaming platform.
+	//    KAFKA Connections use the following ConnectionParameters. Required: KAFKA_BOOTSTRAP_SERVERS.
+	//    Optional: KAFKA_SSL_ENABLED, KAFKA_CUSTOM_CERT, KAFKA_SKIP_CUSTOM_CERT_VALIDATION.
+	//    These parameters are used to configure SSL with KAFKA. Optional: KAFKA_CLIENT_KEYSTORE,
+	//    KAFKA_CLIENT_KEYSTORE_PASSWORD, KAFKA_CLIENT_KEY_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD,
+	//    ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD. These parameters are used to configure
+	//    TLS client configuration with SSL in KAFKA. Optional: KAFKA_SASL_MECHANISM.
+	//    Can be specified as SCRAM-SHA-512, GSSAPI, or AWS_MSK_IAM. Optional: KAFKA_SASL_SCRAM_USERNAME,
+	//    KAFKA_SASL_SCRAM_PASSWORD, ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD. These
+	//    parameters are used to configure SASL/SCRAM-SHA-512 authentication with
+	//    KAFKA. Optional: KAFKA_SASL_GSSAPI_KEYTAB, KAFKA_SASL_GSSAPI_KRB5_CONF,
+	//    KAFKA_SASL_GSSAPI_SERVICE, KAFKA_SASL_GSSAPI_PRINCIPAL. These parameters
+	//    are used to configure SASL/GSSAPI authentication with KAFKA.
 	//
-	//    * MONGODB - Designates a connection to a MongoDB document database.
+	//    * MONGODB - Designates a connection to a MongoDB document database. MONGODB
+	//    Connections use the following ConnectionParameters. Required: CONNECTION_URL.
+	//    Required: All of (USERNAME, PASSWORD) or SECRET_ID.
 	//
 	//    * NETWORK - Designates a network connection to a data source within an
-	//    Amazon Virtual Private Cloud environment (Amazon VPC).
+	//    Amazon Virtual Private Cloud environment (Amazon VPC). NETWORK Connections
+	//    do not require ConnectionParameters. Instead, provide a PhysicalConnectionRequirements.
 	//
 	//    * MARKETPLACE - Uses configuration settings contained in a connector purchased
 	//    from Amazon Web Services Marketplace to read from and write to data stores
-	//    that are not natively supported by Glue.
+	//    that are not natively supported by Glue. MARKETPLACE Connections use the
+	//    following ConnectionParameters. Required: CONNECTOR_TYPE, CONNECTOR_URL,
+	//    CONNECTOR_CLASS_NAME, CONNECTION_URL. Required for JDBC CONNECTOR_TYPE
+	//    connections: All of (USERNAME, PASSWORD) or SECRET_ID.
 	//
 	//    * CUSTOM - Uses configuration settings contained in a custom connector
 	//    to read from and write to data stores that are not natively supported
 	//    by Glue.
 	//
 	// SFTP is not supported.
+	//
+	// For more information about how optional ConnectionProperties are used to
+	// configure features in Glue, consult Glue connection properties (https://docs.aws.amazon.com/glue/latest/dg/connection-defining.html).
+	//
+	// For more information about how optional ConnectionProperties are used to
+	// configure features in Glue Studio, consult Using connectors and connections
+	// (https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html).
 	//
 	// ConnectionType is a required field
 	ConnectionType *string `type:"string" required:"true" enum:"ConnectionType"`
@@ -27223,7 +27635,8 @@ type ConnectionInput struct {
 	// A list of criteria that can be used in selecting this connection.
 	MatchCriteria []*string `type:"list"`
 
-	// The name of the connection.
+	// The name of the connection. Connection will not function as expected without
+	// a name.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -33931,7 +34344,8 @@ type Database struct {
 	// The ID of the Data Catalog in which the database resides.
 	CatalogId *string `min:"1" type:"string"`
 
-	// Creates a set of default permissions on the table for principals.
+	// Creates a set of default permissions on the table for principals. Used by
+	// Lake Formation. Not used in the normal course of Glue operations.
 	CreateTableDefaultPermissions []*PrincipalPermissions `type:"list"`
 
 	// The time at which the metadata database was created in the catalog.
@@ -34084,7 +34498,8 @@ func (s *DatabaseIdentifier) SetDatabaseName(v string) *DatabaseIdentifier {
 type DatabaseInput struct {
 	_ struct{} `type:"structure"`
 
-	// Creates a set of default permissions on the table for principals.
+	// Creates a set of default permissions on the table for principals. Used by
+	// Lake Formation. Not used in the normal course of Glue operations.
 	CreateTableDefaultPermissions []*PrincipalPermissions `type:"list"`
 
 	// A description of the database.
@@ -37204,6 +37619,118 @@ func (s *DevEndpointCustomLibraries) SetExtraJarsS3Path(v string) *DevEndpointCu
 // SetExtraPythonLibsS3Path sets the ExtraPythonLibsS3Path field's value.
 func (s *DevEndpointCustomLibraries) SetExtraPythonLibsS3Path(v string) *DevEndpointCustomLibraries {
 	s.ExtraPythonLibsS3Path = &v
+	return s
+}
+
+// Specifies the direct JDBC source connection.
+type DirectJDBCSource struct {
+	_ struct{} `type:"structure"`
+
+	// The connection name of the JDBC source.
+	//
+	// ConnectionName is a required field
+	ConnectionName *string `type:"string" required:"true"`
+
+	// The connection type of the JDBC source.
+	//
+	// ConnectionType is a required field
+	ConnectionType *string `type:"string" required:"true" enum:"JDBCConnectionType"`
+
+	// The database of the JDBC source connection.
+	//
+	// Database is a required field
+	Database *string `type:"string" required:"true"`
+
+	// The name of the JDBC source connection.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The temp directory of the JDBC Redshift source.
+	RedshiftTmpDir *string `type:"string"`
+
+	// The table of the JDBC source connection.
+	//
+	// Table is a required field
+	Table *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectJDBCSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectJDBCSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DirectJDBCSource) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DirectJDBCSource"}
+	if s.ConnectionName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ConnectionName"))
+	}
+	if s.ConnectionType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ConnectionType"))
+	}
+	if s.Database == nil {
+		invalidParams.Add(request.NewErrParamRequired("Database"))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Table == nil {
+		invalidParams.Add(request.NewErrParamRequired("Table"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetConnectionName sets the ConnectionName field's value.
+func (s *DirectJDBCSource) SetConnectionName(v string) *DirectJDBCSource {
+	s.ConnectionName = &v
+	return s
+}
+
+// SetConnectionType sets the ConnectionType field's value.
+func (s *DirectJDBCSource) SetConnectionType(v string) *DirectJDBCSource {
+	s.ConnectionType = &v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *DirectJDBCSource) SetDatabase(v string) *DirectJDBCSource {
+	s.Database = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *DirectJDBCSource) SetName(v string) *DirectJDBCSource {
+	s.Name = &v
+	return s
+}
+
+// SetRedshiftTmpDir sets the RedshiftTmpDir field's value.
+func (s *DirectJDBCSource) SetRedshiftTmpDir(v string) *DirectJDBCSource {
+	s.RedshiftTmpDir = &v
+	return s
+}
+
+// SetTable sets the Table field's value.
+func (s *DirectJDBCSource) SetTable(v string) *DirectJDBCSource {
+	s.Table = &v
 	return s
 }
 
@@ -46193,21 +46720,31 @@ func (s *GetTriggersOutput) SetTriggers(v []*Trigger) *GetTriggersOutput {
 type GetUnfilteredPartitionMetadataInput struct {
 	_ struct{} `type:"structure"`
 
-	// A structure containing information for audit.
+	// A structure containing Lake Formation audit context information.
 	AuditContext *AuditContext `type:"structure"`
 
+	// The catalog ID where the partition resides.
+	//
 	// CatalogId is a required field
 	CatalogId *string `min:"1" type:"string" required:"true"`
 
+	// (Required) Specifies the name of a database that contains the partition.
+	//
 	// DatabaseName is a required field
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
+	// (Required) A list of partition key values.
+	//
 	// PartitionValues is a required field
 	PartitionValues []*string `type:"list" required:"true"`
 
+	// (Required) A list of supported permission types.
+	//
 	// SupportedPermissionTypes is a required field
 	SupportedPermissionTypes []*string `min:"1" type:"list" required:"true" enum:"PermissionType"`
 
+	// (Required) Specifies the name of a table that contains the partition.
+	//
 	// TableName is a required field
 	TableName *string `min:"1" type:"string" required:"true"`
 }
@@ -46306,11 +46843,14 @@ func (s *GetUnfilteredPartitionMetadataInput) SetTableName(v string) *GetUnfilte
 type GetUnfilteredPartitionMetadataOutput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of column names that the user has been granted access to.
 	AuthorizedColumns []*string `type:"list"`
 
+	// A Boolean value that indicates whether the partition location is registered
+	// with Lake Formation.
 	IsRegisteredWithLakeFormation *bool `type:"boolean"`
 
-	// Represents a slice of table data.
+	// A Partition object containing the partition metadata.
 	Partition *Partition `type:"structure"`
 }
 
@@ -46353,28 +46893,117 @@ func (s *GetUnfilteredPartitionMetadataOutput) SetPartition(v *Partition) *GetUn
 type GetUnfilteredPartitionsMetadataInput struct {
 	_ struct{} `type:"structure"`
 
-	// A structure containing information for audit.
+	// A structure containing Lake Formation audit context information.
 	AuditContext *AuditContext `type:"structure"`
 
+	// The ID of the Data Catalog where the partitions in question reside. If none
+	// is provided, the AWS account ID is used by default.
+	//
 	// CatalogId is a required field
 	CatalogId *string `min:"1" type:"string" required:"true"`
 
+	// The name of the catalog database where the partitions reside.
+	//
 	// DatabaseName is a required field
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
+	// An expression that filters the partitions to be returned.
+	//
+	// The expression uses SQL syntax similar to the SQL WHERE filter clause. The
+	// SQL statement parser JSQLParser (http://jsqlparser.sourceforge.net/home.php)
+	// parses the expression.
+	//
+	// Operators: The following are the operators that you can use in the Expression
+	// API call:
+	//
+	// =
+	//
+	// Checks whether the values of the two operands are equal; if yes, then the
+	// condition becomes true.
+	//
+	// Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
+	//
+	// (a = b) is not true.
+	//
+	// < >
+	//
+	// Checks whether the values of two operands are equal; if the values are not
+	// equal, then the condition becomes true.
+	//
+	// Example: (a < > b) is true.
+	//
+	// >
+	//
+	// Checks whether the value of the left operand is greater than the value of
+	// the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a > b) is not true.
+	//
+	// <
+	//
+	// Checks whether the value of the left operand is less than the value of the
+	// right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a < b) is true.
+	//
+	// >=
+	//
+	// Checks whether the value of the left operand is greater than or equal to
+	// the value of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a >= b) is not true.
+	//
+	// <=
+	//
+	// Checks whether the value of the left operand is less than or equal to the
+	// value of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a <= b) is true.
+	//
+	// AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL
+	//
+	// Logical operators.
+	//
+	// Supported Partition Key Types: The following are the supported partition
+	// keys.
+	//
+	//    * string
+	//
+	//    * date
+	//
+	//    * timestamp
+	//
+	//    * int
+	//
+	//    * bigint
+	//
+	//    * long
+	//
+	//    * tinyint
+	//
+	//    * smallint
+	//
+	//    * decimal
+	//
+	// If an type is encountered that is not valid, an exception is thrown.
 	Expression *string `type:"string"`
 
+	// The maximum number of partitions to return in a single response.
 	MaxResults *int64 `min:"1" type:"integer"`
 
+	// A continuation token, if this is not the first call to retrieve these partitions.
 	NextToken *string `type:"string"`
 
-	// Defines a non-overlapping region of a table's partitions, allowing multiple
-	// requests to be run in parallel.
+	// The segment of the table's partitions to scan in this request.
 	Segment *Segment `type:"structure"`
 
+	// A list of supported permission types.
+	//
 	// SupportedPermissionTypes is a required field
 	SupportedPermissionTypes []*string `min:"1" type:"list" required:"true" enum:"PermissionType"`
 
+	// The name of the table that contains the partition.
+	//
 	// TableName is a required field
 	TableName *string `min:"1" type:"string" required:"true"`
 }
@@ -46496,8 +47125,11 @@ func (s *GetUnfilteredPartitionsMetadataInput) SetTableName(v string) *GetUnfilt
 type GetUnfilteredPartitionsMetadataOutput struct {
 	_ struct{} `type:"structure"`
 
+	// A continuation token, if the returned list of partitions does not include
+	// the last one.
 	NextToken *string `type:"string"`
 
+	// A list of requested partitions.
 	UnfilteredPartitions []*UnfilteredPartition `type:"list"`
 }
 
@@ -46534,18 +47166,26 @@ func (s *GetUnfilteredPartitionsMetadataOutput) SetUnfilteredPartitions(v []*Unf
 type GetUnfilteredTableMetadataInput struct {
 	_ struct{} `type:"structure"`
 
-	// A structure containing information for audit.
+	// A structure containing Lake Formation audit context information.
 	AuditContext *AuditContext `type:"structure"`
 
+	// The catalog ID where the table resides.
+	//
 	// CatalogId is a required field
 	CatalogId *string `min:"1" type:"string" required:"true"`
 
+	// (Required) Specifies the name of a database that contains the table.
+	//
 	// DatabaseName is a required field
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
+	// (Required) Specifies the name of a table for which you are requesting metadata.
+	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
+	// (Required) A list of supported permission types.
+	//
 	// SupportedPermissionTypes is a required field
 	SupportedPermissionTypes []*string `min:"1" type:"list" required:"true" enum:"PermissionType"`
 }
@@ -46635,13 +47275,17 @@ func (s *GetUnfilteredTableMetadataInput) SetSupportedPermissionTypes(v []*strin
 type GetUnfilteredTableMetadataOutput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of column names that the user has been granted access to.
 	AuthorizedColumns []*string `type:"list"`
 
+	// A list of column row filters.
 	CellFilters []*ColumnRowFilter `type:"list"`
 
+	// A Boolean value that indicates whether the partition location is registered
+	// with Lake Formation.
 	IsRegisteredWithLakeFormation *bool `type:"boolean"`
 
-	// Represents a collection of related data organized in columns and rows.
+	// A Table object containing the table metadata.
 	Table *TableData `type:"structure"`
 }
 
@@ -50262,6 +50906,12 @@ func (s *JsonClassifier) SetVersion(v int64) *JsonClassifier {
 type KafkaStreamingSourceOptions struct {
 	_ struct{} `type:"structure"`
 
+	// When this option is set to 'true', the data output will contain an additional
+	// column named "__src_timestamp" that indicates the time when the corresponding
+	// record received by the topic. The default value is 'false'. This option is
+	// supported in Glue version 4.0 or later.
+	AddRecordTimestamp *string `type:"string"`
+
 	// The specific TopicPartitions to consume. You must specify at least one of
 	// "topicName", "assign" or "subscribePattern".
 	Assign *string `type:"string"`
@@ -50280,9 +50930,22 @@ type KafkaStreamingSourceOptions struct {
 	// Specifies the delimiter character.
 	Delimiter *string `type:"string"`
 
+	// When this option is set to 'true', for each batch, it will emit the metrics
+	// for the duration between the oldest record received by the topic and the
+	// time it arrives in Glue to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs".
+	// The default value is 'false'. This option is supported in Glue version 4.0
+	// or later.
+	EmitConsumerLagMetrics *string `type:"string"`
+
 	// The end point when a batch query is ended. Possible values are either "latest"
 	// or a JSON string that specifies an ending offset for each TopicPartition.
 	EndingOffsets *string `type:"string"`
+
+	// Whether to include the Kafka headers. When the option is set to "true", the
+	// data output will contain an additional column named "glue_streaming_kafka_headers"
+	// with type Array[Struct(key: String, value: String)]. The default value is
+	// "false". This option is available in Glue version 3.0 or later only.
+	IncludeHeaders *bool `type:"boolean"`
 
 	// The rate limit on the maximum number of offsets that are processed per trigger
 	// interval. The specified total number of offsets is proportionally split across
@@ -50342,6 +51005,12 @@ func (s KafkaStreamingSourceOptions) GoString() string {
 	return s.String()
 }
 
+// SetAddRecordTimestamp sets the AddRecordTimestamp field's value.
+func (s *KafkaStreamingSourceOptions) SetAddRecordTimestamp(v string) *KafkaStreamingSourceOptions {
+	s.AddRecordTimestamp = &v
+	return s
+}
+
 // SetAssign sets the Assign field's value.
 func (s *KafkaStreamingSourceOptions) SetAssign(v string) *KafkaStreamingSourceOptions {
 	s.Assign = &v
@@ -50372,9 +51041,21 @@ func (s *KafkaStreamingSourceOptions) SetDelimiter(v string) *KafkaStreamingSour
 	return s
 }
 
+// SetEmitConsumerLagMetrics sets the EmitConsumerLagMetrics field's value.
+func (s *KafkaStreamingSourceOptions) SetEmitConsumerLagMetrics(v string) *KafkaStreamingSourceOptions {
+	s.EmitConsumerLagMetrics = &v
+	return s
+}
+
 // SetEndingOffsets sets the EndingOffsets field's value.
 func (s *KafkaStreamingSourceOptions) SetEndingOffsets(v string) *KafkaStreamingSourceOptions {
 	s.EndingOffsets = &v
+	return s
+}
+
+// SetIncludeHeaders sets the IncludeHeaders field's value.
+func (s *KafkaStreamingSourceOptions) SetIncludeHeaders(v bool) *KafkaStreamingSourceOptions {
+	s.IncludeHeaders = &v
 	return s
 }
 
@@ -50486,6 +51167,12 @@ type KinesisStreamingSourceOptions struct {
 	// above.
 	AddIdleTimeBetweenReads *bool `type:"boolean"`
 
+	// When this option is set to 'true', the data output will contain an additional
+	// column named "__src_timestamp" that indicates the time when the corresponding
+	// record received by the stream. The default value is 'false'. This option
+	// is supported in Glue version 4.0 or later.
+	AddRecordTimestamp *string `type:"string"`
+
 	// Avoids creating an empty microbatch job by checking for unread data in the
 	// Kinesis data stream before the batch is started. The default value is "False".
 	AvoidEmptyBatches *bool `type:"boolean"`
@@ -50499,6 +51186,13 @@ type KinesisStreamingSourceOptions struct {
 	// The minimum time interval between two ListShards API calls for your script
 	// to consider resharding. The default value is 1s.
 	DescribeShardInterval *int64 `type:"long"`
+
+	// When this option is set to 'true', for each batch, it will emit the metrics
+	// for the duration between the oldest record received by the stream and the
+	// time it arrives in Glue to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs".
+	// The default value is 'false'. This option is supported in Glue version 4.0
+	// or later.
+	EmitConsumerLagMetrics *string `type:"string"`
 
 	// The URL of the Kinesis endpoint.
 	EndpointUrl *string `type:"string"`
@@ -50581,6 +51275,12 @@ func (s *KinesisStreamingSourceOptions) SetAddIdleTimeBetweenReads(v bool) *Kine
 	return s
 }
 
+// SetAddRecordTimestamp sets the AddRecordTimestamp field's value.
+func (s *KinesisStreamingSourceOptions) SetAddRecordTimestamp(v string) *KinesisStreamingSourceOptions {
+	s.AddRecordTimestamp = &v
+	return s
+}
+
 // SetAvoidEmptyBatches sets the AvoidEmptyBatches field's value.
 func (s *KinesisStreamingSourceOptions) SetAvoidEmptyBatches(v bool) *KinesisStreamingSourceOptions {
 	s.AvoidEmptyBatches = &v
@@ -50602,6 +51302,12 @@ func (s *KinesisStreamingSourceOptions) SetDelimiter(v string) *KinesisStreaming
 // SetDescribeShardInterval sets the DescribeShardInterval field's value.
 func (s *KinesisStreamingSourceOptions) SetDescribeShardInterval(v int64) *KinesisStreamingSourceOptions {
 	s.DescribeShardInterval = &v
+	return s
+}
+
+// SetEmitConsumerLagMetrics sets the EmitConsumerLagMetrics field's value.
+func (s *KinesisStreamingSourceOptions) SetEmitConsumerLagMetrics(v string) *KinesisStreamingSourceOptions {
+	s.EmitConsumerLagMetrics = &v
 	return s
 }
 
@@ -58007,6 +58713,214 @@ func (s *RunStatementOutput) SetId(v int64) *RunStatementOutput {
 	return s
 }
 
+// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+// The data source must be stored in Amazon S3.
+type S3CatalogDeltaSource struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options.
+	AdditionalDeltaOptions map[string]*string `type:"map"`
+
+	// The name of the database to read from.
+	//
+	// Database is a required field
+	Database *string `type:"string" required:"true"`
+
+	// The name of the Delta Lake data source.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies the data schema for the Delta Lake source.
+	OutputSchemas []*GlueSchema `type:"list"`
+
+	// The name of the table in the database to read from.
+	//
+	// Table is a required field
+	Table *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3CatalogDeltaSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3CatalogDeltaSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3CatalogDeltaSource) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3CatalogDeltaSource"}
+	if s.Database == nil {
+		invalidParams.Add(request.NewErrParamRequired("Database"))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Table == nil {
+		invalidParams.Add(request.NewErrParamRequired("Table"))
+	}
+	if s.OutputSchemas != nil {
+		for i, v := range s.OutputSchemas {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputSchemas", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalDeltaOptions sets the AdditionalDeltaOptions field's value.
+func (s *S3CatalogDeltaSource) SetAdditionalDeltaOptions(v map[string]*string) *S3CatalogDeltaSource {
+	s.AdditionalDeltaOptions = v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *S3CatalogDeltaSource) SetDatabase(v string) *S3CatalogDeltaSource {
+	s.Database = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3CatalogDeltaSource) SetName(v string) *S3CatalogDeltaSource {
+	s.Name = &v
+	return s
+}
+
+// SetOutputSchemas sets the OutputSchemas field's value.
+func (s *S3CatalogDeltaSource) SetOutputSchemas(v []*GlueSchema) *S3CatalogDeltaSource {
+	s.OutputSchemas = v
+	return s
+}
+
+// SetTable sets the Table field's value.
+func (s *S3CatalogDeltaSource) SetTable(v string) *S3CatalogDeltaSource {
+	s.Table = &v
+	return s
+}
+
+// Specifies a Hudi data source that is registered in the Glue Data Catalog.
+// The Hudi data source must be stored in Amazon S3.
+type S3CatalogHudiSource struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options.
+	AdditionalHudiOptions map[string]*string `type:"map"`
+
+	// The name of the database to read from.
+	//
+	// Database is a required field
+	Database *string `type:"string" required:"true"`
+
+	// The name of the Hudi data source.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies the data schema for the Hudi source.
+	OutputSchemas []*GlueSchema `type:"list"`
+
+	// The name of the table in the database to read from.
+	//
+	// Table is a required field
+	Table *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3CatalogHudiSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3CatalogHudiSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3CatalogHudiSource) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3CatalogHudiSource"}
+	if s.Database == nil {
+		invalidParams.Add(request.NewErrParamRequired("Database"))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Table == nil {
+		invalidParams.Add(request.NewErrParamRequired("Table"))
+	}
+	if s.OutputSchemas != nil {
+		for i, v := range s.OutputSchemas {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputSchemas", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalHudiOptions sets the AdditionalHudiOptions field's value.
+func (s *S3CatalogHudiSource) SetAdditionalHudiOptions(v map[string]*string) *S3CatalogHudiSource {
+	s.AdditionalHudiOptions = v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *S3CatalogHudiSource) SetDatabase(v string) *S3CatalogHudiSource {
+	s.Database = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3CatalogHudiSource) SetName(v string) *S3CatalogHudiSource {
+	s.Name = &v
+	return s
+}
+
+// SetOutputSchemas sets the OutputSchemas field's value.
+func (s *S3CatalogHudiSource) SetOutputSchemas(v []*GlueSchema) *S3CatalogHudiSource {
+	s.OutputSchemas = v
+	return s
+}
+
+// SetTable sets the Table field's value.
+func (s *S3CatalogHudiSource) SetTable(v string) *S3CatalogHudiSource {
+	s.Table = &v
+	return s
+}
+
 // Specifies an Amazon S3 data store in the Glue Data Catalog.
 type S3CatalogSource struct {
 	_ struct{} `type:"structure"`
@@ -58473,6 +59387,358 @@ func (s *S3CsvSource) SetWriteHeader(v bool) *S3CsvSource {
 	return s
 }
 
+// Specifies a target that writes to a Delta Lake data source in the Glue Data
+// Catalog.
+type S3DeltaCatalogTarget struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options for the connector.
+	AdditionalOptions map[string]*string `type:"map"`
+
+	// The name of the database to write to.
+	//
+	// Database is a required field
+	Database *string `type:"string" required:"true"`
+
+	// The nodes that are inputs to the data target.
+	//
+	// Inputs is a required field
+	Inputs []*string `min:"1" type:"list" required:"true"`
+
+	// The name of the data target.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]*string `type:"list"`
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *CatalogSchemaChangePolicy `type:"structure"`
+
+	// The name of the table in the database to write to.
+	//
+	// Table is a required field
+	Table *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3DeltaCatalogTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3DeltaCatalogTarget) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3DeltaCatalogTarget) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3DeltaCatalogTarget"}
+	if s.Database == nil {
+		invalidParams.Add(request.NewErrParamRequired("Database"))
+	}
+	if s.Inputs == nil {
+		invalidParams.Add(request.NewErrParamRequired("Inputs"))
+	}
+	if s.Inputs != nil && len(s.Inputs) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Inputs", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Table == nil {
+		invalidParams.Add(request.NewErrParamRequired("Table"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalOptions sets the AdditionalOptions field's value.
+func (s *S3DeltaCatalogTarget) SetAdditionalOptions(v map[string]*string) *S3DeltaCatalogTarget {
+	s.AdditionalOptions = v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *S3DeltaCatalogTarget) SetDatabase(v string) *S3DeltaCatalogTarget {
+	s.Database = &v
+	return s
+}
+
+// SetInputs sets the Inputs field's value.
+func (s *S3DeltaCatalogTarget) SetInputs(v []*string) *S3DeltaCatalogTarget {
+	s.Inputs = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3DeltaCatalogTarget) SetName(v string) *S3DeltaCatalogTarget {
+	s.Name = &v
+	return s
+}
+
+// SetPartitionKeys sets the PartitionKeys field's value.
+func (s *S3DeltaCatalogTarget) SetPartitionKeys(v [][]*string) *S3DeltaCatalogTarget {
+	s.PartitionKeys = v
+	return s
+}
+
+// SetSchemaChangePolicy sets the SchemaChangePolicy field's value.
+func (s *S3DeltaCatalogTarget) SetSchemaChangePolicy(v *CatalogSchemaChangePolicy) *S3DeltaCatalogTarget {
+	s.SchemaChangePolicy = v
+	return s
+}
+
+// SetTable sets the Table field's value.
+func (s *S3DeltaCatalogTarget) SetTable(v string) *S3DeltaCatalogTarget {
+	s.Table = &v
+	return s
+}
+
+// Specifies a target that writes to a Delta Lake data source in Amazon S3.
+type S3DeltaDirectTarget struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options for the connector.
+	AdditionalOptions map[string]*string `type:"map"`
+
+	// Specifies how the data is compressed. This is generally not necessary if
+	// the data has a standard file extension. Possible values are "gzip" and "bzip").
+	//
+	// Compression is a required field
+	Compression *string `type:"string" required:"true" enum:"DeltaTargetCompressionType"`
+
+	// Specifies the data output format for the target.
+	//
+	// Format is a required field
+	Format *string `type:"string" required:"true" enum:"TargetFormat"`
+
+	// The nodes that are inputs to the data target.
+	//
+	// Inputs is a required field
+	Inputs []*string `min:"1" type:"list" required:"true"`
+
+	// The name of the data target.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]*string `type:"list"`
+
+	// The Amazon S3 path of your Delta Lake data source to write to.
+	//
+	// Path is a required field
+	Path *string `type:"string" required:"true"`
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *DirectSchemaChangePolicy `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3DeltaDirectTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3DeltaDirectTarget) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3DeltaDirectTarget) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3DeltaDirectTarget"}
+	if s.Compression == nil {
+		invalidParams.Add(request.NewErrParamRequired("Compression"))
+	}
+	if s.Format == nil {
+		invalidParams.Add(request.NewErrParamRequired("Format"))
+	}
+	if s.Inputs == nil {
+		invalidParams.Add(request.NewErrParamRequired("Inputs"))
+	}
+	if s.Inputs != nil && len(s.Inputs) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Inputs", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Path == nil {
+		invalidParams.Add(request.NewErrParamRequired("Path"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalOptions sets the AdditionalOptions field's value.
+func (s *S3DeltaDirectTarget) SetAdditionalOptions(v map[string]*string) *S3DeltaDirectTarget {
+	s.AdditionalOptions = v
+	return s
+}
+
+// SetCompression sets the Compression field's value.
+func (s *S3DeltaDirectTarget) SetCompression(v string) *S3DeltaDirectTarget {
+	s.Compression = &v
+	return s
+}
+
+// SetFormat sets the Format field's value.
+func (s *S3DeltaDirectTarget) SetFormat(v string) *S3DeltaDirectTarget {
+	s.Format = &v
+	return s
+}
+
+// SetInputs sets the Inputs field's value.
+func (s *S3DeltaDirectTarget) SetInputs(v []*string) *S3DeltaDirectTarget {
+	s.Inputs = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3DeltaDirectTarget) SetName(v string) *S3DeltaDirectTarget {
+	s.Name = &v
+	return s
+}
+
+// SetPartitionKeys sets the PartitionKeys field's value.
+func (s *S3DeltaDirectTarget) SetPartitionKeys(v [][]*string) *S3DeltaDirectTarget {
+	s.PartitionKeys = v
+	return s
+}
+
+// SetPath sets the Path field's value.
+func (s *S3DeltaDirectTarget) SetPath(v string) *S3DeltaDirectTarget {
+	s.Path = &v
+	return s
+}
+
+// SetSchemaChangePolicy sets the SchemaChangePolicy field's value.
+func (s *S3DeltaDirectTarget) SetSchemaChangePolicy(v *DirectSchemaChangePolicy) *S3DeltaDirectTarget {
+	s.SchemaChangePolicy = v
+	return s
+}
+
+// Specifies a Delta Lake data source stored in Amazon S3.
+type S3DeltaSource struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options.
+	AdditionalDeltaOptions map[string]*string `type:"map"`
+
+	// Specifies additional options for the connector.
+	AdditionalOptions *S3DirectSourceAdditionalOptions `type:"structure"`
+
+	// The name of the Delta Lake source.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies the data schema for the Delta Lake source.
+	OutputSchemas []*GlueSchema `type:"list"`
+
+	// A list of the Amazon S3 paths to read from.
+	//
+	// Paths is a required field
+	Paths []*string `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3DeltaSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3DeltaSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3DeltaSource) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3DeltaSource"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Paths == nil {
+		invalidParams.Add(request.NewErrParamRequired("Paths"))
+	}
+	if s.OutputSchemas != nil {
+		for i, v := range s.OutputSchemas {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputSchemas", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalDeltaOptions sets the AdditionalDeltaOptions field's value.
+func (s *S3DeltaSource) SetAdditionalDeltaOptions(v map[string]*string) *S3DeltaSource {
+	s.AdditionalDeltaOptions = v
+	return s
+}
+
+// SetAdditionalOptions sets the AdditionalOptions field's value.
+func (s *S3DeltaSource) SetAdditionalOptions(v *S3DirectSourceAdditionalOptions) *S3DeltaSource {
+	s.AdditionalOptions = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3DeltaSource) SetName(v string) *S3DeltaSource {
+	s.Name = &v
+	return s
+}
+
+// SetOutputSchemas sets the OutputSchemas field's value.
+func (s *S3DeltaSource) SetOutputSchemas(v []*GlueSchema) *S3DeltaSource {
+	s.OutputSchemas = v
+	return s
+}
+
+// SetPaths sets the Paths field's value.
+func (s *S3DeltaSource) SetPaths(v []*string) *S3DeltaSource {
+	s.Paths = v
+	return s
+}
+
 // Specifies additional connection options for the Amazon S3 data store.
 type S3DirectSourceAdditionalOptions struct {
 	_ struct{} `type:"structure"`
@@ -58798,6 +60064,367 @@ func (s *S3GlueParquetTarget) SetPath(v string) *S3GlueParquetTarget {
 // SetSchemaChangePolicy sets the SchemaChangePolicy field's value.
 func (s *S3GlueParquetTarget) SetSchemaChangePolicy(v *DirectSchemaChangePolicy) *S3GlueParquetTarget {
 	s.SchemaChangePolicy = v
+	return s
+}
+
+// Specifies a target that writes to a Hudi data source in the Glue Data Catalog.
+type S3HudiCatalogTarget struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options for the connector.
+	//
+	// AdditionalOptions is a required field
+	AdditionalOptions map[string]*string `type:"map" required:"true"`
+
+	// The name of the database to write to.
+	//
+	// Database is a required field
+	Database *string `type:"string" required:"true"`
+
+	// The nodes that are inputs to the data target.
+	//
+	// Inputs is a required field
+	Inputs []*string `min:"1" type:"list" required:"true"`
+
+	// The name of the data target.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]*string `type:"list"`
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *CatalogSchemaChangePolicy `type:"structure"`
+
+	// The name of the table in the database to write to.
+	//
+	// Table is a required field
+	Table *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3HudiCatalogTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3HudiCatalogTarget) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3HudiCatalogTarget) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3HudiCatalogTarget"}
+	if s.AdditionalOptions == nil {
+		invalidParams.Add(request.NewErrParamRequired("AdditionalOptions"))
+	}
+	if s.Database == nil {
+		invalidParams.Add(request.NewErrParamRequired("Database"))
+	}
+	if s.Inputs == nil {
+		invalidParams.Add(request.NewErrParamRequired("Inputs"))
+	}
+	if s.Inputs != nil && len(s.Inputs) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Inputs", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Table == nil {
+		invalidParams.Add(request.NewErrParamRequired("Table"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalOptions sets the AdditionalOptions field's value.
+func (s *S3HudiCatalogTarget) SetAdditionalOptions(v map[string]*string) *S3HudiCatalogTarget {
+	s.AdditionalOptions = v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *S3HudiCatalogTarget) SetDatabase(v string) *S3HudiCatalogTarget {
+	s.Database = &v
+	return s
+}
+
+// SetInputs sets the Inputs field's value.
+func (s *S3HudiCatalogTarget) SetInputs(v []*string) *S3HudiCatalogTarget {
+	s.Inputs = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3HudiCatalogTarget) SetName(v string) *S3HudiCatalogTarget {
+	s.Name = &v
+	return s
+}
+
+// SetPartitionKeys sets the PartitionKeys field's value.
+func (s *S3HudiCatalogTarget) SetPartitionKeys(v [][]*string) *S3HudiCatalogTarget {
+	s.PartitionKeys = v
+	return s
+}
+
+// SetSchemaChangePolicy sets the SchemaChangePolicy field's value.
+func (s *S3HudiCatalogTarget) SetSchemaChangePolicy(v *CatalogSchemaChangePolicy) *S3HudiCatalogTarget {
+	s.SchemaChangePolicy = v
+	return s
+}
+
+// SetTable sets the Table field's value.
+func (s *S3HudiCatalogTarget) SetTable(v string) *S3HudiCatalogTarget {
+	s.Table = &v
+	return s
+}
+
+// Specifies a target that writes to a Hudi data source in Amazon S3.
+type S3HudiDirectTarget struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options for the connector.
+	//
+	// AdditionalOptions is a required field
+	AdditionalOptions map[string]*string `type:"map" required:"true"`
+
+	// Specifies how the data is compressed. This is generally not necessary if
+	// the data has a standard file extension. Possible values are "gzip" and "bzip").
+	//
+	// Compression is a required field
+	Compression *string `type:"string" required:"true" enum:"HudiTargetCompressionType"`
+
+	// Specifies the data output format for the target.
+	//
+	// Format is a required field
+	Format *string `type:"string" required:"true" enum:"TargetFormat"`
+
+	// The nodes that are inputs to the data target.
+	//
+	// Inputs is a required field
+	Inputs []*string `min:"1" type:"list" required:"true"`
+
+	// The name of the data target.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]*string `type:"list"`
+
+	// The Amazon S3 path of your Hudi data source to write to.
+	//
+	// Path is a required field
+	Path *string `type:"string" required:"true"`
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *DirectSchemaChangePolicy `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3HudiDirectTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3HudiDirectTarget) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3HudiDirectTarget) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3HudiDirectTarget"}
+	if s.AdditionalOptions == nil {
+		invalidParams.Add(request.NewErrParamRequired("AdditionalOptions"))
+	}
+	if s.Compression == nil {
+		invalidParams.Add(request.NewErrParamRequired("Compression"))
+	}
+	if s.Format == nil {
+		invalidParams.Add(request.NewErrParamRequired("Format"))
+	}
+	if s.Inputs == nil {
+		invalidParams.Add(request.NewErrParamRequired("Inputs"))
+	}
+	if s.Inputs != nil && len(s.Inputs) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Inputs", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Path == nil {
+		invalidParams.Add(request.NewErrParamRequired("Path"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalOptions sets the AdditionalOptions field's value.
+func (s *S3HudiDirectTarget) SetAdditionalOptions(v map[string]*string) *S3HudiDirectTarget {
+	s.AdditionalOptions = v
+	return s
+}
+
+// SetCompression sets the Compression field's value.
+func (s *S3HudiDirectTarget) SetCompression(v string) *S3HudiDirectTarget {
+	s.Compression = &v
+	return s
+}
+
+// SetFormat sets the Format field's value.
+func (s *S3HudiDirectTarget) SetFormat(v string) *S3HudiDirectTarget {
+	s.Format = &v
+	return s
+}
+
+// SetInputs sets the Inputs field's value.
+func (s *S3HudiDirectTarget) SetInputs(v []*string) *S3HudiDirectTarget {
+	s.Inputs = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3HudiDirectTarget) SetName(v string) *S3HudiDirectTarget {
+	s.Name = &v
+	return s
+}
+
+// SetPartitionKeys sets the PartitionKeys field's value.
+func (s *S3HudiDirectTarget) SetPartitionKeys(v [][]*string) *S3HudiDirectTarget {
+	s.PartitionKeys = v
+	return s
+}
+
+// SetPath sets the Path field's value.
+func (s *S3HudiDirectTarget) SetPath(v string) *S3HudiDirectTarget {
+	s.Path = &v
+	return s
+}
+
+// SetSchemaChangePolicy sets the SchemaChangePolicy field's value.
+func (s *S3HudiDirectTarget) SetSchemaChangePolicy(v *DirectSchemaChangePolicy) *S3HudiDirectTarget {
+	s.SchemaChangePolicy = v
+	return s
+}
+
+// Specifies a Hudi data source stored in Amazon S3.
+type S3HudiSource struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies additional connection options.
+	AdditionalHudiOptions map[string]*string `type:"map"`
+
+	// Specifies additional options for the connector.
+	AdditionalOptions *S3DirectSourceAdditionalOptions `type:"structure"`
+
+	// The name of the Hudi source.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// Specifies the data schema for the Hudi source.
+	OutputSchemas []*GlueSchema `type:"list"`
+
+	// A list of the Amazon S3 paths to read from.
+	//
+	// Paths is a required field
+	Paths []*string `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3HudiSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3HudiSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3HudiSource) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3HudiSource"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Paths == nil {
+		invalidParams.Add(request.NewErrParamRequired("Paths"))
+	}
+	if s.OutputSchemas != nil {
+		for i, v := range s.OutputSchemas {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputSchemas", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalHudiOptions sets the AdditionalHudiOptions field's value.
+func (s *S3HudiSource) SetAdditionalHudiOptions(v map[string]*string) *S3HudiSource {
+	s.AdditionalHudiOptions = v
+	return s
+}
+
+// SetAdditionalOptions sets the AdditionalOptions field's value.
+func (s *S3HudiSource) SetAdditionalOptions(v *S3DirectSourceAdditionalOptions) *S3HudiSource {
+	s.AdditionalOptions = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3HudiSource) SetName(v string) *S3HudiSource {
+	s.Name = &v
+	return s
+}
+
+// SetOutputSchemas sets the OutputSchemas field's value.
+func (s *S3HudiSource) SetOutputSchemas(v []*GlueSchema) *S3HudiSource {
+	s.OutputSchemas = v
+	return s
+}
+
+// SetPaths sets the Paths field's value.
+func (s *S3HudiSource) SetPaths(v []*string) *S3HudiSource {
+	s.Paths = v
 	return s
 }
 
@@ -64049,7 +65676,18 @@ type TableData struct {
 	// this table.
 	StorageDescriptor *StorageDescriptor `type:"structure"`
 
-	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
+	// The type of this table. Glue will create tables with the EXTERNAL_TABLE type.
+	// Other services, such as Athena, may create tables with additional table types.
+	//
+	// Glue related table types:
+	//
+	// EXTERNAL_TABLE
+	//
+	// Hive compatible attribute - indicates a non-Hive managed table.
+	//
+	// GOVERNED
+	//
+	// Used by Lake Formation. The Glue Data Catalog understands GOVERNED.
 	TableType *string `type:"string"`
 
 	// A TableIdentifier structure that describes a target table for resource linking.
@@ -64061,10 +65699,13 @@ type TableData struct {
 	// The ID of the table version.
 	VersionId *string `min:"1" type:"string"`
 
-	// If the table is a view, the expanded text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of
+	// Glue operations.
 	ViewExpandedText *string `type:"string"`
 
-	// If the table is a view, the original text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of
+	// Glue operations. If the table is a VIRTUAL_VIEW, certain Athena configuration
+	// encoded in base64.
 	ViewOriginalText *string `type:"string"`
 }
 
@@ -64335,7 +65976,8 @@ type TableInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The table owner.
+	// The table owner. Included for Apache Hive compatibility. Not used in the
+	// normal course of Glue operations.
 	Owner *string `min:"1" type:"string"`
 
 	// These key-value pairs define properties associated with the table.
@@ -64358,16 +66000,30 @@ type TableInput struct {
 	// this table.
 	StorageDescriptor *StorageDescriptor `type:"structure"`
 
-	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
+	// The type of this table. Glue will create tables with the EXTERNAL_TABLE type.
+	// Other services, such as Athena, may create tables with additional table types.
+	//
+	// Glue related table types:
+	//
+	// EXTERNAL_TABLE
+	//
+	// Hive compatible attribute - indicates a non-Hive managed table.
+	//
+	// GOVERNED
+	//
+	// Used by Lake Formation. The Glue Data Catalog understands GOVERNED.
 	TableType *string `type:"string"`
 
 	// A TableIdentifier structure that describes a target table for resource linking.
 	TargetTable *TableIdentifier `type:"structure"`
 
-	// If the table is a view, the expanded text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of
+	// Glue operations.
 	ViewExpandedText *string `type:"string"`
 
-	// If the table is a view, the original text of the view; otherwise null.
+	// Included for Apache Hive compatibility. Not used in the normal course of
+	// Glue operations. If the table is a VIRTUAL_VIEW, certain Athena configuration
+	// encoded in base64.
 	ViewOriginalText *string `type:"string"`
 }
 
@@ -65696,14 +67352,18 @@ func (s *TriggerUpdate) SetSchedule(v string) *TriggerUpdate {
 	return s
 }
 
+// A partition that contains unfiltered metadata.
 type UnfilteredPartition struct {
 	_ struct{} `type:"structure"`
 
+	// The list of columns the user has permissions to access.
 	AuthorizedColumns []*string `type:"list"`
 
+	// A Boolean value indicating that the partition location is registered with
+	// Lake Formation.
 	IsRegisteredWithLakeFormation *bool `type:"boolean"`
 
-	// Represents a slice of table data.
+	// The partition object.
 	Partition *Partition `type:"structure"`
 }
 
@@ -70518,6 +72178,22 @@ func DeleteBehavior_Values() []string {
 }
 
 const (
+	// DeltaTargetCompressionTypeUncompressed is a DeltaTargetCompressionType enum value
+	DeltaTargetCompressionTypeUncompressed = "uncompressed"
+
+	// DeltaTargetCompressionTypeSnappy is a DeltaTargetCompressionType enum value
+	DeltaTargetCompressionTypeSnappy = "snappy"
+)
+
+// DeltaTargetCompressionType_Values returns all elements of the DeltaTargetCompressionType enum
+func DeltaTargetCompressionType_Values() []string {
+	return []string{
+		DeltaTargetCompressionTypeUncompressed,
+		DeltaTargetCompressionTypeSnappy,
+	}
+}
+
+const (
 	// EnableHybridValuesTrue is a EnableHybridValues enum value
 	EnableHybridValuesTrue = "TRUE"
 
@@ -70742,6 +72418,58 @@ func GlueRecordType_Values() []string {
 		GlueRecordTypeByte,
 		GlueRecordTypeShort,
 		GlueRecordTypeDouble,
+	}
+}
+
+const (
+	// HudiTargetCompressionTypeGzip is a HudiTargetCompressionType enum value
+	HudiTargetCompressionTypeGzip = "gzip"
+
+	// HudiTargetCompressionTypeLzo is a HudiTargetCompressionType enum value
+	HudiTargetCompressionTypeLzo = "lzo"
+
+	// HudiTargetCompressionTypeUncompressed is a HudiTargetCompressionType enum value
+	HudiTargetCompressionTypeUncompressed = "uncompressed"
+
+	// HudiTargetCompressionTypeSnappy is a HudiTargetCompressionType enum value
+	HudiTargetCompressionTypeSnappy = "snappy"
+)
+
+// HudiTargetCompressionType_Values returns all elements of the HudiTargetCompressionType enum
+func HudiTargetCompressionType_Values() []string {
+	return []string{
+		HudiTargetCompressionTypeGzip,
+		HudiTargetCompressionTypeLzo,
+		HudiTargetCompressionTypeUncompressed,
+		HudiTargetCompressionTypeSnappy,
+	}
+}
+
+const (
+	// JDBCConnectionTypeSqlserver is a JDBCConnectionType enum value
+	JDBCConnectionTypeSqlserver = "sqlserver"
+
+	// JDBCConnectionTypeMysql is a JDBCConnectionType enum value
+	JDBCConnectionTypeMysql = "mysql"
+
+	// JDBCConnectionTypeOracle is a JDBCConnectionType enum value
+	JDBCConnectionTypeOracle = "oracle"
+
+	// JDBCConnectionTypePostgresql is a JDBCConnectionType enum value
+	JDBCConnectionTypePostgresql = "postgresql"
+
+	// JDBCConnectionTypeRedshift is a JDBCConnectionType enum value
+	JDBCConnectionTypeRedshift = "redshift"
+)
+
+// JDBCConnectionType_Values returns all elements of the JDBCConnectionType enum
+func JDBCConnectionType_Values() []string {
+	return []string{
+		JDBCConnectionTypeSqlserver,
+		JDBCConnectionTypeMysql,
+		JDBCConnectionTypeOracle,
+		JDBCConnectionTypePostgresql,
+		JDBCConnectionTypeRedshift,
 	}
 }
 
@@ -71692,6 +73420,12 @@ const (
 
 	// TargetFormatParquet is a TargetFormat enum value
 	TargetFormatParquet = "parquet"
+
+	// TargetFormatHudi is a TargetFormat enum value
+	TargetFormatHudi = "hudi"
+
+	// TargetFormatDelta is a TargetFormat enum value
+	TargetFormatDelta = "delta"
 )
 
 // TargetFormat_Values returns all elements of the TargetFormat enum
@@ -71702,6 +73436,8 @@ func TargetFormat_Values() []string {
 		TargetFormatAvro,
 		TargetFormatOrc,
 		TargetFormatParquet,
+		TargetFormatHudi,
+		TargetFormatDelta,
 	}
 }
 

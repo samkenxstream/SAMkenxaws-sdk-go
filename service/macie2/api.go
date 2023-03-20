@@ -9804,7 +9804,7 @@ func (s *BlockPublicAccess) SetRestrictPublicBuckets(v bool) *BlockPublicAccess 
 }
 
 // Provides information about the number of S3 buckets that are publicly accessible
-// based on a combination of permissions settings for each bucket.
+// due to a combination of permissions settings for each bucket.
 type BucketCountByEffectivePermission struct {
 	_ struct{} `type:"structure"`
 
@@ -9859,10 +9859,10 @@ func (s *BucketCountByEffectivePermission) SetUnknown(v int64) *BucketCountByEff
 	return s
 }
 
-// Provides information about the number of S3 buckets that use certain types
-// of server-side encryption by default or don't encrypt new objects by default.
-// For detailed information about these settings, see Setting default server-side
-// encryption behavior for Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
+// Provides information about the number of S3 buckets whose settings do or
+// don't specify default server-side encryption behavior for objects that are
+// added to the buckets. For detailed information about these settings, see
+// Setting default server-side encryption behavior for Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
 // in the Amazon Simple Storage Service User Guide.
 type BucketCountByEncryptionType struct {
 	_ struct{} `type:"structure"`
@@ -9919,7 +9919,11 @@ func (s *BucketCountByEncryptionType) SetUnknown(v int64) *BucketCountByEncrypti
 }
 
 // Provides information about the number of S3 buckets that are or aren't shared
-// with other Amazon Web Services accounts.
+// with other Amazon Web Services accounts, Amazon CloudFront origin access
+// identities (OAIs), or CloudFront origin access controls (OACs). In this data,
+// an Amazon Macie organization is defined as a set of Macie accounts that are
+// centrally managed as a group of related accounts through Organizations or
+// by Macie invitation.
 type BucketCountBySharedAccessType struct {
 	_ struct{} `type:"structure"`
 
@@ -9975,7 +9979,7 @@ func (s *BucketCountBySharedAccessType) SetUnknown(v int64) *BucketCountByShared
 }
 
 // Provides information about the number of S3 buckets whose bucket policies
-// do or don't require server-side encryption of objects when objects are uploaded
+// do or don't require server-side encryption of objects when objects are added
 // to the buckets.
 type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 	_ struct{} `type:"structure"`
@@ -10161,12 +10165,18 @@ func (s *BucketLevelPermissions) SetBucketPolicy(v *BucketPolicy) *BucketLevelPe
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
-// Macie monitors and analyzes for your account. If an error occurs when Macie
-// attempts to retrieve and process metadata from Amazon S3 for the bucket and
-// the bucket's objects, the value for the versioning property is false and
-// the value for most other properties is null. Key exceptions are accountId,
-// bucketArn, bucketCreatedAt, bucketName, lastUpdated, and region. To identify
-// the cause of the error, refer to the errorCode and errorMessage values.
+// Macie monitors and analyzes for your account. By default, object count and
+// storage size values include data for object parts that are the result of
+// incomplete multipart uploads. For more information, see How Macie monitors
+// Amazon S3 data security (https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html)
+// in the Amazon Macie User Guide.
+//
+// If an error occurs when Macie attempts to retrieve and process metadata from
+// Amazon S3 for the bucket or the bucket's objects, the value for the versioning
+// property is false and the value for most other properties is null. Key exceptions
+// are accountId, bucketArn, bucketCreatedAt, bucketName, lastUpdated, and region.
+// To identify the cause of the error, refer to the errorCode and errorMessage
+// values.
 type BucketMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -14693,29 +14703,37 @@ func (s *GetBucketStatisticsInput) SetAccountId(v string) *GetBucketStatisticsIn
 
 // Provides the results of a query that retrieved aggregated statistical data
 // for all the S3 buckets that Amazon Macie monitors and analyzes for your account.
+// By default, object count and storage size values include data for object
+// parts that are the result of incomplete multipart uploads. For more information,
+// see How Macie monitors Amazon S3 data security (https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html)
+// in the Amazon Macie User Guide.
 type GetBucketStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
 	BucketCount *int64 `locationName:"bucketCount" type:"long"`
 
 	// Provides information about the number of S3 buckets that are publicly accessible
-	// based on a combination of permissions settings for each bucket.
+	// due to a combination of permissions settings for each bucket.
 	BucketCountByEffectivePermission *BucketCountByEffectivePermission `locationName:"bucketCountByEffectivePermission" type:"structure"`
 
-	// Provides information about the number of S3 buckets that use certain types
-	// of server-side encryption by default or don't encrypt new objects by default.
-	// For detailed information about these settings, see Setting default server-side
-	// encryption behavior for Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
+	// Provides information about the number of S3 buckets whose settings do or
+	// don't specify default server-side encryption behavior for objects that are
+	// added to the buckets. For detailed information about these settings, see
+	// Setting default server-side encryption behavior for Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
 	// in the Amazon Simple Storage Service User Guide.
 	BucketCountByEncryptionType *BucketCountByEncryptionType `locationName:"bucketCountByEncryptionType" type:"structure"`
 
 	// Provides information about the number of S3 buckets whose bucket policies
-	// do or don't require server-side encryption of objects when objects are uploaded
+	// do or don't require server-side encryption of objects when objects are added
 	// to the buckets.
 	BucketCountByObjectEncryptionRequirement *BucketCountPolicyAllowsUnencryptedObjectUploads `locationName:"bucketCountByObjectEncryptionRequirement" type:"structure"`
 
 	// Provides information about the number of S3 buckets that are or aren't shared
-	// with other Amazon Web Services accounts.
+	// with other Amazon Web Services accounts, Amazon CloudFront origin access
+	// identities (OAIs), or CloudFront origin access controls (OACs). In this data,
+	// an Amazon Macie organization is defined as a set of Macie accounts that are
+	// centrally managed as a group of related accounts through Organizations or
+	// by Macie invitation.
 	BucketCountBySharedAccessType *BucketCountBySharedAccessType `locationName:"bucketCountBySharedAccessType" type:"structure"`
 
 	// Provides aggregated statistical data for sensitive data discovery metrics
@@ -18876,11 +18894,16 @@ func (s *ManagedDataIdentifierSummary) SetId(v string) *ManagedDataIdentifierSum
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
-// Macie monitors and analyzes for your account. If an error occurs when Macie
-// attempts to retrieve and process information about the bucket or the bucket's
-// objects, the value for most of these properties is null. Key exceptions are
-// accountId and bucketName. To identify the cause of the error, refer to the
-// errorCode and errorMessage values.
+// Macie monitors and analyzes for your account. By default, object count and
+// storage size values include data for object parts that are the result of
+// incomplete multipart uploads. For more information, see How Macie monitors
+// Amazon S3 data security (https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html)
+// in the Amazon Macie User Guide.
+//
+// If an error occurs when Macie attempts to retrieve and process information
+// about the bucket or the bucket's objects, the value for most of these properties
+// is null. Key exceptions are accountId and bucketName. To identify the cause
+// of the error, refer to the errorCode and errorMessage values.
 type MatchingBucket struct {
 	_ struct{} `type:"structure"`
 
@@ -19049,11 +19072,16 @@ type MatchingResource struct {
 	_ struct{} `type:"structure"`
 
 	// Provides statistical data and other information about an S3 bucket that Amazon
-	// Macie monitors and analyzes for your account. If an error occurs when Macie
-	// attempts to retrieve and process information about the bucket or the bucket's
-	// objects, the value for most of these properties is null. Key exceptions are
-	// accountId and bucketName. To identify the cause of the error, refer to the
-	// errorCode and errorMessage values.
+	// Macie monitors and analyzes for your account. By default, object count and
+	// storage size values include data for object parts that are the result of
+	// incomplete multipart uploads. For more information, see How Macie monitors
+	// Amazon S3 data security (https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html)
+	// in the Amazon Macie User Guide.
+	//
+	// If an error occurs when Macie attempts to retrieve and process information
+	// about the bucket or the bucket's objects, the value for most of these properties
+	// is null. Key exceptions are accountId and bucketName. To identify the cause
+	// of the error, refer to the errorCode and errorMessage values.
 	MatchingBucket *MatchingBucket `locationName:"matchingBucket" type:"structure"`
 }
 
@@ -19409,12 +19437,12 @@ func (s *Occurrences) SetRecords(v []*Record) *Occurrences {
 type Page struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the location of an occurrence of sensitive data in a non-binary
-	// text file, such as an HTML, TXT, or XML file.
+	// Specifies the location of an occurrence of sensitive data in an email message
+	// or a non-binary text file such as an HTML, TXT, or XML file.
 	LineRange *Range `locationName:"lineRange" type:"structure"`
 
-	// Specifies the location of an occurrence of sensitive data in a non-binary
-	// text file, such as an HTML, TXT, or XML file.
+	// Specifies the location of an occurrence of sensitive data in an email message
+	// or a non-binary text file such as an HTML, TXT, or XML file.
 	OffsetRange *Range `locationName:"offsetRange" type:"structure"`
 
 	PageNumber *int64 `locationName:"pageNumber" type:"long"`
@@ -19671,8 +19699,8 @@ func (s PutFindingsPublicationConfigurationOutput) GoString() string {
 	return s.String()
 }
 
-// Specifies the location of an occurrence of sensitive data in a non-binary
-// text file, such as an HTML, TXT, or XML file.
+// Specifies the location of an occurrence of sensitive data in an email message
+// or a non-binary text file such as an HTML, TXT, or XML file.
 type Range struct {
 	_ struct{} `type:"structure"`
 
@@ -20140,8 +20168,8 @@ type S3Bucket struct {
 
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"iso8601"`
 
-	// Provides information about the server-side encryption settings for an S3
-	// bucket or S3 object.
+	// Provides information about the default server-side encryption settings for
+	// an S3 bucket or the encryption settings for an S3 object.
 	DefaultServerSideEncryption *ServerSideEncryption `locationName:"defaultServerSideEncryption" type:"structure"`
 
 	Name *string `locationName:"name" type:"string"`
@@ -20715,8 +20743,8 @@ type S3Object struct {
 
 	PublicAccess *bool `locationName:"publicAccess" type:"boolean"`
 
-	// Provides information about the server-side encryption settings for an S3
-	// bucket or S3 object.
+	// Provides information about the default server-side encryption settings for
+	// an S3 bucket or the encryption settings for an S3 object.
 	ServerSideEncryption *ServerSideEncryption `locationName:"serverSideEncryption" type:"structure"`
 
 	Size *int64 `locationName:"size" type:"long"`
@@ -21635,13 +21663,14 @@ func (s *SensitivityInspectionTemplatesEntry) SetName(v string) *SensitivityInsp
 	return s
 }
 
-// Provides information about the server-side encryption settings for an S3
-// bucket or S3 object.
+// Provides information about the default server-side encryption settings for
+// an S3 bucket or the encryption settings for an S3 object.
 type ServerSideEncryption struct {
 	_ struct{} `type:"structure"`
 
-	// The type of server-side encryption that's used to encrypt an S3 object or
-	// objects in an S3 bucket. Possible values are:
+	// The server-side encryption algorithm that was used to encrypt an S3 object
+	// or is used by default to encrypt objects that are added to an S3 bucket.
+	// Possible values are:
 	EncryptionType *string `locationName:"encryptionType" type:"string" enum:"EncryptionType"`
 
 	KmsMasterKeyId *string `locationName:"kmsMasterKeyId" type:"string"`
@@ -24839,8 +24868,9 @@ func EffectivePermission_Values() []string {
 	}
 }
 
-// The type of server-side encryption that's used to encrypt an S3 object or
-// objects in an S3 bucket. Possible values are:
+// The server-side encryption algorithm that was used to encrypt an S3 object
+// or is used by default to encrypt objects that are added to an S3 bucket.
+// Possible values are:
 const (
 	// EncryptionTypeNone is a EncryptionType enum value
 	EncryptionTypeNone = "NONE"
@@ -24988,6 +25018,9 @@ const (
 
 	// FindingTypePolicyIamuserS3blockPublicAccessDisabled is a FindingType enum value
 	FindingTypePolicyIamuserS3blockPublicAccessDisabled = "Policy:IAMUser/S3BlockPublicAccessDisabled"
+
+	// FindingTypePolicyIamuserS3bucketSharedWithCloudFront is a FindingType enum value
+	FindingTypePolicyIamuserS3bucketSharedWithCloudFront = "Policy:IAMUser/S3BucketSharedWithCloudFront"
 )
 
 // FindingType_Values returns all elements of the FindingType enum
@@ -25003,6 +25036,7 @@ func FindingType_Values() []string {
 		FindingTypePolicyIamuserS3bucketReplicatedExternally,
 		FindingTypePolicyIamuserS3bucketEncryptionDisabled,
 		FindingTypePolicyIamuserS3blockPublicAccessDisabled,
+		FindingTypePolicyIamuserS3bucketSharedWithCloudFront,
 	}
 }
 

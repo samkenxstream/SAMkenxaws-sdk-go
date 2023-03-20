@@ -59,8 +59,8 @@ func (c *WAFV2) AssociateWebACLRequest(input *AssociateWebACLInput) (req *reques
 //
 // Associates a web ACL with a regional application resource, to protect the
 // resource. A regional application can be an Application Load Balancer (ALB),
-// an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito
-// user pool.
+// an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+// user pool, or an App Runner service.
 //
 // For Amazon CloudFront, don't use this call. Instead, use your CloudFront
 // distribution configuration. To associate a web ACL, in the CloudFront call
@@ -726,7 +726,8 @@ func (c *WAFV2) CreateWebACLRequest(input *CreateWebACLInput) (req *request.Requ
 // RuleGroup, and managed rule group. You can associate a web ACL with one or
 // more Amazon Web Services resources to protect. The resources can be an Amazon
 // CloudFront distribution, an Amazon API Gateway REST API, an Application Load
-// Balancer, an AppSync GraphQL API, or an Amazon Cognito user pool.
+// Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner
+// service.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1830,7 +1831,8 @@ func (c *WAFV2) DisassociateWebACLRequest(input *DisassociateWebACLInput) (req *
 // Disassociates the specified regional application resource from any existing
 // web ACL association. A resource can have at most one web ACL association.
 // A regional application can be an Application Load Balancer (ALB), an Amazon
-// API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool.
+// API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito user pool,
+// or an App Runner service.
 //
 // For Amazon CloudFront, don't use this call. Instead, use your CloudFront
 // distribution configuration. To disassociate a web ACL, provide an empty web
@@ -4373,6 +4375,17 @@ func (c *WAFV2) PutLoggingConfigurationRequest(input *PutLoggingConfigurationInp
 // Enables the specified LoggingConfiguration, to start logging from a web ACL,
 // according to the configuration provided.
 //
+// This operation completely replaces any mutable specifications that you already
+// have for a logging configuration with the ones that you provide to this call.
+//
+// To modify an existing logging configuration, do the following:
+//
+// # Retrieve it by calling GetLoggingConfiguration
+//
+// # Update its settings as needed
+//
+// # Provide the complete logging configuration specification to this call
+//
 // You can define one logging destination per web ACL.
 //
 // You can access information about the traffic that WAF inspects using the
@@ -4403,12 +4416,6 @@ func (c *WAFV2) PutLoggingConfigurationRequest(input *PutLoggingConfigurationInp
 // For additional information about web ACL logging, see Logging web ACL traffic
 // information (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
 // in the WAF Developer Guide.
-//
-// This operation completely replaces the mutable specifications that you already
-// have for the logging configuration with the ones that you provide to this
-// call. To modify the logging configuration, retrieve it by calling GetLoggingConfiguration,
-// update the settings as needed, and then provide the complete logging configuration
-// specification to this call.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -5045,9 +5052,15 @@ func (c *WAFV2) UpdateIPSetRequest(input *UpdateIPSetInput) (req *request.Reques
 // Updates the specified IPSet.
 //
 // This operation completely replaces the mutable specifications that you already
-// have for the IP set with the ones that you provide to this call. To modify
-// the IP set, retrieve it by calling GetIPSet, update the settings as needed,
-// and then provide the complete IP set specification to this call.
+// have for the IP set with the ones that you provide to this call.
+//
+// To modify an IP set, do the following:
+//
+// # Retrieve it by calling GetIPSet
+//
+// # Update its settings as needed
+//
+// # Provide the complete IP set specification to this call
 //
 // When you make changes to web ACLs or web ACL components, like rules and rule
 // groups, WAF propagates the changes everywhere that the web ACL and its components
@@ -5303,9 +5316,14 @@ func (c *WAFV2) UpdateRegexPatternSetRequest(input *UpdateRegexPatternSetInput) 
 //
 // This operation completely replaces the mutable specifications that you already
 // have for the regex pattern set with the ones that you provide to this call.
-// To modify the regex pattern set, retrieve it by calling GetRegexPatternSet,
-// update the settings as needed, and then provide the complete regex pattern
-// set specification to this call.
+//
+// To modify a regex pattern set, do the following:
+//
+// # Retrieve it by calling GetRegexPatternSet
+//
+// # Update its settings as needed
+//
+// # Provide the complete regex pattern set specification to this call
 //
 // When you make changes to web ACLs or web ACL components, like rules and rule
 // groups, WAF propagates the changes everywhere that the web ACL and its components
@@ -5440,10 +5458,15 @@ func (c *WAFV2) UpdateRuleGroupRequest(input *UpdateRuleGroupInput) (req *reques
 // Updates the specified RuleGroup.
 //
 // This operation completely replaces the mutable specifications that you already
-// have for the rule group with the ones that you provide to this call. To modify
-// the rule group, retrieve it by calling GetRuleGroup, update the settings
-// as needed, and then provide the complete rule group specification to this
-// call.
+// have for the rule group with the ones that you provide to this call.
+//
+// To modify a rule group, do the following:
+//
+// # Retrieve it by calling GetRuleGroup
+//
+// # Update its settings as needed
+//
+// # Provide the complete rule group specification to this call
 //
 // When you make changes to web ACLs or web ACL components, like rules and rule
 // groups, WAF propagates the changes everywhere that the web ACL and its components
@@ -5609,6 +5632,17 @@ func (c *WAFV2) UpdateWebACLRequest(input *UpdateWebACLInput) (req *request.Requ
 // Updates the specified WebACL. While updating a web ACL, WAF provides continuous
 // coverage to the resources that you have associated with the web ACL.
 //
+// This operation completely replaces the mutable specifications that you already
+// have for the web ACL with the ones that you provide to this call.
+//
+// To modify a web ACL, do the following:
+//
+// # Retrieve it by calling GetWebACL
+//
+// # Update its settings as needed
+//
+// # Provide the complete web ACL specification to this call
+//
 // When you make changes to web ACLs or web ACL components, like rules and rule
 // groups, WAF propagates the changes everywhere that the web ACL and its components
 // are stored and used. Your changes are applied within seconds, but there might
@@ -5622,11 +5656,6 @@ func (c *WAFV2) UpdateWebACLRequest(input *UpdateWebACLInput) (req *request.Requ
 // already associated with a resource. Generally, any inconsistencies of this
 // type last only a few seconds.
 //
-// This operation completely replaces the mutable specifications that you already
-// have for the web ACL with the ones that you provide to this call. To modify
-// the web ACL, retrieve it by calling GetWebACL, update the settings as needed,
-// and then provide the complete web ACL specification to this call.
-//
 // A web ACL defines a collection of rules to use to inspect and control web
 // requests. Each rule has an action defined (allow, block, or count) for requests
 // that match the statement of the rule. In the web ACL, you assign a default
@@ -5635,7 +5664,8 @@ func (c *WAFV2) UpdateWebACLRequest(input *UpdateWebACLInput) (req *request.Requ
 // RuleGroup, and managed rule group. You can associate a web ACL with one or
 // more Amazon Web Services resources to protect. The resources can be an Amazon
 // CloudFront distribution, an Amazon API Gateway REST API, an Application Load
-// Balancer, an AppSync GraphQL API, or an Amazon Cognito user pool.
+// Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner
+// service.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -5745,7 +5775,99 @@ func (c *WAFV2) UpdateWebACLWithContext(ctx aws.Context, input *UpdateWebACLInpu
 	return out, req.Send()
 }
 
-// Details for your use of the Bot Control managed rule group, used in ManagedRuleGroupConfig.
+// Details for your use of the account takeover prevention managed rule group,
+// AWSManagedRulesATPRuleSet. This configuration is used in ManagedRuleGroupConfig.
+type AWSManagedRulesATPRuleSet struct {
+	_ struct{} `type:"structure"`
+
+	// The path of the login endpoint for your application. For example, for the
+	// URL https://example.com/web/login, you would provide the path /web/login.
+	//
+	// The rule group inspects only HTTP POST requests to your specified login endpoint.
+	//
+	// LoginPath is a required field
+	LoginPath *string `type:"string" required:"true"`
+
+	// The criteria for inspecting login requests, used by the ATP rule group to
+	// validate credentials usage.
+	RequestInspection *RequestInspection `type:"structure"`
+
+	// The criteria for inspecting responses to login requests, used by the ATP
+	// rule group to track login failure rates.
+	//
+	// The ATP rule group evaluates the responses that your protected resources
+	// send back to client login attempts, keeping count of successful and failed
+	// attempts from each IP address and client session. Using this information,
+	// the rule group labels and mitigates requests from client sessions and IP
+	// addresses that submit too many failed login attempts in a short amount of
+	// time.
+	//
+	// Response inspection is available only in web ACLs that protect Amazon CloudFront
+	// distributions.
+	ResponseInspection *ResponseInspection `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AWSManagedRulesATPRuleSet) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AWSManagedRulesATPRuleSet) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AWSManagedRulesATPRuleSet) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AWSManagedRulesATPRuleSet"}
+	if s.LoginPath == nil {
+		invalidParams.Add(request.NewErrParamRequired("LoginPath"))
+	}
+	if s.RequestInspection != nil {
+		if err := s.RequestInspection.Validate(); err != nil {
+			invalidParams.AddNested("RequestInspection", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ResponseInspection != nil {
+		if err := s.ResponseInspection.Validate(); err != nil {
+			invalidParams.AddNested("ResponseInspection", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLoginPath sets the LoginPath field's value.
+func (s *AWSManagedRulesATPRuleSet) SetLoginPath(v string) *AWSManagedRulesATPRuleSet {
+	s.LoginPath = &v
+	return s
+}
+
+// SetRequestInspection sets the RequestInspection field's value.
+func (s *AWSManagedRulesATPRuleSet) SetRequestInspection(v *RequestInspection) *AWSManagedRulesATPRuleSet {
+	s.RequestInspection = v
+	return s
+}
+
+// SetResponseInspection sets the ResponseInspection field's value.
+func (s *AWSManagedRulesATPRuleSet) SetResponseInspection(v *ResponseInspection) *AWSManagedRulesATPRuleSet {
+	s.ResponseInspection = v
+	return s
+}
+
+// Details for your use of the Bot Control managed rule group, AWSManagedRulesBotControlRuleSet.
+// This configuration is used in ManagedRuleGroupConfig.
 type AWSManagedRulesBotControlRuleSet struct {
 	_ struct{} `type:"structure"`
 
@@ -6025,6 +6147,8 @@ type AssociateWebACLInput struct {
 	//
 	//    * For an Amazon Cognito user pool: arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
 	//
+	//    * For an App Runner service: arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"20" type:"string" required:"true"`
 
@@ -6276,7 +6400,7 @@ type ByteMatchStatement struct {
 
 	// A string value that you want WAF to search for. WAF searches only in the
 	// part of web requests that you designate for inspection in FieldToMatch. The
-	// maximum length of the value is 50 bytes.
+	// maximum length of the value is 200 bytes.
 	//
 	// Valid values depend on the component that you specify for inspection in FieldToMatch:
 	//
@@ -6292,7 +6416,7 @@ type ByteMatchStatement struct {
 	// If you're using the WAF API
 	//
 	// Specify a base64-encoded version of the value. The maximum length of the
-	// value before you base64-encode it is 50 bytes.
+	// value before you base64-encode it is 200 bytes.
 	//
 	// For example, suppose the value of Type is HEADER and the value of Data is
 	// User-Agent. If you want to search the User-Agent header for the value BadBot,
@@ -6765,8 +6889,8 @@ type CheckCapacityInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -7224,8 +7348,8 @@ type CreateIPSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -7389,8 +7513,8 @@ type CreateRegexPatternSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -7589,8 +7713,8 @@ type CreateRuleGroupInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -7833,8 +7957,8 @@ type CreateWebACLInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -7862,7 +7986,7 @@ type CreateWebACLInput struct {
 	//
 	// Public suffixes aren't allowed. For example, you can't use usa.gov or co.uk
 	// as token domains.
-	TokenDomains []*string `min:"1" type:"list"`
+	TokenDomains []*string `type:"list"`
 
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
@@ -7911,9 +8035,6 @@ func (s *CreateWebACLInput) Validate() error {
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
-	}
-	if s.TokenDomains != nil && len(s.TokenDomains) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TokenDomains", 1))
 	}
 	if s.VisibilityConfig == nil {
 		invalidParams.Add(request.NewErrParamRequired("VisibilityConfig"))
@@ -8596,8 +8717,8 @@ type DeleteIPSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -8880,8 +9001,8 @@ type DeleteRegexPatternSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -9020,8 +9141,8 @@ type DeleteRuleGroupInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -9160,8 +9281,8 @@ type DeleteWebACLInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -9281,8 +9402,8 @@ type DescribeManagedRuleGroupInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -9499,6 +9620,8 @@ type DisassociateWebACLInput struct {
 	//    * For an AppSync GraphQL API: arn:aws:appsync:region:account-id:apis/GraphQLApiId
 	//
 	//    * For an Amazon Cognito user pool: arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
+	//
+	//    * For an App Runner service: arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"20" type:"string" required:"true"`
@@ -10368,8 +10491,8 @@ type GetIPSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -10598,8 +10721,8 @@ type GetManagedRuleSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -10912,8 +11035,8 @@ type GetRateBasedStatementManagedKeysInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -11078,8 +11201,8 @@ type GetRegexPatternSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -11221,8 +11344,8 @@ type GetRuleGroupInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -11357,16 +11480,16 @@ type GetSampledRequestsInput struct {
 	// MaxItems is a required field
 	MaxItems *int64 `min:"1" type:"long" required:"true"`
 
-	// The metric name assigned to the Rule or RuleGroup for which you want a sample
-	// of requests.
+	// The metric name assigned to the Rule or RuleGroup dimension for which you
+	// want a sample of requests.
 	//
 	// RuleMetricName is a required field
 	RuleMetricName *string `min:"1" type:"string" required:"true"`
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -11556,6 +11679,8 @@ type GetWebACLForResourceInput struct {
 	//
 	//    * For an Amazon Cognito user pool: arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
 	//
+	//    * For an App Runner service: arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"20" type:"string" required:"true"`
 }
@@ -11650,8 +11775,8 @@ type GetWebACLInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -13027,8 +13152,8 @@ type ListAvailableManagedRuleGroupVersionsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -13196,8 +13321,8 @@ type ListAvailableManagedRuleGroupsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -13324,8 +13449,8 @@ type ListIPSetsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -13454,8 +13579,8 @@ type ListLoggingConfigurationsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -13582,8 +13707,8 @@ type ListManagedRuleSetsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -13829,8 +13954,8 @@ type ListRegexPatternSetsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -13946,7 +14071,7 @@ type ListResourcesForWebACLInput struct {
 
 	// Used for web ACLs that are scoped for regional applications. A regional application
 	// can be an Application Load Balancer (ALB), an Amazon API Gateway REST API,
-	// an AppSync GraphQL API, or an Amazon Cognito user pool.
+	// an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner service.
 	//
 	// If you don't provide a resource type, the call uses the resource type APPLICATION_LOAD_BALANCER.
 	//
@@ -14052,8 +14177,8 @@ type ListRuleGroupsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -14301,8 +14426,8 @@ type ListWebACLsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -14471,7 +14596,7 @@ type LoggingConfiguration struct {
 
 	// The parts of the request that you want to keep out of the logs. For example,
 	// if you redact the SingleHeader field, the HEADER field in the logs will be
-	// xxx.
+	// REDACTED.
 	//
 	// You can specify only the following fields for redaction: UriPath, QueryString,
 	// SingleHeader, Method, and JsonBody.
@@ -14651,12 +14776,32 @@ func (s *LoggingFilter) SetFilters(v []*Filter) *LoggingFilter {
 // Additional information that's used by a managed rule group. Many managed
 // rule groups don't require this.
 //
+// Use the AWSManagedRulesATPRuleSet configuration object for the account takeover
+// prevention managed rule group, to provide information such as the sign-in
+// page of your application and the type of content to accept or reject from
+// the client.
+//
 // Use the AWSManagedRulesBotControlRuleSet configuration object to configure
 // the protection level that you want the Bot Control rule group to use.
 //
 // For example specifications, see the examples section of CreateWebACL.
 type ManagedRuleGroupConfig struct {
 	_ struct{} `type:"structure"`
+
+	// Additional configuration for using the account takeover prevention (ATP)
+	// managed rule group, AWSManagedRulesATPRuleSet. Use this to provide login
+	// request information to the rule group. For web ACLs that protect CloudFront
+	// distributions, use this to also provide the information about how your distribution
+	// responds to login requests.
+	//
+	// This configuration replaces the individual configuration fields in ManagedRuleGroupConfig
+	// and provides additional feature configuration.
+	//
+	// For information about using the ATP managed rule group, see WAF Fraud Control
+	// account takeover prevention (ATP) rule group (https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html)
+	// and WAF Fraud Control account takeover prevention (ATP) (https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html)
+	// in the WAF Developer Guide.
+	AWSManagedRulesATPRuleSet *AWSManagedRulesATPRuleSet `type:"structure"`
 
 	// Additional configuration for using the Bot Control managed rule group. Use
 	// this to specify the inspection level that you want to use. For information
@@ -14666,18 +14811,32 @@ type ManagedRuleGroupConfig struct {
 	// in the WAF Developer Guide.
 	AWSManagedRulesBotControlRuleSet *AWSManagedRulesBotControlRuleSet `type:"structure"`
 
-	// The path of the login endpoint for your application. For example, for the
-	// URL https://example.com/web/login, you would provide the path /web/login.
-	LoginPath *string `min:"1" type:"string"`
+	//
+	// Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet LoginPath
+	LoginPath *string `min:"1" deprecated:"true" type:"string"`
 
-	// Details about your login page password field.
-	PasswordField *PasswordField `type:"structure"`
+	//
+	// Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet
+	// RequestInspection.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField
+	PasswordField *PasswordField `deprecated:"true" type:"structure"`
 
-	// The payload type for your login endpoint, either JSON or form encoded.
-	PayloadType *string `type:"string" enum:"PayloadType"`
+	//
+	// Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet
+	// RequestInspection.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType
+	PayloadType *string `deprecated:"true" type:"string" enum:"PayloadType"`
 
-	// Details about your login page username field.
-	UsernameField *UsernameField `type:"structure"`
+	//
+	// Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet
+	// RequestInspection.
+	//
+	// Deprecated: Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField
+	UsernameField *UsernameField `deprecated:"true" type:"structure"`
 }
 
 // String returns the string representation.
@@ -14704,6 +14863,11 @@ func (s *ManagedRuleGroupConfig) Validate() error {
 	if s.LoginPath != nil && len(*s.LoginPath) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("LoginPath", 1))
 	}
+	if s.AWSManagedRulesATPRuleSet != nil {
+		if err := s.AWSManagedRulesATPRuleSet.Validate(); err != nil {
+			invalidParams.AddNested("AWSManagedRulesATPRuleSet", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.AWSManagedRulesBotControlRuleSet != nil {
 		if err := s.AWSManagedRulesBotControlRuleSet.Validate(); err != nil {
 			invalidParams.AddNested("AWSManagedRulesBotControlRuleSet", err.(request.ErrInvalidParams))
@@ -14724,6 +14888,12 @@ func (s *ManagedRuleGroupConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAWSManagedRulesATPRuleSet sets the AWSManagedRulesATPRuleSet field's value.
+func (s *ManagedRuleGroupConfig) SetAWSManagedRulesATPRuleSet(v *AWSManagedRulesATPRuleSet) *ManagedRuleGroupConfig {
+	s.AWSManagedRulesATPRuleSet = v
+	return s
 }
 
 // SetAWSManagedRulesBotControlRuleSet sets the AWSManagedRulesBotControlRuleSet field's value.
@@ -14780,9 +14950,14 @@ type ManagedRuleGroupStatement struct {
 	// Additional information that's used by a managed rule group. Many managed
 	// rule groups don't require this.
 	//
+	// Use the AWSManagedRulesATPRuleSet configuration object for the account takeover
+	// prevention managed rule group, to provide information such as the sign-in
+	// page of your application and the type of content to accept or reject from
+	// the client.
+	//
 	// Use the AWSManagedRulesBotControlRuleSet configuration object to configure
 	// the protection level that you want the Bot Control rule group to use.
-	ManagedRuleGroupConfigs []*ManagedRuleGroupConfig `min:"1" type:"list"`
+	ManagedRuleGroupConfigs []*ManagedRuleGroupConfig `type:"list"`
 
 	// The name of the managed rule group. You use this, along with the vendor name,
 	// to identify the rule group.
@@ -14842,9 +15017,6 @@ func (s ManagedRuleGroupStatement) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ManagedRuleGroupStatement) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ManagedRuleGroupStatement"}
-	if s.ManagedRuleGroupConfigs != nil && len(s.ManagedRuleGroupConfigs) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ManagedRuleGroupConfigs", 1))
-	}
 	if s.Name == nil {
 		invalidParams.Add(request.NewErrParamRequired("Name"))
 	}
@@ -15695,7 +15867,8 @@ func (s *OverrideAction) SetNone(v *NoneAction) *OverrideAction {
 	return s
 }
 
-// Details about your login page password field, used in a ManagedRuleGroupConfig.
+// Details about your login page password field for request inspection, used
+// in the AWSManagedRulesATPRuleSet RequestInspection configuration.
 type PasswordField struct {
 	_ struct{} `type:"structure"`
 
@@ -15931,8 +16104,8 @@ type PutManagedRuleSetVersionsInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -16244,7 +16417,7 @@ func (s QueryString) GoString() string {
 // seen from an attacker, you might create a rate-based rule with a nested AND
 // rule statement that contains the following nested statements:
 //
-//   - An IP match statement with an IP set that specified the address 192.0.2.44.
+//   - An IP match statement with an IP set that specifies the address 192.0.2.44.
 //
 //   - A string match statement that searches in the User-Agent header for
 //     the string BadBot.
@@ -16860,6 +17033,602 @@ func (s *ReleaseSummary) SetReleaseVersion(v string) *ReleaseSummary {
 // SetTimestamp sets the Timestamp field's value.
 func (s *ReleaseSummary) SetTimestamp(v time.Time) *ReleaseSummary {
 	s.Timestamp = &v
+	return s
+}
+
+// The criteria for inspecting login requests, used by the ATP rule group to
+// validate credentials usage.
+//
+// This is part of the AWSManagedRulesATPRuleSet configuration in ManagedRuleGroupConfig.
+//
+// In these settings, you specify how your application accepts login attempts
+// by providing the request payload type and the names of the fields within
+// the request body where the username and password are provided.
+type RequestInspection struct {
+	_ struct{} `type:"structure"`
+
+	// Details about your login page password field.
+	//
+	// How you specify this depends on the payload type.
+	//
+	//    * For JSON payloads, specify the field name in JSON pointer syntax. For
+	//    information about the JSON Pointer syntax, see the Internet Engineering
+	//    Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer
+	//    (https://tools.ietf.org/html/rfc6901). For example, for the JSON payload
+	//    { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" }
+	//    }, the username field specification is /login/username and the password
+	//    field specification is /login/password.
+	//
+	//    * For form encoded payload types, use the HTML form names. For example,
+	//    for an HTML form with input elements named username1 and password1, the
+	//    username field specification is username1 and the password field specification
+	//    is password1.
+	//
+	// PasswordField is a required field
+	PasswordField *PasswordField `type:"structure" required:"true"`
+
+	// The payload type for your login endpoint, either JSON or form encoded.
+	//
+	// PayloadType is a required field
+	PayloadType *string `type:"string" required:"true" enum:"PayloadType"`
+
+	// Details about your login page username field.
+	//
+	// How you specify this depends on the payload type.
+	//
+	//    * For JSON payloads, specify the field name in JSON pointer syntax. For
+	//    information about the JSON Pointer syntax, see the Internet Engineering
+	//    Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer
+	//    (https://tools.ietf.org/html/rfc6901). For example, for the JSON payload
+	//    { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" }
+	//    }, the username field specification is /login/username and the password
+	//    field specification is /login/password.
+	//
+	//    * For form encoded payload types, use the HTML form names. For example,
+	//    for an HTML form with input elements named username1 and password1, the
+	//    username field specification is username1 and the password field specification
+	//    is password1.
+	//
+	// UsernameField is a required field
+	UsernameField *UsernameField `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestInspection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestInspection) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RequestInspection) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RequestInspection"}
+	if s.PasswordField == nil {
+		invalidParams.Add(request.NewErrParamRequired("PasswordField"))
+	}
+	if s.PayloadType == nil {
+		invalidParams.Add(request.NewErrParamRequired("PayloadType"))
+	}
+	if s.UsernameField == nil {
+		invalidParams.Add(request.NewErrParamRequired("UsernameField"))
+	}
+	if s.PasswordField != nil {
+		if err := s.PasswordField.Validate(); err != nil {
+			invalidParams.AddNested("PasswordField", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.UsernameField != nil {
+		if err := s.UsernameField.Validate(); err != nil {
+			invalidParams.AddNested("UsernameField", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPasswordField sets the PasswordField field's value.
+func (s *RequestInspection) SetPasswordField(v *PasswordField) *RequestInspection {
+	s.PasswordField = v
+	return s
+}
+
+// SetPayloadType sets the PayloadType field's value.
+func (s *RequestInspection) SetPayloadType(v string) *RequestInspection {
+	s.PayloadType = &v
+	return s
+}
+
+// SetUsernameField sets the UsernameField field's value.
+func (s *RequestInspection) SetUsernameField(v *UsernameField) *RequestInspection {
+	s.UsernameField = v
+	return s
+}
+
+// The criteria for inspecting responses to login requests, used by the ATP
+// rule group to track login failure rates.
+//
+// The ATP rule group evaluates the responses that your protected resources
+// send back to client login attempts, keeping count of successful and failed
+// attempts from each IP address and client session. Using this information,
+// the rule group labels and mitigates requests from client sessions and IP
+// addresses that submit too many failed login attempts in a short amount of
+// time.
+//
+// Response inspection is available only in web ACLs that protect Amazon CloudFront
+// distributions.
+//
+// This is part of the AWSManagedRulesATPRuleSet configuration in ManagedRuleGroupConfig.
+//
+// Enable login response inspection by configuring exactly one component of
+// the response to inspect. You can't configure more than one. If you don't
+// configure any of the response inspection options, response inspection is
+// disabled.
+type ResponseInspection struct {
+	_ struct{} `type:"structure"`
+
+	// Configures inspection of the response body. WAF can inspect the first 65,536
+	// bytes (64 KB) of the response body.
+	BodyContains *ResponseInspectionBodyContains `type:"structure"`
+
+	// Configures inspection of the response header.
+	Header *ResponseInspectionHeader `type:"structure"`
+
+	// Configures inspection of the response JSON. WAF can inspect the first 65,536
+	// bytes (64 KB) of the response JSON.
+	Json *ResponseInspectionJson `type:"structure"`
+
+	// Configures inspection of the response status code.
+	StatusCode *ResponseInspectionStatusCode `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspection) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResponseInspection) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ResponseInspection"}
+	if s.BodyContains != nil {
+		if err := s.BodyContains.Validate(); err != nil {
+			invalidParams.AddNested("BodyContains", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Header != nil {
+		if err := s.Header.Validate(); err != nil {
+			invalidParams.AddNested("Header", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Json != nil {
+		if err := s.Json.Validate(); err != nil {
+			invalidParams.AddNested("Json", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.StatusCode != nil {
+		if err := s.StatusCode.Validate(); err != nil {
+			invalidParams.AddNested("StatusCode", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBodyContains sets the BodyContains field's value.
+func (s *ResponseInspection) SetBodyContains(v *ResponseInspectionBodyContains) *ResponseInspection {
+	s.BodyContains = v
+	return s
+}
+
+// SetHeader sets the Header field's value.
+func (s *ResponseInspection) SetHeader(v *ResponseInspectionHeader) *ResponseInspection {
+	s.Header = v
+	return s
+}
+
+// SetJson sets the Json field's value.
+func (s *ResponseInspection) SetJson(v *ResponseInspectionJson) *ResponseInspection {
+	s.Json = v
+	return s
+}
+
+// SetStatusCode sets the StatusCode field's value.
+func (s *ResponseInspection) SetStatusCode(v *ResponseInspectionStatusCode) *ResponseInspection {
+	s.StatusCode = v
+	return s
+}
+
+// Configures inspection of the response body. WAF can inspect the first 65,536
+// bytes (64 KB) of the response body. This is part of the ResponseInspection
+// configuration for AWSManagedRulesATPRuleSet.
+//
+// Response inspection is available only in web ACLs that protect Amazon CloudFront
+// distributions.
+type ResponseInspectionBodyContains struct {
+	_ struct{} `type:"structure"`
+
+	// Strings in the body of the response that indicate a failed login attempt.
+	// To be counted as a failed login, the string can be anywhere in the body and
+	// must be an exact match, including case. Each string must be unique among
+	// the success and failure strings.
+	//
+	// JSON example: "FailureStrings": [ "Login failed" ]
+	//
+	// FailureStrings is a required field
+	FailureStrings []*string `min:"1" type:"list" required:"true"`
+
+	// Strings in the body of the response that indicate a successful login attempt.
+	// To be counted as a successful login, the string can be anywhere in the body
+	// and must be an exact match, including case. Each string must be unique among
+	// the success and failure strings.
+	//
+	// JSON example: "SuccessStrings": [ "Login successful", "Welcome to our site!"
+	// ]
+	//
+	// SuccessStrings is a required field
+	SuccessStrings []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionBodyContains) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionBodyContains) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResponseInspectionBodyContains) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ResponseInspectionBodyContains"}
+	if s.FailureStrings == nil {
+		invalidParams.Add(request.NewErrParamRequired("FailureStrings"))
+	}
+	if s.FailureStrings != nil && len(s.FailureStrings) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("FailureStrings", 1))
+	}
+	if s.SuccessStrings == nil {
+		invalidParams.Add(request.NewErrParamRequired("SuccessStrings"))
+	}
+	if s.SuccessStrings != nil && len(s.SuccessStrings) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SuccessStrings", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFailureStrings sets the FailureStrings field's value.
+func (s *ResponseInspectionBodyContains) SetFailureStrings(v []*string) *ResponseInspectionBodyContains {
+	s.FailureStrings = v
+	return s
+}
+
+// SetSuccessStrings sets the SuccessStrings field's value.
+func (s *ResponseInspectionBodyContains) SetSuccessStrings(v []*string) *ResponseInspectionBodyContains {
+	s.SuccessStrings = v
+	return s
+}
+
+// Configures inspection of the response header. This is part of the ResponseInspection
+// configuration for AWSManagedRulesATPRuleSet.
+//
+// Response inspection is available only in web ACLs that protect Amazon CloudFront
+// distributions.
+type ResponseInspectionHeader struct {
+	_ struct{} `type:"structure"`
+
+	// Values in the response header with the specified name that indicate a failed
+	// login attempt. To be counted as a failed login, the value must be an exact
+	// match, including case. Each value must be unique among the success and failure
+	// values.
+	//
+	// JSON example: "FailureValues": [ "LoginFailed", "Failed login" ]
+	//
+	// FailureValues is a required field
+	FailureValues []*string `min:"1" type:"list" required:"true"`
+
+	// The name of the header to match against. The name must be an exact match,
+	// including case.
+	//
+	// JSON example: "Name": [ "LoginResult" ]
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// Values in the response header with the specified name that indicate a successful
+	// login attempt. To be counted as a successful login, the value must be an
+	// exact match, including case. Each value must be unique among the success
+	// and failure values.
+	//
+	// JSON example: "SuccessValues": [ "LoginPassed", "Successful login" ]
+	//
+	// SuccessValues is a required field
+	SuccessValues []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionHeader) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionHeader) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResponseInspectionHeader) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ResponseInspectionHeader"}
+	if s.FailureValues == nil {
+		invalidParams.Add(request.NewErrParamRequired("FailureValues"))
+	}
+	if s.FailureValues != nil && len(s.FailureValues) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("FailureValues", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.SuccessValues == nil {
+		invalidParams.Add(request.NewErrParamRequired("SuccessValues"))
+	}
+	if s.SuccessValues != nil && len(s.SuccessValues) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SuccessValues", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFailureValues sets the FailureValues field's value.
+func (s *ResponseInspectionHeader) SetFailureValues(v []*string) *ResponseInspectionHeader {
+	s.FailureValues = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *ResponseInspectionHeader) SetName(v string) *ResponseInspectionHeader {
+	s.Name = &v
+	return s
+}
+
+// SetSuccessValues sets the SuccessValues field's value.
+func (s *ResponseInspectionHeader) SetSuccessValues(v []*string) *ResponseInspectionHeader {
+	s.SuccessValues = v
+	return s
+}
+
+// Configures inspection of the response JSON. WAF can inspect the first 65,536
+// bytes (64 KB) of the response JSON. This is part of the ResponseInspection
+// configuration for AWSManagedRulesATPRuleSet.
+//
+// Response inspection is available only in web ACLs that protect Amazon CloudFront
+// distributions.
+type ResponseInspectionJson struct {
+	_ struct{} `type:"structure"`
+
+	// Values for the specified identifier in the response JSON that indicate a
+	// failed login attempt. To be counted as a failed login, the value must be
+	// an exact match, including case. Each value must be unique among the success
+	// and failure values.
+	//
+	// JSON example: "FailureValues": [ "False", "Failed" ]
+	//
+	// FailureValues is a required field
+	FailureValues []*string `min:"1" type:"list" required:"true"`
+
+	// The identifier for the value to match against in the JSON. The identifier
+	// must be an exact match, including case.
+	//
+	// JSON example: "Identifier": [ "/login/success" ]
+	//
+	// Identifier is a required field
+	Identifier *string `min:"1" type:"string" required:"true"`
+
+	// Values for the specified identifier in the response JSON that indicate a
+	// successful login attempt. To be counted as a successful login, the value
+	// must be an exact match, including case. Each value must be unique among the
+	// success and failure values.
+	//
+	// JSON example: "SuccessValues": [ "True", "Succeeded" ]
+	//
+	// SuccessValues is a required field
+	SuccessValues []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionJson) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionJson) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResponseInspectionJson) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ResponseInspectionJson"}
+	if s.FailureValues == nil {
+		invalidParams.Add(request.NewErrParamRequired("FailureValues"))
+	}
+	if s.FailureValues != nil && len(s.FailureValues) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("FailureValues", 1))
+	}
+	if s.Identifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("Identifier"))
+	}
+	if s.Identifier != nil && len(*s.Identifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Identifier", 1))
+	}
+	if s.SuccessValues == nil {
+		invalidParams.Add(request.NewErrParamRequired("SuccessValues"))
+	}
+	if s.SuccessValues != nil && len(s.SuccessValues) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SuccessValues", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFailureValues sets the FailureValues field's value.
+func (s *ResponseInspectionJson) SetFailureValues(v []*string) *ResponseInspectionJson {
+	s.FailureValues = v
+	return s
+}
+
+// SetIdentifier sets the Identifier field's value.
+func (s *ResponseInspectionJson) SetIdentifier(v string) *ResponseInspectionJson {
+	s.Identifier = &v
+	return s
+}
+
+// SetSuccessValues sets the SuccessValues field's value.
+func (s *ResponseInspectionJson) SetSuccessValues(v []*string) *ResponseInspectionJson {
+	s.SuccessValues = v
+	return s
+}
+
+// Configures inspection of the response status code. This is part of the ResponseInspection
+// configuration for AWSManagedRulesATPRuleSet.
+//
+// Response inspection is available only in web ACLs that protect Amazon CloudFront
+// distributions.
+type ResponseInspectionStatusCode struct {
+	_ struct{} `type:"structure"`
+
+	// Status codes in the response that indicate a failed login attempt. To be
+	// counted as a failed login, the response status code must match one of these.
+	// Each code must be unique among the success and failure status codes.
+	//
+	// JSON example: "FailureCodes": [ 400, 404 ]
+	//
+	// FailureCodes is a required field
+	FailureCodes []*int64 `min:"1" type:"list" required:"true"`
+
+	// Status codes in the response that indicate a successful login attempt. To
+	// be counted as a successful login, the response status code must match one
+	// of these. Each code must be unique among the success and failure status codes.
+	//
+	// JSON example: "SuccessCodes": [ 200, 201 ]
+	//
+	// SuccessCodes is a required field
+	SuccessCodes []*int64 `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionStatusCode) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseInspectionStatusCode) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResponseInspectionStatusCode) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ResponseInspectionStatusCode"}
+	if s.FailureCodes == nil {
+		invalidParams.Add(request.NewErrParamRequired("FailureCodes"))
+	}
+	if s.FailureCodes != nil && len(s.FailureCodes) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("FailureCodes", 1))
+	}
+	if s.SuccessCodes == nil {
+		invalidParams.Add(request.NewErrParamRequired("SuccessCodes"))
+	}
+	if s.SuccessCodes != nil && len(s.SuccessCodes) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SuccessCodes", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFailureCodes sets the FailureCodes field's value.
+func (s *ResponseInspectionStatusCode) SetFailureCodes(v []*int64) *ResponseInspectionStatusCode {
+	s.FailureCodes = v
+	return s
+}
+
+// SetSuccessCodes sets the SuccessCodes field's value.
+func (s *ResponseInspectionStatusCode) SetSuccessCodes(v []*int64) *ResponseInspectionStatusCode {
+	s.SuccessCodes = v
 	return s
 }
 
@@ -18296,7 +19065,7 @@ type Statement struct {
 	// seen from an attacker, you might create a rate-based rule with a nested AND
 	// rule statement that contains the following nested statements:
 	//
-	//    * An IP match statement with an IP set that specified the address 192.0.2.44.
+	//    * An IP match statement with an IP set that specifies the address 192.0.2.44.
 	//
 	//    * A string match statement that searches in the User-Agent header for
 	//    the string BadBot.
@@ -19199,8 +19968,8 @@ type UpdateIPSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -19377,8 +20146,8 @@ type UpdateManagedRuleSetVersionExpiryDateInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -19585,8 +20354,8 @@ type UpdateRegexPatternSetInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -19786,8 +20555,8 @@ type UpdateRuleGroupInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -20037,8 +20806,8 @@ type UpdateWebACLInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
-	// Cognito user pool.
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
+	// user pool, or an App Runner service.
 	//
 	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
 	// as follows:
@@ -20063,7 +20832,7 @@ type UpdateWebACLInput struct {
 	//
 	// Public suffixes aren't allowed. For example, you can't use usa.gov or co.uk
 	// as token domains.
-	TokenDomains []*string `min:"1" type:"list"`
+	TokenDomains []*string `type:"list"`
 
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
@@ -20121,9 +20890,6 @@ func (s *UpdateWebACLInput) Validate() error {
 	}
 	if s.Scope == nil {
 		invalidParams.Add(request.NewErrParamRequired("Scope"))
-	}
-	if s.TokenDomains != nil && len(s.TokenDomains) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TokenDomains", 1))
 	}
 	if s.VisibilityConfig == nil {
 		invalidParams.Add(request.NewErrParamRequired("VisibilityConfig"))
@@ -20308,7 +21074,8 @@ func (s UriPath) GoString() string {
 	return s.String()
 }
 
-// Details about your login page username field, used in a ManagedRuleGroupConfig.
+// Details about your login page username field for request inspection, used
+// in the AWSManagedRulesATPRuleSet RequestInspection configuration.
 type UsernameField struct {
 	_ struct{} `type:"structure"`
 
@@ -20436,10 +21203,10 @@ type VisibilityConfig struct {
 	// CloudWatchMetricsEnabled is a required field
 	CloudWatchMetricsEnabled *bool `type:"boolean" required:"true"`
 
-	// A name of the Amazon CloudWatch metric. The name can contain only the characters:
-	// A-Z, a-z, 0-9, - (hyphen), and _ (underscore). The name can be from one to
-	// 128 characters long. It can't contain whitespace or metric names reserved
-	// for WAF, for example All and Default_Action.
+	// A name of the Amazon CloudWatch metric dimension. The name can contain only
+	// the characters: A-Z, a-z, 0-9, - (hyphen), and _ (underscore). The name can
+	// be from one to 128 characters long. It can't contain whitespace or metric
+	// names that are reserved for WAF, for example All and Default_Action.
 	//
 	// MetricName is a required field
 	MetricName *string `min:"1" type:"string" required:"true"`
@@ -21748,7 +22515,8 @@ func (s *WAFUnavailableEntityException) RequestID() string {
 // RuleGroup, and managed rule group. You can associate a web ACL with one or
 // more Amazon Web Services resources to protect. The resources can be an Amazon
 // CloudFront distribution, an Amazon API Gateway REST API, an Application Load
-// Balancer, an AppSync GraphQL API, or an Amazon Cognito user pool.
+// Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner
+// service.
 type WebACL struct {
 	_ struct{} `type:"structure"`
 
@@ -21867,7 +22635,7 @@ type WebACL struct {
 	// accepts tokens only for the domain of the protected resource. With a token
 	// domain list, WAF accepts the resource's host domain plus all domains in the
 	// token domain list, including their prefixed subdomains.
-	TokenDomains []*string `min:"1" type:"list"`
+	TokenDomains []*string `type:"list"`
 
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
@@ -23641,6 +24409,9 @@ const (
 
 	// ParameterExceptionFieldTokenDomain is a ParameterExceptionField enum value
 	ParameterExceptionFieldTokenDomain = "TOKEN_DOMAIN"
+
+	// ParameterExceptionFieldAtpRuleSetResponseInspection is a ParameterExceptionField enum value
+	ParameterExceptionFieldAtpRuleSetResponseInspection = "ATP_RULE_SET_RESPONSE_INSPECTION"
 )
 
 // ParameterExceptionField_Values returns all elements of the ParameterExceptionField enum
@@ -23711,6 +24482,7 @@ func ParameterExceptionField_Values() []string {
 		ParameterExceptionFieldOversizeHandling,
 		ParameterExceptionFieldChallengeConfig,
 		ParameterExceptionFieldTokenDomain,
+		ParameterExceptionFieldAtpRuleSetResponseInspection,
 	}
 }
 
@@ -23802,6 +24574,9 @@ const (
 
 	// ResourceTypeCognitoUserPool is a ResourceType enum value
 	ResourceTypeCognitoUserPool = "COGNITO_USER_POOL"
+
+	// ResourceTypeAppRunnerService is a ResourceType enum value
+	ResourceTypeAppRunnerService = "APP_RUNNER_SERVICE"
 )
 
 // ResourceType_Values returns all elements of the ResourceType enum
@@ -23811,6 +24586,7 @@ func ResourceType_Values() []string {
 		ResourceTypeApiGateway,
 		ResourceTypeAppsync,
 		ResourceTypeCognitoUserPool,
+		ResourceTypeAppRunnerService,
 	}
 }
 

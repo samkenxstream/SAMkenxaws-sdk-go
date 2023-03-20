@@ -1,3 +1,610 @@
+Release v1.44.224 (2023-03-17)
+===
+
+### Service Client Updates
+* `service/billingconductor`: Updates service API and documentation
+* `service/config`: Updates service API and documentation
+* `service/dms`: Updates service API and documentation
+  * S3 setting to create AWS Glue Data Catalog. Oracle setting to control conversion of timestamp column. Support for Kafka SASL Plain authentication. Setting to map boolean from PostgreSQL to Redshift. SQL Server settings to force lob lookup on inline LOBs and to control access of database logs.
+
+Release v1.44.223 (2023-03-16)
+===
+
+### Service Client Updates
+* `service/guardduty`: Updates service API, documentation, and paginators
+  * Updated 9 APIs for feature enablement to reflect expansion of GuardDuty to features. Added new APIs and updated existing APIs to support RDS Protection GA.
+* `service/resource-explorer-2`: Updates service documentation
+* `service/runtime.sagemaker`: Updates service documentation
+
+Release v1.44.222 (2023-03-15)
+===
+
+### Service Client Updates
+* `service/migrationhubstrategy`: Updates service API and documentation
+* `service/s3control`: Updates service API and documentation
+  * Added support for S3 Object Lambda aliases.
+* `service/securitylake`: Updates service API and documentation
+
+### SDK Bugs
+
+* `private/protocol`: Fix error message being elided in restJson errors.
+  * Use request body error message for unknown errors when header is absent.
+
+Release v1.44.221 (2023-03-14)
+===
+
+### Service Client Updates
+* `service/application-autoscaling`: Updates service API and documentation
+* `service/dataexchange`: Updates service API and documentation
+* `service/directconnect`: Updates service documentation
+  * describe-direct-connect-gateway-associations includes a new status, updating, indicating that the association is currently in-process of updating.
+* `service/ec2`: Updates service API and documentation
+  * This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs.
+* `service/iam`: Updates service documentation
+  * Documentation only updates to correct customer-reported issues
+* `service/keyspaces`: Updates service API and documentation
+
+### SDK Enhancements
+
+* `aws/ec2metadata`: Added an option to disable fallback to IMDSv1. 
+  * When set the SDK will no longer fallback to IMDSv1 when fetching a token fails. Use `aws.WithEC2MetadataDisableFallback` to enable.
+
+Release v1.44.220 (2023-03-13)
+===
+
+### Service Client Updates
+* `service/appintegrations`: Updates service API and documentation
+* `service/lakeformation`: Updates service documentation
+* `service/s3control`: Updates service API and documentation
+  * Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.
+* `service/tnb`: Updates service API and documentation
+* `service/wisdom`: Updates service API and documentation
+
+Release v1.44.219 (2023-03-10)
+===
+
+### Service Client Updates
+* `service/ivschat`: Updates service API
+* `service/secretsmanager`: Updates service API
+  * The type definitions of SecretString and SecretBinary now have a minimum length of 1 in the model to match the exception thrown when you pass in empty values.
+
+Release v1.44.218 (2023-03-09)
+===
+
+### Service Client Updates
+* `service/codeartifact`: Updates service API and documentation
+* `service/connect`: Updates service API, documentation, and paginators
+* `service/evidently`: Updates service documentation
+* `service/networkmanager`: Updates service documentation
+* `service/quicksight`: Updates service API and documentation
+  * This release has two changes: add state persistence feature for embedded dashboard and console in GenerateEmbedUrlForRegisteredUser API; add properties for hidden collapsed row dimensions in PivotTableOptions.
+* `service/redshift-data`: Updates service API and documentation
+* `service/sagemaker`: Updates service API and documentation
+  * Amazon SageMaker Inference now allows SSM access to customer's model container by setting the "EnableSSMAccess" parameter for a ProductionVariant in CreateEndpointConfig API.
+* `service/servicediscovery`: Updates service API
+* `service/sesv2`: Updates service API and documentation
+
+Release v1.44.217 (2023-03-08)
+===
+
+### Service Client Updates
+* `service/athena`: Updates service API and documentation
+  * A new field SubstatementType is added to GetQueryExecution API, so customers have an error free way to detect the query type and interpret the result.
+* `service/dynamodb`: Updates service API, documentation, waiters, paginators, and examples
+  * Adds deletion protection support to DynamoDB tables. Tables with deletion protection enabled cannot be deleted. Deletion protection is disabled by default, can be enabled via the CreateTable or UpdateTable APIs, and is visible in TableDescription. This setting is not replicated for Global Tables.
+* `service/ec2`: Updates service API
+  * Introducing Amazon EC2 C7g, M7g and R7g instances, powered by the latest generation AWS Graviton3 processors and deliver up to 25% better performance over Graviton2-based instances.
+* `service/lakeformation`: Updates service API and documentation
+* `service/mediapackage`: Updates service API and documentation
+  * This release provides the date and time live resources were created.
+* `service/mediapackage-vod`: Updates service API and documentation
+* `service/route53resolver`: Updates service API and documentation
+* `service/sagemaker`: Updates service API and documentation
+  * There needs to be a user identity to specify the SageMaker user who perform each action regarding the entity. However, these is a not a unified concept of user identity across SageMaker service that could be used today.
+
+Release v1.44.216 (2023-03-07)
+===
+
+### Service Client Updates
+* `service/dms`: Updates service API, documentation, and paginators
+  * This release adds DMS Fleet Advisor Target Recommendation APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to start Target Recommendation calculation.
+* `service/location`: Updates service documentation
+
+Release v1.44.215 (2023-03-06)
+===
+
+### Service Client Updates
+* `service/account`: Updates service API and documentation
+* `service/ivs`: Updates service documentation
+
+Release v1.44.214 (2023-03-03)
+===
+
+### Service Client Updates
+* `service/dynamodb`: Updates service API, documentation, waiters, paginators, and examples
+  * Documentation updates for DynamoDB.
+* `service/ec2`: Updates service API and documentation
+  * This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
+* `service/macie2`: Updates service documentation
+* `service/mediaconvert`: Updates service API and documentation
+  * The AWS Elemental MediaConvert SDK has improved handling for different input and output color space combinations.
+* `service/medialive`: Updates service API and documentation
+  * AWS Elemental MediaLive adds support for Nielsen watermark timezones.
+* `service/transcribe`: Updates service API and documentation
+
+Release v1.44.213 (2023-03-02)
+===
+
+### Service Client Updates
+* `service/iot`: Updates service API and documentation
+  * A recurring maintenance window is an optional configuration used for rolling out the job document to all devices in the target group observing a predetermined start time, duration, and frequency that the maintenance window occurs.
+* `service/migrationhubstrategy`: Updates service API
+* `service/organizations`: Updates service API and documentation
+  * This release introduces a new reason code, ACCOUNT_CREATION_NOT_COMPLETE, to ConstraintViolationException in CreateOrganization API.
+* `service/pi`: Updates service API and documentation
+* `service/pipes`: Updates service API and documentation
+* `service/sagemaker`: Updates service API and documentation
+  * Add a new field "EndpointMetrics" in SageMaker Inference Recommender "ListInferenceRecommendationsJobSteps" API response.
+
+Release v1.44.212 (2023-03-01)
+===
+
+### Service Client Updates
+* `service/pricing`: Updates service API, documentation, and paginators
+* `service/s3outposts`: Updates service API, documentation, and paginators
+
+Release v1.44.211 (2023-02-28)
+===
+
+### Service Client Updates
+* `service/comprehend`: Updates service API, documentation, and paginators
+* `service/ec2`: Updates service API and documentation
+  * This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.
+* `service/kms`: Updates service documentation and examples
+  * AWS KMS is deprecating the RSAES_PKCS1_V1_5 wrapping algorithm option in the GetParametersForImport API that is used in the AWS KMS Import Key Material feature. AWS KMS will end support for this wrapping algorithm by October 1, 2023.
+* `service/lightsail`: Updates service API and documentation
+  * This release adds Lightsail for Research feature support, such as GUI session access, cost estimates, stop instance on idle, and disk auto mount.
+* `service/managedblockchain`: Updates service API and documentation
+* `service/omics`: Updates service API and documentation
+
+Release v1.44.210 (2023-02-27)
+===
+
+### Service Client Updates
+* `service/devops-guru`: Updates service API and documentation
+* `service/drs`: Updates service API and documentation
+* `service/internetmonitor`: Adds new service
+* `service/lambda`: Updates service API and documentation
+  * This release adds the ability to create ESMs with Document DB change streams as event source. For more information see  https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html.
+* `service/mediaconvert`: Updates service API and documentation
+  * The AWS Elemental MediaConvert SDK has added support for HDR10 to SDR tone mapping, and animated GIF video input sources.
+* `service/timestream-write`: Updates service API, documentation, and paginators
+
+Release v1.44.209 (2023-02-24)
+===
+
+### Service Client Updates
+* `service/connect`: Updates service API and documentation
+* `service/connectcases`: Updates service API and documentation
+* `service/redshift`: Updates service documentation
+  * Documentation updates for Redshift API bringing it in line with IAM best practices.
+* `service/securityhub`: Updates service API, documentation, and paginators
+* `service/servicecatalog`: Updates service documentation
+  * Documentation updates for Service Catalog
+
+Release v1.44.208 (2023-02-23)
+===
+
+### Service Client Updates
+* `service/appflow`: Updates service API and documentation
+* `service/ecs`: Updates service API and documentation
+  * This release supports deleting Amazon ECS task definitions that are in the INACTIVE state.
+* `service/grafana`: Updates service documentation
+* `service/guardduty`: Updates service documentation
+  * Updated API and data types descriptions for CreateFilter, UpdateFilter, and TriggerDetails.
+* `service/iotwireless`: Updates service API and documentation
+* `service/location`: Updates service API, documentation, and paginators
+* `service/macie2`: Updates service API and documentation
+* `service/wafv2`: Updates service API and documentation
+
+Release v1.44.207 (2023-02-22)
+===
+
+### Service Client Updates
+* `service/chime-sdk-voice`: Updates service API and documentation
+* `service/cloudfront`: Updates service API and documentation
+  * CloudFront now supports block lists in origin request policies so that you can forward all headers, cookies, or query string from viewer requests to the origin *except* for those specified in the block list.
+* `service/datasync`: Updates service API
+* `service/opensearch`: Updates service API, documentation, and paginators
+* `service/rum`: Updates service API and documentation
+* `service/ssm`: Updates service documentation
+  * Document only update for Feb 2023
+
+Release v1.44.206 (2023-02-21)
+===
+
+### Service Client Updates
+* `service/quicksight`: Updates service API and documentation
+  * S3 data sources now accept a custom IAM role.
+* `service/resiliencehub`: Updates service API, documentation, and paginators
+* `service/securityhub`: Updates service documentation
+* `service/tnb`: Updates service API, documentation, paginators, and examples
+
+Release v1.44.205 (2023-02-20)
+===
+
+### Service Client Updates
+* `service/auditmanager`: Updates service API and documentation
+* `service/connect`: Updates service API and documentation
+
+Release v1.44.204 (2023-02-17)
+===
+
+### Service Client Updates
+* `service/apprunner`: Updates service API
+* `service/glue`: Updates service API and documentation
+  * Release of Delta Lake Data Lake Format for Glue Studio Service
+
+Release v1.44.203 (2023-02-16)
+===
+
+### Service Client Updates
+* `service/elasticmapreduce`: Updates service API and documentation
+  * This release provides customers the ability to define a timeout period for procuring capacity during a resize operation for Instance Fleet clusters. Customers can specify this timeout using the ResizeSpecifications parameter supported by RunJobFlow, ModifyInstanceFleet and AddInstanceFleet APIs.
+* `service/grafana`: Updates service API and documentation
+* `service/ivs`: Updates service documentation
+* `service/wafv2`: Updates service documentation
+
+Release v1.44.202 (2023-02-15)
+===
+
+### Service Client Updates
+* `service/cloudtrail`: Updates service API
+  * This release adds an InsufficientEncryptionPolicyException type to the StartImport endpoint
+* `service/elasticfilesystem`: Updates service documentation
+  * Documentation update for EFS to support IAM best practices.
+* `service/frauddetector`: Updates service API, documentation, and paginators
+* `service/glue`: Updates service API and documentation
+  * Fix DirectJDBCSource not showing up in CLI code gen
+* `service/privatenetworks`: Updates service API and documentation
+* `service/rds`: Updates service API, documentation, waiters, paginators, and examples
+  * Database Activity Stream support for RDS for SQL Server.
+* `service/wafv2`: Updates service API and documentation
+
+Release v1.44.201 (2023-02-14)
+===
+
+### Service Client Updates
+* `service/appconfig`: Updates service API and documentation
+* `service/datasync`: Updates service API and documentation
+* `service/ec2`: Updates service API and documentation
+  * With this release customers can turn host maintenance on or off when allocating or modifying a supported dedicated host. Host maintenance is turned on by default for supported hosts.
+
+Release v1.44.200 (2023-02-13)
+===
+
+### Service Client Updates
+* `service/account`: Updates service API, documentation, and paginators
+* `service/appconfigdata`: Updates service API and documentation
+* `service/snowball`: Updates service API and documentation
+  * Adds support for EKS Anywhere on Snowball. AWS Snow Family customers can now install EKS Anywhere service on Snowball Edge Compute Optimized devices.
+
+Release v1.44.199 (2023-02-10)
+===
+
+### Service Client Updates
+* `service/autoscaling`: Updates service API and documentation
+  * You can now either terminate/replace, ignore, or wait for EC2 Auto Scaling instances on standby or protected from scale in. Also, you can also roll back changes from a failed instance refresh.
+* `service/connect`: Updates service API and documentation
+* `service/ec2`: Updates service API, documentation, and waiters
+  * Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.
+* `service/polly`: Updates service API
+  * Amazon Polly adds two new neural Japanese voices - Kazuha, Tomoko
+* `service/sagemaker`: Updates service API and documentation
+  * Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.
+* `service/sns`: Updates service documentation
+  * This release adds support for SNS X-Ray active tracing as well as other updates.
+
+Release v1.44.198 (2023-02-09)
+===
+
+### Service Client Updates
+* `service/chime-sdk-meetings`: Updates service documentation
+* `service/emr-containers`: Updates service API and documentation
+* `service/evidently`: Updates service API and documentation
+* `service/lightsail`: Updates service documentation
+  * Documentation updates for Lightsail
+* `service/migration-hub-refactor-spaces`: Updates service API and documentation
+* `service/models.lex.v2`: Updates service API and documentation
+* `service/runtime.lex.v2`: Updates service API and documentation
+* `service/workdocs`: Updates service documentation
+  * Doc only update for the WorkDocs APIs.
+* `service/workspaces`: Updates service documentation
+  * Removed Windows Server 2016 BYOL and made changes based on IAM campaign.
+
+Release v1.44.197 (2023-02-08)
+===
+
+### Service Client Updates
+* `service/backup`: Updates service API and documentation
+* `service/cloudfront`: Updates service API and documentation
+  * CloudFront Origin Access Control extends support to AWS Elemental MediaStore origins.
+* `service/glue`: Updates service API and documentation
+  * DirectJDBCSource + Glue 4.0 streaming options
+* `service/lakeformation`: Updates service API
+
+Release v1.44.196 (2023-02-07)
+===
+
+### Service Client Updates
+* `service/transfer`: Updates service documentation
+  * Updated the documentation for the ImportCertificate API call, and added examples.
+
+Release v1.44.195 (2023-02-06)
+===
+
+### Service Client Updates
+* `service/compute-optimizer`: Updates service API and documentation
+* `service/customer-profiles`: Updates service API and documentation
+* `service/frauddetector`: Updates service API and documentation
+* `service/mediaconvert`: Updates service API and documentation
+  * The AWS Elemental MediaConvert SDK has added improved scene change detection capabilities and a bandwidth reduction filter, along with video quality enhancements, to the AVC encoder.
+* `service/outposts`: Updates service API and documentation
+
+Release v1.44.194 (2023-02-03)
+===
+
+### Service Client Updates
+* `service/proton`: Updates service API and documentation
+* `service/redshift`: Updates service documentation
+  * Corrects descriptions of the parameters for the API operations RestoreFromClusterSnapshot, RestoreTableFromClusterSnapshot, and CreateCluster.
+
+Release v1.44.193 (2023-02-02)
+===
+
+### Service Client Updates
+* `service/appconfig`: Updates service API and documentation
+* `service/connect`: Adds new service
+* `service/ec2`: Updates service API and documentation
+  * Documentation updates for EC2.
+* `service/elasticloadbalancingv2`: Updates service documentation
+* `service/keyspaces`: Adds new service
+* `service/quicksight`: Updates service API and documentation
+  * QuickSight support for Radar Chart and Dashboard Publish Options
+* `service/redshift`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* `service/sso-admin`: Adds new service
+
+Release v1.44.192 (2023-02-01)
+===
+
+### Service Client Updates
+* `service/devops-guru`: Updates service API and documentation
+* `service/forecast`: Updates service API and documentation
+* `service/iam`: Updates service documentation
+  * Documentation updates for AWS Identity and Access Management (IAM).
+* `service/mediatailor`: Updates service API and documentation
+* `service/sns`: Updates service documentation
+  * Additional attributes added for set-topic-attributes.
+
+Release v1.44.191 (2023-01-31)
+===
+
+### Service Client Updates
+* `service/accessanalyzer`: Adds new service
+* `service/appsync`: Updates service API and documentation
+* `service/cloudtrail`: Updates service API and documentation
+  * Add new "Channel" APIs to enable users to manage channels used for CloudTrail Lake integrations, and "Resource Policy" APIs to enable users to manage the resource-based permissions policy attached to a channel.
+* `service/cloudtrail-data`: Adds new service
+* `service/codeartifact`: Updates service API and documentation
+* `service/connectparticipant`: Adds new service
+* `service/ec2`: Updates service API and documentation
+  * This launch allows customers to associate up to 8 IP addresses to their NAT Gateways to increase the limit on concurrent connections to a single destination by eight times from 55K to 440K.
+* `service/groundstation`: Updates service API and documentation
+* `service/iot`: Updates service API and documentation
+  * Added support for IoT Rules Engine Cloudwatch Logs action batch mode.
+* `service/kinesis`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* `service/opensearch`: Updates service API and documentation
+* `service/outposts`: Adds new service
+* `service/polly`: Updates service API
+  * Amazon Polly adds two new neural American English voices - Ruth, Stephen
+* `service/sagemaker`: Updates service API and documentation
+  * Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.
+* `service/securityhub`: Updates service API and documentation
+* `service/support`: Adds new service
+  * This fixes incorrect endpoint construction when a customer is explicitly setting a region.
+
+Release v1.44.190 (2023-01-30)
+===
+
+### Service Client Updates
+* `service/clouddirectory`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* `service/cloudformation`: Updates service API and documentation
+  * This feature provides a method of obtaining which regions a stackset has stack instances deployed in.
+* `service/discovery`: Updates service API
+  * Update ImportName validation to 255 from the current length of 100
+* `service/dlm`: Adds new service
+* `service/ec2`: Updates service API and documentation
+  * We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route.
+* `service/imagebuilder`: Adds new service
+* `service/kafka`: Adds new service
+* `service/mediaconvert`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* `service/swf`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+
+Release v1.44.189 (2023-01-27)
+===
+
+### Service Client Updates
+* `service/application-autoscaling`: Adds new service
+* `service/appstream`: Updates service waiters
+  * Fixing the issue where Appstream waiters hang for fleet_started and fleet_stopped.
+* `service/elasticbeanstalk`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* `service/fis`: Adds new service
+* `service/glacier`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* `service/greengrass`: Adds new service
+  * Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* `service/greengrassv2`: Adds new service
+* `service/mediatailor`: Updates service API and documentation
+* `service/outposts`: Updates service API and documentation
+* `service/runtime.sagemaker`: Updates service API and documentation
+* `service/sagemaker`: Updates service API and documentation
+  * This release supports running SageMaker Training jobs with container images that are in a private Docker registry.
+* `service/serverlessrepo`: Adds new service
+
+Release v1.44.188 (2023-01-26)
+===
+
+### Service Client Updates
+* `service/eventbridge`: Updates service documentation
+* `service/iotfleetwise`: Updates service API
+* `service/s3`: Updates service examples
+  * Allow FIPS to be used with path-style URLs.
+
+Release v1.44.187 (2023-01-25)
+===
+
+### Service Client Updates
+* `service/cloudformation`: Adds new service
+  * Enabled FIPS aws-us-gov endpoints in SDK.
+* `service/ec2`: Updates service API, documentation, and paginators
+  * This release adds new functionality that allows customers to provision IPv6 CIDR blocks through Amazon VPC IP Address Manager (IPAM) as well as allowing customers to utilize IPAM Resource Discovery APIs.
+* `service/m2`: Updates service API and documentation
+* `service/polly`: Updates service API
+  * Add 5 new neural voices - Sergio (es-ES), Andres (es-MX), Remi (fr-FR), Adriano (it-IT) and Thiago (pt-BR).
+* `service/redshift-serverless`: Updates service documentation
+* `service/s3control`: Updates service API
+  * Add additional endpoint tests for S3 Control. Fix missing endpoint parameters for PutBucketVersioning and GetBucketVersioning. Prior to this fix, those operations may have resulted in an invalid endpoint being resolved.
+* `service/sagemaker`: Updates service API and documentation
+  * SageMaker Inference Recommender now decouples from Model Registry and could accept Model Name to invoke inference recommendations job; Inference Recommender now provides CPU/Memory Utilization metrics data in recommendation output.
+* `service/sts`: Updates service documentation
+  * Doc only change to update wording in a key topic
+
+Release v1.44.186 (2023-01-24)
+===
+
+### Service Client Updates
+* `service/databrew`: Adds new service
+* `service/route53`: Updates service API
+  * Amazon Route 53 now supports the Asia Pacific (Melbourne) Region (ap-southeast-4) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* `service/ssm-sap`: Updates service API, documentation, and paginators
+
+Release v1.44.185 (2023-01-23)
+===
+
+### Service Client Updates
+* `service/lambda`: Updates service API and documentation
+  * Release Lambda RuntimeManagementConfig, enabling customers to better manage runtime updates to their Lambda functions. This release adds two new APIs, GetRuntimeManagementConfig and PutRuntimeManagementConfig, as well as support on existing Create/Get/Update function APIs.
+* `service/sagemaker`: Updates service API and documentation
+  * Amazon SageMaker Inference now supports P4de instance types.
+
+Release v1.44.184 (2023-01-20)
+===
+
+### Service Client Updates
+* `service/ec2`: Updates service API
+  * C6in, M6in, M6idn, R6in and R6idn instances are powered by 3rd Generation Intel Xeon Scalable processors (code named Ice Lake) with an all-core turbo frequency of 3.5 GHz.
+* `service/ivs`: Updates service API and documentation
+* `service/quicksight`: Updates service API and documentation
+  * This release adds support for data bars in QuickSight table and increases pivot table field well limit.
+
+Release v1.44.183 (2023-01-19)
+===
+
+### Service Client Updates
+* `service/appflow`: Updates service API and documentation
+* `service/codeartifact`: Updates service documentation
+* `service/connect`: Updates service API and documentation
+* `service/connectparticipant`: Updates service API and documentation
+* `service/ec2`: Updates service API and documentation
+  * Adds SSM Parameter Resource Aliasing support to EC2 Launch Templates. Launch Templates can now store parameter aliases in place of AMI Resource IDs. CreateLaunchTemplateVersion and DescribeLaunchTemplateVersions now support a convenience flag, ResolveAlias, to return the resolved parameter value.
+* `service/glue`: Updates service API and documentation
+  * Release Glue Studio Hudi Data Lake Format for SDK/CLI
+* `service/groundstation`: Updates service API, documentation, and waiters
+* `service/logs`: Updates service API and documentation
+  * Bug fix - Removed the regex pattern validation from CoralModel to avoid potential security issue.
+* `service/medialive`: Updates service API and documentation
+  * AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds.
+* `service/opensearch`: Updates service API and documentation
+* `service/panorama`: Updates service API and documentation
+* `service/sagemaker`: Updates service API and documentation
+  * HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs
+
+Release v1.44.182 (2023-01-18)
+===
+
+### Service Client Updates
+* `service/elasticfilesystem`: Updates service documentation
+  * Documentation updates for EFS access points limit increase
+* `service/ivschat`: Updates service API
+* `service/monitoring`: Updates service API and documentation
+  * Enable cross-account streams in CloudWatch Metric Streams via Observability Access Manager.
+* `service/wafv2`: Updates service documentation
+
+Release v1.44.181 (2023-01-17)
+===
+
+### Service Client Updates
+* `service/billingconductor`: Updates service API and documentation
+* `service/cloud9`: Updates service API
+  * Added minimum value to AutomaticStopTimeMinutes parameter.
+* `service/imagebuilder`: Updates service API and documentation
+* `service/network-firewall`: Updates service API and documentation
+
+Release v1.44.180 (2023-01-13)
+===
+
+### Service Client Updates
+* `service/connect`: Updates service API and documentation
+* `service/ec2`: Updates service documentation
+  * Documentation updates for EC2.
+* `service/outposts`: Updates service API
+* `service/resource-groups`: Updates service API and documentation
+
+Release v1.44.179 (2023-01-12)
+===
+
+### Service Client Updates
+* `service/cleanrooms`: Adds new service
+* `service/lambda`: Updates service API and documentation
+  * Add support for MaximumConcurrency parameter for SQS event source. Customers can now limit the maximum concurrent invocations for their SQS Event Source Mapping.
+* `service/logs`: Updates service API and documentation
+  * Bug fix: logGroupName is now not a required field in GetLogEvents, FilterLogEvents, GetLogGroupFields, and DescribeLogStreams APIs as logGroupIdentifier can be provided instead
+* `service/mediaconvert`: Updates service API and documentation
+  * The AWS Elemental MediaConvert SDK has added support for compact DASH manifest generation, audio normalization using TruePeak measurements, and the ability to clip the sample range in the color corrector.
+* `service/secretsmanager`: Updates service documentation and examples
+  * Update documentation for new ListSecrets and DescribeSecret parameters
+
+Release v1.44.178 (2023-01-11)
+===
+
+### Service Client Updates
+* `service/kendra`: Updates service API and documentation
+  * This release adds support to new document types - RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD
+
+Release v1.44.177 (2023-01-10)
+===
+
+### Service Client Updates
+* `service/location`: Updates service API and documentation
+* `service/rds`: Updates service API, documentation, waiters, paginators, and examples
+  * This release adds support for configuring allocated storage on the CreateDBInstanceReadReplica, RestoreDBInstanceFromDBSnapshot, and RestoreDBInstanceToPointInTime APIs.
+
+Release v1.44.176 (2023-01-09)
+===
+
+### Service Client Updates
+* `service/ecr-public`: Updates service API and documentation
+* `service/kendra-ranking`: Adds new service
+* `service/network-firewall`: Updates service API and documentation
+* `service/ram`: Adds new service
+* `service/workspaces-web`: Updates service API and documentation
+
 Release v1.44.175 (2023-01-06)
 ===
 

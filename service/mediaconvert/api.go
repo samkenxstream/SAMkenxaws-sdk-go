@@ -3929,6 +3929,12 @@ type AudioNormalizationSettings struct {
 	// choose for Algorithm (algorithm). If you choose algorithm 1770-1, the encoder
 	// will choose -24 LKFS; otherwise, the encoder will choose -23 LKFS.
 	TargetLkfs *float64 `locationName:"targetLkfs" type:"double"`
+
+	// Specify the True-peak limiter threshold in decibels relative to full scale
+	// (dBFS). The peak inter-audio sample loudness in your output will be limited
+	// to the value that you specify, without affecting the overall target LKFS.
+	// Enter a value from 0 to -20. Leave blank to use the default value 0.
+	TruePeakLimiterThreshold *float64 `locationName:"truePeakLimiterThreshold" type:"double"`
 }
 
 // String returns the string representation.
@@ -3995,6 +4001,12 @@ func (s *AudioNormalizationSettings) SetPeakCalculation(v string) *AudioNormaliz
 // SetTargetLkfs sets the TargetLkfs field's value.
 func (s *AudioNormalizationSettings) SetTargetLkfs(v float64) *AudioNormalizationSettings {
 	s.TargetLkfs = &v
+	return s
+}
+
+// SetTruePeakLimiterThreshold sets the TruePeakLimiterThreshold field's value.
+func (s *AudioNormalizationSettings) SetTruePeakLimiterThreshold(v float64) *AudioNormalizationSettings {
+	s.TruePeakLimiterThreshold = &v
 	return s
 }
 
@@ -5189,6 +5201,63 @@ func (s *BadRequestException) RequestID() string {
 	return s.RespMetadata.RequestID
 }
 
+// The Bandwidth reduction filter increases the video quality of your output
+// relative to its bitrate. Use to lower the bitrate of your constant quality
+// QVBR output, with little or no perceptual decrease in quality. Or, use to
+// increase the video quality of outputs with other rate control modes relative
+// to the bitrate that you specify. Bandwidth reduction increases further when
+// your input is low quality or noisy. Outputs that use this feature incur pro-tier
+// pricing. When you include Bandwidth reduction filter, you cannot include
+// the Noise reducer preprocessor.
+type BandwidthReductionFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Optionally specify the level of sharpening to apply when you use the Bandwidth
+	// reduction filter. Sharpening adds contrast to the edges of your video content
+	// and can reduce softness. Keep the default value Off to apply no sharpening.
+	// Set Sharpening strength to Low to apply a minimal amount of sharpening, or
+	// High to apply a maximum amount of sharpening.
+	Sharpening *string `locationName:"sharpening" type:"string" enum:"BandwidthReductionFilterSharpening"`
+
+	// Specify the strength of the Bandwidth reduction filter. For most workflows,
+	// we recommend that you choose Auto to reduce the bandwidth of your output
+	// with little to no perceptual decrease in video quality. For high quality
+	// and high bitrate outputs, choose Low. For the most bandwidth reduction, choose
+	// High. We recommend that you choose High for low bitrate outputs. Note that
+	// High may incur a slight increase in the softness of your output.
+	Strength *string `locationName:"strength" type:"string" enum:"BandwidthReductionFilterStrength"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BandwidthReductionFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BandwidthReductionFilter) GoString() string {
+	return s.String()
+}
+
+// SetSharpening sets the Sharpening field's value.
+func (s *BandwidthReductionFilter) SetSharpening(v string) *BandwidthReductionFilter {
+	s.Sharpening = &v
+	return s
+}
+
+// SetStrength sets the Strength field's value.
+func (s *BandwidthReductionFilter) SetStrength(v string) *BandwidthReductionFilter {
+	s.Strength = &v
+	return s
+}
+
 // Burn-in is a captions delivery method, rather than a captions format. Burn-in
 // writes the captions directly on your video frames, replacing pixels of video
 // content with the captions. Set up burn-in captions in the same output as
@@ -6318,6 +6387,105 @@ func (s *ChannelMapping) SetOutputChannels(v []*OutputChannelMapping) *ChannelMa
 	return s
 }
 
+// Specify YUV limits and RGB tolerances when you set Sample range conversion
+// to Limited range clip.
+type ClipLimits struct {
+	_ struct{} `type:"structure"`
+
+	// Specify the Maximum RGB color sample range tolerance for your output. MediaConvert
+	// corrects any YUV values that, when converted to RGB, would be outside the
+	// upper tolerance that you specify. Enter an integer from 90 to 105 as an offset
+	// percentage to the maximum possible value. Leave blank to use the default
+	// value 100. When you specify a value for Maximum RGB tolerance, you must set
+	// Sample range conversion to Limited range clip.
+	MaximumRGBTolerance *int64 `locationName:"maximumRGBTolerance" min:"90" type:"integer"`
+
+	// Specify the Maximum YUV color sample limit. MediaConvert conforms any pixels
+	// in your input above the value that you specify to typical limited range bounds.
+	// Enter an integer from 920 to 1023. Leave blank to use the default value 940.
+	// The value that you enter applies to 10-bit ranges. For 8-bit ranges, MediaConvert
+	// automatically scales this value down. When you specify a value for Maximum
+	// YUV, you must set Sample range conversion to Limited range clip.
+	MaximumYUV *int64 `locationName:"maximumYUV" min:"920" type:"integer"`
+
+	// Specify the Minimum RGB color sample range tolerance for your output. MediaConvert
+	// corrects any YUV values that, when converted to RGB, would be outside the
+	// lower tolerance that you specify. Enter an integer from -5 to 10 as an offset
+	// percentage to the minimum possible value. Leave blank to use the default
+	// value 0. When you specify a value for Minimum RGB tolerance, you must set
+	// Sample range conversion to Limited range clip.
+	MinimumRGBTolerance *int64 `locationName:"minimumRGBTolerance" type:"integer"`
+
+	// Specify the Minimum YUV color sample limit. MediaConvert conforms any pixels
+	// in your input below the value that you specify to typical limited range bounds.
+	// Enter an integer from 0 to 128. Leave blank to use the default value 64.
+	// The value that you enter applies to 10-bit ranges. For 8-bit ranges, MediaConvert
+	// automatically scales this value down. When you specify a value for Minumum
+	// YUV, you must set Sample range conversion to Limited range clip.
+	MinimumYUV *int64 `locationName:"minimumYUV" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClipLimits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClipLimits) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ClipLimits) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ClipLimits"}
+	if s.MaximumRGBTolerance != nil && *s.MaximumRGBTolerance < 90 {
+		invalidParams.Add(request.NewErrParamMinValue("MaximumRGBTolerance", 90))
+	}
+	if s.MaximumYUV != nil && *s.MaximumYUV < 920 {
+		invalidParams.Add(request.NewErrParamMinValue("MaximumYUV", 920))
+	}
+	if s.MinimumRGBTolerance != nil && *s.MinimumRGBTolerance < -5 {
+		invalidParams.Add(request.NewErrParamMinValue("MinimumRGBTolerance", -5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaximumRGBTolerance sets the MaximumRGBTolerance field's value.
+func (s *ClipLimits) SetMaximumRGBTolerance(v int64) *ClipLimits {
+	s.MaximumRGBTolerance = &v
+	return s
+}
+
+// SetMaximumYUV sets the MaximumYUV field's value.
+func (s *ClipLimits) SetMaximumYUV(v int64) *ClipLimits {
+	s.MaximumYUV = &v
+	return s
+}
+
+// SetMinimumRGBTolerance sets the MinimumRGBTolerance field's value.
+func (s *ClipLimits) SetMinimumRGBTolerance(v int64) *ClipLimits {
+	s.MinimumRGBTolerance = &v
+	return s
+}
+
+// SetMinimumYUV sets the MinimumYUV field's value.
+func (s *ClipLimits) SetMinimumYUV(v int64) *ClipLimits {
+	s.MinimumYUV = &v
+	return s
+}
+
 // Specify the details for each pair of HLS and DASH additional manifests that
 // you want the service to generate for this CMAF output group. Each pair of
 // manifests can reference a different subset of outputs in the group.
@@ -6507,6 +6675,15 @@ type CmafGroupSettings struct {
 	// Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
 	// generation.
 	CodecSpecification *string `locationName:"codecSpecification" type:"string" enum:"CmafCodecSpecification"`
+
+	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest.
+	// To write a SegmentTimeline in each video Representation: Keep the default
+	// value, Basic. To write a common SegmentTimeline in the video AdaptationSet:
+	// Choose Compact. Note that MediaConvert will still write a SegmentTimeline
+	// in any Representation that does not share a common timeline. To write a video
+	// AdaptationSet for each different output framerate, and a common SegmentTimeline
+	// in each AdaptationSet: Choose Distinct.
+	DashManifestStyle *string `locationName:"dashManifestStyle" type:"string" enum:"DashManifestStyle"`
 
 	// Use Destination (Destination) to specify the S3 output location and the output
 	// filename base. Destination accepts format identifiers. If you do not specify
@@ -6728,6 +6905,12 @@ func (s *CmafGroupSettings) SetClientCache(v string) *CmafGroupSettings {
 // SetCodecSpecification sets the CodecSpecification field's value.
 func (s *CmafGroupSettings) SetCodecSpecification(v string) *CmafGroupSettings {
 	s.CodecSpecification = &v
+	return s
+}
+
+// SetDashManifestStyle sets the DashManifestStyle field's value.
+func (s *CmafGroupSettings) SetDashManifestStyle(v string) *CmafGroupSettings {
+	s.DashManifestStyle = &v
 	return s
 }
 
@@ -7069,7 +7252,9 @@ type CmfcSettings struct {
 	// that you specify for ID3 metadata scheme ID URI. For SCTE35 event messages,
 	// the InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin".
 	// To leave these elements out of your output MPD manifest, set Manifest metadata
-	// signaling to Disabled.
+	// signaling to Disabled. To enable Manifest metadata signaling, you must also
+	// set SCTE-35 source to Passthrough, ESAM SCTE-35 to insert, or ID3 metadata
+	// (TimedMetadata) to Passthrough.
 	ManifestMetadataSignaling *string `locationName:"manifestMetadataSignaling" type:"string" enum:"CmfcManifestMetadataSignaling"`
 
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
@@ -7098,14 +7283,14 @@ type CmfcSettings struct {
 	TimedMetadataBoxVersion *string `locationName:"timedMetadataBoxVersion" type:"string" enum:"CmfcTimedMetadataBoxVersion"`
 
 	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3
-	// timed metadata in your output. For more informaiton, see ISO/IEC 23009-1:2022
+	// timed metadata in your output. For more information, see ISO/IEC 23009-1:2022
 	// section 5.10.3.3.4 Semantics. Leave blank to use the default value: https://aomedia.org/emsg/ID3
 	// When you specify a value for ID3 metadata scheme ID URI, you must also set
 	// ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataSchemeIdUri *string `locationName:"timedMetadataSchemeIdUri" type:"string"`
 
 	// Specify the event message box (eMSG) value for ID3 timed metadata in your
-	// output. For more informaiton, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
+	// output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
 	// Semantics. When you specify a value for ID3 Metadata Value, you must also
 	// set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataValue *string `locationName:"timedMetadataValue" type:"string"`
@@ -7220,15 +7405,21 @@ type ColorCorrector struct {
 	// Brightness level.
 	Brightness *int64 `locationName:"brightness" min:"1" type:"integer"`
 
+	// Specify YUV limits and RGB tolerances when you set Sample range conversion
+	// to Limited range clip.
+	ClipLimits *ClipLimits `locationName:"clipLimits" type:"structure"`
+
 	// Specify the color space you want for this output. The service supports conversion
 	// between HDR formats, between SDR formats, from SDR to HDR, and from HDR to
 	// SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted
 	// video has an HDR format, but visually appears the same as an unconverted
-	// output. HDR to SDR conversion uses Elemental tone mapping technology to approximate
-	// the outcome of manually regrading from HDR to SDR. Select Force P3D65 (SDR)
-	// to set the output color space metadata to the following: * Color primaries:
-	// Display P3 * Transfer characteristics: SMPTE 428M * Matrix coefficients:
-	// BT.709
+	// output. HDR to SDR conversion uses tone mapping to approximate the outcome
+	// of manually regrading from HDR to SDR. When you specify an output color space,
+	// MediaConvert uses the following color space metadata, which includes color
+	// primaries, transfer characteristics, and matrix coefficients: * HDR 10: BT.2020,
+	// PQ, BT.2020 non-constant * HLG 2020: BT.2020, HLG, BT.2020 non-constant *
+	// P3DCI (Theater): DCIP3, SMPTE 428M, BT.709 * P3D65 (SDR): Display P3, sRGB,
+	// BT.709 * P3D65 (HDR): Display P3, PQ, BT.709
 	ColorSpaceConversion *string `locationName:"colorSpaceConversion" type:"string" enum:"ColorSpaceConversion"`
 
 	// Contrast level.
@@ -7248,19 +7439,37 @@ type ColorCorrector struct {
 	// see https://docs.aws.amazon.com/console/mediaconvert/hdr.
 	Hdr10Metadata *Hdr10Metadata `locationName:"hdr10Metadata" type:"structure"`
 
+	// Specify how MediaConvert maps brightness and colors from your HDR input to
+	// your SDR output. The mode that you select represents a creative choice, with
+	// different tradeoffs in the details and tones of your output. To maintain
+	// details in bright or saturated areas of your output: Choose Preserve details.
+	// For some sources, your SDR output may look less bright and less saturated
+	// when compared to your HDR source. MediaConvert automatically applies this
+	// mode for HLG sources, regardless of your choice. For a bright and saturated
+	// output: Choose Vibrant. We recommend that you choose this mode when any of
+	// your source content is HDR10, and for the best results when it is mastered
+	// for 1000 nits. You may notice loss of details in bright or saturated areas
+	// of your output. HDR to SDR tone mapping has no effect when your input is
+	// SDR.
+	HdrToSdrToneMapper *string `locationName:"hdrToSdrToneMapper" type:"string" enum:"HDRToSDRToneMapper"`
+
 	// Hue in degrees.
 	Hue *int64 `locationName:"hue" type:"integer"`
 
-	// Specify the video color sample range for this output. To create a full range
-	// output, you must start with a full range YUV input and keep the default value,
-	// None (NONE). To create a limited range output from a full range input, choose
-	// Limited range (LIMITED_RANGE_SQUEEZE). With RGB inputs, your output is always
-	// limited range, regardless of your choice here. When you create a limited
-	// range output from a full range input, MediaConvert limits the active pixel
-	// values in a way that depends on the output's bit depth: 8-bit outputs contain
-	// only values from 16 through 235 and 10-bit outputs contain only values from
-	// 64 through 940. With this conversion, MediaConvert also changes the output
-	// metadata to note the limited range.
+	// Specify how MediaConvert limits the color sample range for this output. To
+	// create a limited range output from a full range input: Choose Limited range
+	// squeeze. For full range inputs, MediaConvert performs a linear offset to
+	// color samples equally across all pixels and frames. Color samples in 10-bit
+	// outputs are limited to 64 through 940, and 8-bit outputs are limited to 16
+	// through 235. Note: For limited range inputs, values for color samples are
+	// passed through to your output unchanged. MediaConvert does not limit the
+	// sample range. To correct pixels in your input that are out of range or out
+	// of gamut: Choose Limited range clip. Use for broadcast applications. MediaConvert
+	// conforms any pixels outside of the values that you specify under Minimum
+	// YUV and Maximum YUV to limited range bounds. MediaConvert also corrects any
+	// YUV values that, when converted to RGB, would be outside the bounds you specify
+	// under Minimum RGB tolerance and Maximum RGB tolerance. With either limited
+	// range conversion, MediaConvert writes the sample range metadata in the output.
 	SampleRangeConversion *string `locationName:"sampleRangeConversion" type:"string" enum:"SampleRangeConversion"`
 
 	// Saturation level.
@@ -7314,6 +7523,11 @@ func (s *ColorCorrector) Validate() error {
 	if s.SdrReferenceWhiteLevel != nil && *s.SdrReferenceWhiteLevel < 100 {
 		invalidParams.Add(request.NewErrParamMinValue("SdrReferenceWhiteLevel", 100))
 	}
+	if s.ClipLimits != nil {
+		if err := s.ClipLimits.Validate(); err != nil {
+			invalidParams.AddNested("ClipLimits", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7324,6 +7538,12 @@ func (s *ColorCorrector) Validate() error {
 // SetBrightness sets the Brightness field's value.
 func (s *ColorCorrector) SetBrightness(v int64) *ColorCorrector {
 	s.Brightness = &v
+	return s
+}
+
+// SetClipLimits sets the ClipLimits field's value.
+func (s *ColorCorrector) SetClipLimits(v *ClipLimits) *ColorCorrector {
+	s.ClipLimits = v
 	return s
 }
 
@@ -7342,6 +7562,12 @@ func (s *ColorCorrector) SetContrast(v int64) *ColorCorrector {
 // SetHdr10Metadata sets the Hdr10Metadata field's value.
 func (s *ColorCorrector) SetHdr10Metadata(v *Hdr10Metadata) *ColorCorrector {
 	s.Hdr10Metadata = v
+	return s
+}
+
+// SetHdrToSdrToneMapper sets the HdrToSdrToneMapper field's value.
+func (s *ColorCorrector) SetHdrToSdrToneMapper(v string) *ColorCorrector {
+	s.HdrToSdrToneMapper = &v
 	return s
 }
 
@@ -7588,7 +7814,11 @@ type CreateJobInput struct {
 	// for this field, your job outputs will appear on the billing report unsorted.
 	BillingTagsSource *string `locationName:"billingTagsSource" type:"string" enum:"BillingTagsSource"`
 
-	// Optional. Idempotency token for CreateJob operation.
+	// Prevent duplicate jobs from being created and ensure idempotency for your
+	// requests. A client request token can be any string that includes up to 64
+	// ASCII characters. If you reuse a client request token within one minute of
+	// a successful request, the API returns the job details of the original request
+	// instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
 	// Optional. Use queue hopping to avoid overly long waits in the backlog of
@@ -8437,6 +8667,15 @@ type DashIsoGroupSettings struct {
 	// URL than the manifest file.
 	BaseUrl *string `locationName:"baseUrl" type:"string"`
 
+	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest.
+	// To write a SegmentTimeline in each video Representation: Keep the default
+	// value, Basic. To write a common SegmentTimeline in the video AdaptationSet:
+	// Choose Compact. Note that MediaConvert will still write a SegmentTimeline
+	// in any Representation that does not share a common timeline. To write a video
+	// AdaptationSet for each different output framerate, and a common SegmentTimeline
+	// in each AdaptationSet: Choose Distinct.
+	DashManifestStyle *string `locationName:"dashManifestStyle" type:"string" enum:"DashManifestStyle"`
+
 	// Use Destination (Destination) to specify the S3 output location and the output
 	// filename base. Destination accepts format identifiers. If you do not specify
 	// the base filename in the URI, the service will use the filename of the input
@@ -8622,6 +8861,12 @@ func (s *DashIsoGroupSettings) SetAudioChannelConfigSchemeIdUri(v string) *DashI
 // SetBaseUrl sets the BaseUrl field's value.
 func (s *DashIsoGroupSettings) SetBaseUrl(v string) *DashIsoGroupSettings {
 	s.BaseUrl = &v
+	return s
+}
+
+// SetDashManifestStyle sets the DashManifestStyle field's value.
+func (s *DashIsoGroupSettings) SetDashManifestStyle(v string) *DashIsoGroupSettings {
+	s.DashManifestStyle = &v
 	return s
 }
 
@@ -12023,6 +12268,16 @@ type H264Settings struct {
 	// H264FlickerAdaptiveQuantization, H264SpatialAdaptiveQuantization, and H264TemporalAdaptiveQuantization.
 	AdaptiveQuantization *string `locationName:"adaptiveQuantization" type:"string" enum:"H264AdaptiveQuantization"`
 
+	// The Bandwidth reduction filter increases the video quality of your output
+	// relative to its bitrate. Use to lower the bitrate of your constant quality
+	// QVBR output, with little or no perceptual decrease in quality. Or, use to
+	// increase the video quality of outputs with other rate control modes relative
+	// to the bitrate that you specify. Bandwidth reduction increases further when
+	// your input is low quality or noisy. Outputs that use this feature incur pro-tier
+	// pricing. When you include Bandwidth reduction filter, you cannot include
+	// the Noise reducer preprocessor.
+	BandwidthReductionFilter *BandwidthReductionFilter `locationName:"bandwidthReductionFilter" type:"structure"`
+
 	// Specify the average bitrate in bits per second. Required for VBR and CBR.
 	// For MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
@@ -12423,6 +12678,12 @@ func (s *H264Settings) Validate() error {
 // SetAdaptiveQuantization sets the AdaptiveQuantization field's value.
 func (s *H264Settings) SetAdaptiveQuantization(v string) *H264Settings {
 	s.AdaptiveQuantization = &v
+	return s
+}
+
+// SetBandwidthReductionFilter sets the BandwidthReductionFilter field's value.
+func (s *H264Settings) SetBandwidthReductionFilter(v *BandwidthReductionFilter) *H264Settings {
+	s.BandwidthReductionFilter = v
 	return s
 }
 
@@ -14885,7 +15146,7 @@ type Input struct {
 	FilterEnable *string `locationName:"filterEnable" type:"string" enum:"InputFilterEnable"`
 
 	// Use Filter strength (FilterStrength) to adjust the magnitude the input filter
-	// settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
+	// settings (Deblock and Denoise). The range is 0 to 5. Default is 0.
 	FilterStrength *int64 `locationName:"filterStrength" type:"integer"`
 
 	// Enable the image inserter feature to include a graphic overlay on your video.
@@ -14992,9 +15253,6 @@ func (s *Input) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "Input"}
 	if s.DolbyVisionMetadataXml != nil && len(*s.DolbyVisionMetadataXml) < 14 {
 		invalidParams.Add(request.NewErrParamMinLen("DolbyVisionMetadataXml", 14))
-	}
-	if s.FilterStrength != nil && *s.FilterStrength < -5 {
-		invalidParams.Add(request.NewErrParamMinValue("FilterStrength", -5))
 	}
 	if s.ProgramNumber != nil && *s.ProgramNumber < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("ProgramNumber", 1))
@@ -15397,7 +15655,7 @@ type InputTemplate struct {
 	FilterEnable *string `locationName:"filterEnable" type:"string" enum:"InputFilterEnable"`
 
 	// Use Filter strength (FilterStrength) to adjust the magnitude the input filter
-	// settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
+	// settings (Deblock and Denoise). The range is 0 to 5. Default is 0.
 	FilterStrength *int64 `locationName:"filterStrength" type:"integer"`
 
 	// Enable the image inserter feature to include a graphic overlay on your video.
@@ -15489,9 +15747,6 @@ func (s *InputTemplate) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "InputTemplate"}
 	if s.DolbyVisionMetadataXml != nil && len(*s.DolbyVisionMetadataXml) < 14 {
 		invalidParams.Add(request.NewErrParamMinLen("DolbyVisionMetadataXml", 14))
-	}
-	if s.FilterStrength != nil && *s.FilterStrength < -5 {
-		invalidParams.Add(request.NewErrParamMinValue("FilterStrength", -5))
 	}
 	if s.ProgramNumber != nil && *s.ProgramNumber < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("ProgramNumber", 1))
@@ -19247,7 +19502,9 @@ type MpdSettings struct {
 	// that you specify for ID3 metadata scheme ID URI. For SCTE35 event messages,
 	// the InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin".
 	// To leave these elements out of your output MPD manifest, set Manifest metadata
-	// signaling to Disabled.
+	// signaling to Disabled. To enable Manifest metadata signaling, you must also
+	// set SCTE-35 source to Passthrough, ESAM SCTE-35 to insert, or ID3 metadata
+	// (TimedMetadata) to Passthrough.
 	ManifestMetadataSignaling *string `locationName:"manifestMetadataSignaling" type:"string" enum:"MpdManifestMetadataSignaling"`
 
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
@@ -19276,14 +19533,14 @@ type MpdSettings struct {
 	TimedMetadataBoxVersion *string `locationName:"timedMetadataBoxVersion" type:"string" enum:"MpdTimedMetadataBoxVersion"`
 
 	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3
-	// timed metadata in your output. For more informaiton, see ISO/IEC 23009-1:2022
+	// timed metadata in your output. For more information, see ISO/IEC 23009-1:2022
 	// section 5.10.3.3.4 Semantics. Leave blank to use the default value: https://aomedia.org/emsg/ID3
 	// When you specify a value for ID3 metadata scheme ID URI, you must also set
 	// ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataSchemeIdUri *string `locationName:"timedMetadataSchemeIdUri" type:"string"`
 
 	// Specify the event message box (eMSG) value for ID3 timed metadata in your
-	// output. For more informaiton, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
+	// output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
 	// Semantics. When you specify a value for ID3 Metadata Value, you must also
 	// set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataValue *string `locationName:"timedMetadataValue" type:"string"`
@@ -20560,11 +20817,11 @@ func (s *NielsenNonLinearWatermarkSettings) SetUniqueTicPerAudioTrack(v string) 
 	return s
 }
 
-// Enable the Noise reducer (NoiseReducer) feature to remove noise from your
-// video output if necessary. Enable or disable this feature for each output
-// individually. This setting is disabled by default. When you enable Noise
-// reducer (NoiseReducer), you must also select a value for Noise reducer filter
-// (NoiseReducerFilter).
+// Enable the Noise reducer feature to remove noise from your video output if
+// necessary. Enable or disable this feature for each output individually. This
+// setting is disabled by default. When you enable Noise reducer, you must also
+// select a value for Noise reducer filter. For AVC outputs, when you include
+// Noise reducer, you cannot include the Bandwidth reduction filter.
 type NoiseReducer struct {
 	_ struct{} `type:"structure"`
 
@@ -25008,9 +25265,11 @@ type VideoPreprocessor struct {
 	// This setting is disabled by default.
 	ImageInserter *ImageInserter `locationName:"imageInserter" type:"structure"`
 
-	// Enable the Noise reducer (NoiseReducer) feature to remove noise from your
-	// video output if necessary. Enable or disable this feature for each output
-	// individually. This setting is disabled by default.
+	// Enable the Noise reducer feature to remove noise from your video output if
+	// necessary. Enable or disable this feature for each output individually. This
+	// setting is disabled by default. When you enable Noise reducer, you must also
+	// select a value for Noise reducer filter. For AVC outputs, when you include
+	// Noise reducer, you cannot include the Bandwidth reduction filter.
 	NoiseReducer *NoiseReducer `locationName:"noiseReducer" type:"structure"`
 
 	// If you work with a third party video watermarking partner, use the group
@@ -25137,17 +25396,20 @@ type VideoSelector struct {
 	AlphaBehavior *string `locationName:"alphaBehavior" type:"string" enum:"AlphaBehavior"`
 
 	// If your input video has accurate color space metadata, or if you don't know
-	// about color space, leave this set to the default value Follow. The service
-	// will automatically detect your input color space. If your input video has
-	// metadata indicating the wrong color space, specify the accurate color space
-	// here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display
-	// Color Volume static metadata isn't present in your video stream, or if that
-	// metadata is present but not accurate, choose Force HDR 10 here and specify
+	// about color space: Keep the default value, Follow. MediaConvert will automatically
+	// detect your input color space. If your input video has metadata indicating
+	// the wrong color space, or has missing metadata: Specify the accurate color
+	// space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering
+	// Display Color Volume static metadata isn't present in your video stream,
+	// or if that metadata is present but not accurate: Choose Force HDR 10. Specify
 	// correct values in the input HDR 10 metadata settings. For more information
-	// about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
-	// Select P3D65 (SDR) to set the input color space metadata to the following:
-	// * Color primaries: Display P3 * Transfer characteristics: SMPTE 428M * Matrix
-	// coefficients: BT.709
+	// about HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
+	// When you specify an input color space, MediaConvert uses the following color
+	// space metadata, which includes color primaries, transfer characteristics,
+	// and matrix coefficients: * HDR 10: BT.2020, PQ, BT.2020 non-constant * HLG
+	// 2020: BT.2020, HLG, BT.2020 non-constant * P3DCI (Theater): DCIP3, SMPTE
+	// 428M, BT.709 * P3D65 (SDR): Display P3, sRGB, BT.709 * P3D65 (HDR): Display
+	// P3, PQ, BT.709
 	ColorSpace *string `locationName:"colorSpace" type:"string" enum:"ColorSpace"`
 
 	// There are two sources for color metadata, the input file and the job input
@@ -27985,6 +28247,69 @@ func AvcIntraUhdQualityTuningLevel_Values() []string {
 	}
 }
 
+// Optionally specify the level of sharpening to apply when you use the Bandwidth
+// reduction filter. Sharpening adds contrast to the edges of your video content
+// and can reduce softness. Keep the default value Off to apply no sharpening.
+// Set Sharpening strength to Low to apply a minimal amount of sharpening, or
+// High to apply a maximum amount of sharpening.
+const (
+	// BandwidthReductionFilterSharpeningLow is a BandwidthReductionFilterSharpening enum value
+	BandwidthReductionFilterSharpeningLow = "LOW"
+
+	// BandwidthReductionFilterSharpeningMedium is a BandwidthReductionFilterSharpening enum value
+	BandwidthReductionFilterSharpeningMedium = "MEDIUM"
+
+	// BandwidthReductionFilterSharpeningHigh is a BandwidthReductionFilterSharpening enum value
+	BandwidthReductionFilterSharpeningHigh = "HIGH"
+
+	// BandwidthReductionFilterSharpeningOff is a BandwidthReductionFilterSharpening enum value
+	BandwidthReductionFilterSharpeningOff = "OFF"
+)
+
+// BandwidthReductionFilterSharpening_Values returns all elements of the BandwidthReductionFilterSharpening enum
+func BandwidthReductionFilterSharpening_Values() []string {
+	return []string{
+		BandwidthReductionFilterSharpeningLow,
+		BandwidthReductionFilterSharpeningMedium,
+		BandwidthReductionFilterSharpeningHigh,
+		BandwidthReductionFilterSharpeningOff,
+	}
+}
+
+// Specify the strength of the Bandwidth reduction filter. For most workflows,
+// we recommend that you choose Auto to reduce the bandwidth of your output
+// with little to no perceptual decrease in video quality. For high quality
+// and high bitrate outputs, choose Low. For the most bandwidth reduction, choose
+// High. We recommend that you choose High for low bitrate outputs. Note that
+// High may incur a slight increase in the softness of your output.
+const (
+	// BandwidthReductionFilterStrengthLow is a BandwidthReductionFilterStrength enum value
+	BandwidthReductionFilterStrengthLow = "LOW"
+
+	// BandwidthReductionFilterStrengthMedium is a BandwidthReductionFilterStrength enum value
+	BandwidthReductionFilterStrengthMedium = "MEDIUM"
+
+	// BandwidthReductionFilterStrengthHigh is a BandwidthReductionFilterStrength enum value
+	BandwidthReductionFilterStrengthHigh = "HIGH"
+
+	// BandwidthReductionFilterStrengthAuto is a BandwidthReductionFilterStrength enum value
+	BandwidthReductionFilterStrengthAuto = "AUTO"
+
+	// BandwidthReductionFilterStrengthOff is a BandwidthReductionFilterStrength enum value
+	BandwidthReductionFilterStrengthOff = "OFF"
+)
+
+// BandwidthReductionFilterStrength_Values returns all elements of the BandwidthReductionFilterStrength enum
+func BandwidthReductionFilterStrength_Values() []string {
+	return []string{
+		BandwidthReductionFilterStrengthLow,
+		BandwidthReductionFilterStrengthMedium,
+		BandwidthReductionFilterStrengthHigh,
+		BandwidthReductionFilterStrengthAuto,
+		BandwidthReductionFilterStrengthOff,
+	}
+}
+
 // The tag type that AWS Billing and Cost Management will use to sort your AWS
 // Elemental MediaConvert costs on any billing report that you set up.
 const (
@@ -28963,7 +29288,9 @@ func CmfcKlvMetadata_Values() []string {
 // that you specify for ID3 metadata scheme ID URI. For SCTE35 event messages,
 // the InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin".
 // To leave these elements out of your output MPD manifest, set Manifest metadata
-// signaling to Disabled.
+// signaling to Disabled. To enable Manifest metadata signaling, you must also
+// set SCTE-35 source to Passthrough, ESAM SCTE-35 to insert, or ID3 metadata
+// (TimedMetadata) to Passthrough.
 const (
 	// CmfcManifestMetadataSignalingEnabled is a CmfcManifestMetadataSignaling enum value
 	CmfcManifestMetadataSignalingEnabled = "ENABLED"
@@ -29081,17 +29408,20 @@ func ColorMetadata_Values() []string {
 }
 
 // If your input video has accurate color space metadata, or if you don't know
-// about color space, leave this set to the default value Follow. The service
-// will automatically detect your input color space. If your input video has
-// metadata indicating the wrong color space, specify the accurate color space
-// here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display
-// Color Volume static metadata isn't present in your video stream, or if that
-// metadata is present but not accurate, choose Force HDR 10 here and specify
+// about color space: Keep the default value, Follow. MediaConvert will automatically
+// detect your input color space. If your input video has metadata indicating
+// the wrong color space, or has missing metadata: Specify the accurate color
+// space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering
+// Display Color Volume static metadata isn't present in your video stream,
+// or if that metadata is present but not accurate: Choose Force HDR 10. Specify
 // correct values in the input HDR 10 metadata settings. For more information
-// about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
-// Select P3D65 (SDR) to set the input color space metadata to the following:
-// * Color primaries: Display P3 * Transfer characteristics: SMPTE 428M * Matrix
-// coefficients: BT.709
+// about HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
+// When you specify an input color space, MediaConvert uses the following color
+// space metadata, which includes color primaries, transfer characteristics,
+// and matrix coefficients: * HDR 10: BT.2020, PQ, BT.2020 non-constant * HLG
+// 2020: BT.2020, HLG, BT.2020 non-constant * P3DCI (Theater): DCIP3, SMPTE
+// 428M, BT.709 * P3D65 (SDR): Display P3, sRGB, BT.709 * P3D65 (HDR): Display
+// P3, PQ, BT.709
 const (
 	// ColorSpaceFollow is a ColorSpace enum value
 	ColorSpaceFollow = "FOLLOW"
@@ -29113,6 +29443,9 @@ const (
 
 	// ColorSpaceP3d65Sdr is a ColorSpace enum value
 	ColorSpaceP3d65Sdr = "P3D65_SDR"
+
+	// ColorSpaceP3d65Hdr is a ColorSpace enum value
+	ColorSpaceP3d65Hdr = "P3D65_HDR"
 )
 
 // ColorSpace_Values returns all elements of the ColorSpace enum
@@ -29125,6 +29458,7 @@ func ColorSpace_Values() []string {
 		ColorSpaceHlg2020,
 		ColorSpaceP3dci,
 		ColorSpaceP3d65Sdr,
+		ColorSpaceP3d65Hdr,
 	}
 }
 
@@ -29132,11 +29466,13 @@ func ColorSpace_Values() []string {
 // between HDR formats, between SDR formats, from SDR to HDR, and from HDR to
 // SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted
 // video has an HDR format, but visually appears the same as an unconverted
-// output. HDR to SDR conversion uses Elemental tone mapping technology to approximate
-// the outcome of manually regrading from HDR to SDR. Select Force P3D65 (SDR)
-// to set the output color space metadata to the following: * Color primaries:
-// Display P3 * Transfer characteristics: SMPTE 428M * Matrix coefficients:
-// BT.709
+// output. HDR to SDR conversion uses tone mapping to approximate the outcome
+// of manually regrading from HDR to SDR. When you specify an output color space,
+// MediaConvert uses the following color space metadata, which includes color
+// primaries, transfer characteristics, and matrix coefficients: * HDR 10: BT.2020,
+// PQ, BT.2020 non-constant * HLG 2020: BT.2020, HLG, BT.2020 non-constant *
+// P3DCI (Theater): DCIP3, SMPTE 428M, BT.709 * P3D65 (SDR): Display P3, sRGB,
+// BT.709 * P3D65 (HDR): Display P3, PQ, BT.709
 const (
 	// ColorSpaceConversionNone is a ColorSpaceConversion enum value
 	ColorSpaceConversionNone = "NONE"
@@ -29158,6 +29494,9 @@ const (
 
 	// ColorSpaceConversionForceP3d65Sdr is a ColorSpaceConversion enum value
 	ColorSpaceConversionForceP3d65Sdr = "FORCE_P3D65_SDR"
+
+	// ColorSpaceConversionForceP3d65Hdr is a ColorSpaceConversion enum value
+	ColorSpaceConversionForceP3d65Hdr = "FORCE_P3D65_HDR"
 )
 
 // ColorSpaceConversion_Values returns all elements of the ColorSpaceConversion enum
@@ -29170,6 +29509,7 @@ func ColorSpaceConversion_Values() []string {
 		ColorSpaceConversionForceHlg2020,
 		ColorSpaceConversionForceP3dci,
 		ColorSpaceConversionForceP3d65Sdr,
+		ColorSpaceConversionForceP3d65Hdr,
 	}
 }
 
@@ -29550,6 +29890,33 @@ func DashIsoWriteSegmentTimelineInRepresentation_Values() []string {
 	return []string{
 		DashIsoWriteSegmentTimelineInRepresentationEnabled,
 		DashIsoWriteSegmentTimelineInRepresentationDisabled,
+	}
+}
+
+// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest.
+// To write a SegmentTimeline in each video Representation: Keep the default
+// value, Basic. To write a common SegmentTimeline in the video AdaptationSet:
+// Choose Compact. Note that MediaConvert will still write a SegmentTimeline
+// in any Representation that does not share a common timeline. To write a video
+// AdaptationSet for each different output framerate, and a common SegmentTimeline
+// in each AdaptationSet: Choose Distinct.
+const (
+	// DashManifestStyleBasic is a DashManifestStyle enum value
+	DashManifestStyleBasic = "BASIC"
+
+	// DashManifestStyleCompact is a DashManifestStyle enum value
+	DashManifestStyleCompact = "COMPACT"
+
+	// DashManifestStyleDistinct is a DashManifestStyle enum value
+	DashManifestStyleDistinct = "DISTINCT"
+)
+
+// DashManifestStyle_Values returns all elements of the DashManifestStyle enum
+func DashManifestStyle_Values() []string {
+	return []string{
+		DashManifestStyleBasic,
+		DashManifestStyleCompact,
+		DashManifestStyleDistinct,
 	}
 }
 
@@ -32228,6 +32595,34 @@ func H265WriteMp4PackagingType_Values() []string {
 	}
 }
 
+// Specify how MediaConvert maps brightness and colors from your HDR input to
+// your SDR output. The mode that you select represents a creative choice, with
+// different tradeoffs in the details and tones of your output. To maintain
+// details in bright or saturated areas of your output: Choose Preserve details.
+// For some sources, your SDR output may look less bright and less saturated
+// when compared to your HDR source. MediaConvert automatically applies this
+// mode for HLG sources, regardless of your choice. For a bright and saturated
+// output: Choose Vibrant. We recommend that you choose this mode when any of
+// your source content is HDR10, and for the best results when it is mastered
+// for 1000 nits. You may notice loss of details in bright or saturated areas
+// of your output. HDR to SDR tone mapping has no effect when your input is
+// SDR.
+const (
+	// HDRToSDRToneMapperPreserveDetails is a HDRToSDRToneMapper enum value
+	HDRToSDRToneMapperPreserveDetails = "PRESERVE_DETAILS"
+
+	// HDRToSDRToneMapperVibrant is a HDRToSDRToneMapper enum value
+	HDRToSDRToneMapperVibrant = "VIBRANT"
+)
+
+// HDRToSDRToneMapper_Values returns all elements of the HDRToSDRToneMapper enum
+func HDRToSDRToneMapper_Values() []string {
+	return []string{
+		HDRToSDRToneMapperPreserveDetails,
+		HDRToSDRToneMapperVibrant,
+	}
+}
+
 // Ad marker for Apple HLS manifest.
 const (
 	// HlsAdMarkersElemental is a HlsAdMarkers enum value
@@ -34635,7 +35030,9 @@ func MpdKlvMetadata_Values() []string {
 // that you specify for ID3 metadata scheme ID URI. For SCTE35 event messages,
 // the InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin".
 // To leave these elements out of your output MPD manifest, set Manifest metadata
-// signaling to Disabled.
+// signaling to Disabled. To enable Manifest metadata signaling, you must also
+// set SCTE-35 source to Passthrough, ESAM SCTE-35 to insert, or ID3 metadata
+// (TimedMetadata) to Passthrough.
 const (
 	// MpdManifestMetadataSignalingEnabled is a MpdManifestMetadataSignaling enum value
 	MpdManifestMetadataSignalingEnabled = "ENABLED"
@@ -36142,22 +36539,29 @@ func S3ServerSideEncryptionType_Values() []string {
 	}
 }
 
-// Specify the video color sample range for this output. To create a full range
-// output, you must start with a full range YUV input and keep the default value,
-// None (NONE). To create a limited range output from a full range input, choose
-// Limited range (LIMITED_RANGE_SQUEEZE). With RGB inputs, your output is always
-// limited range, regardless of your choice here. When you create a limited
-// range output from a full range input, MediaConvert limits the active pixel
-// values in a way that depends on the output's bit depth: 8-bit outputs contain
-// only values from 16 through 235 and 10-bit outputs contain only values from
-// 64 through 940. With this conversion, MediaConvert also changes the output
-// metadata to note the limited range.
+// Specify how MediaConvert limits the color sample range for this output. To
+// create a limited range output from a full range input: Choose Limited range
+// squeeze. For full range inputs, MediaConvert performs a linear offset to
+// color samples equally across all pixels and frames. Color samples in 10-bit
+// outputs are limited to 64 through 940, and 8-bit outputs are limited to 16
+// through 235. Note: For limited range inputs, values for color samples are
+// passed through to your output unchanged. MediaConvert does not limit the
+// sample range. To correct pixels in your input that are out of range or out
+// of gamut: Choose Limited range clip. Use for broadcast applications. MediaConvert
+// conforms any pixels outside of the values that you specify under Minimum
+// YUV and Maximum YUV to limited range bounds. MediaConvert also corrects any
+// YUV values that, when converted to RGB, would be outside the bounds you specify
+// under Minimum RGB tolerance and Maximum RGB tolerance. With either limited
+// range conversion, MediaConvert writes the sample range metadata in the output.
 const (
 	// SampleRangeConversionLimitedRangeSqueeze is a SampleRangeConversion enum value
 	SampleRangeConversionLimitedRangeSqueeze = "LIMITED_RANGE_SQUEEZE"
 
 	// SampleRangeConversionNone is a SampleRangeConversion enum value
 	SampleRangeConversionNone = "NONE"
+
+	// SampleRangeConversionLimitedRangeClip is a SampleRangeConversion enum value
+	SampleRangeConversionLimitedRangeClip = "LIMITED_RANGE_CLIP"
 )
 
 // SampleRangeConversion_Values returns all elements of the SampleRangeConversion enum
@@ -36165,6 +36569,7 @@ func SampleRangeConversion_Values() []string {
 	return []string{
 		SampleRangeConversionLimitedRangeSqueeze,
 		SampleRangeConversionNone,
+		SampleRangeConversionLimitedRangeClip,
 	}
 }
 

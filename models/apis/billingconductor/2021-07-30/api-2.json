@@ -612,6 +612,12 @@
       "type":"string",
       "pattern":"[0-9]{12}"
     },
+    "AccountIdFilterList":{
+      "type":"list",
+      "member":{"shape":"AccountId"},
+      "max":30,
+      "min":1
+    },
     "AccountIdList":{
       "type":"list",
       "member":{"shape":"AccountId"},
@@ -804,6 +810,12 @@
         "PRIMARY_ACCOUNT_MISSING"
       ]
     },
+    "BillingGroupStatusList":{
+      "type":"list",
+      "member":{"shape":"BillingGroupStatus"},
+      "max":2,
+      "min":1
+    },
     "BillingGroupStatusReason":{"type":"string"},
     "BillingPeriod":{
       "type":"string",
@@ -959,7 +971,9 @@
         "Service":{"shape":"Service"},
         "Tags":{"shape":"TagMap"},
         "BillingEntity":{"shape":"BillingEntity"},
-        "Tiering":{"shape":"CreateTieringInput"}
+        "Tiering":{"shape":"CreateTieringInput"},
+        "UsageType":{"shape":"UsageType"},
+        "Operation":{"shape":"Operation"}
       }
     },
     "CreatePricingRuleOutput":{
@@ -1133,7 +1147,9 @@
         "LastModifiedTime":{"shape":"Instant"},
         "AssociationSize":{"shape":"NumberOfAssociations"},
         "StartBillingPeriod":{"shape":"BillingPeriod"},
-        "EndBillingPeriod":{"shape":"BillingPeriod"}
+        "EndBillingPeriod":{"shape":"BillingPeriod"},
+        "Arn":{"shape":"CustomLineItemArn"},
+        "StartTime":{"shape":"Instant"}
       }
     },
     "DeleteBillingGroupInput":{
@@ -1261,7 +1277,8 @@
       "type":"structure",
       "members":{
         "Association":{"shape":"Association"},
-        "AccountId":{"shape":"AccountId"}
+        "AccountId":{"shape":"AccountId"},
+        "AccountIds":{"shape":"AccountIdFilterList"}
       }
     },
     "ListAccountAssociationsInput":{
@@ -1305,7 +1322,8 @@
       "type":"structure",
       "members":{
         "Arns":{"shape":"BillingGroupArnList"},
-        "PricingPlan":{"shape":"PricingPlanFullArn"}
+        "PricingPlan":{"shape":"PricingPlanFullArn"},
+        "Statuses":{"shape":"BillingGroupStatusList"}
       }
     },
     "ListBillingGroupsInput":{
@@ -1586,6 +1604,12 @@
       "type":"long",
       "min":0
     },
+    "Operation":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"\\S+"
+    },
     "PricingPlanArn":{
       "type":"string",
       "pattern":"(arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/)?[a-zA-Z0-9]{10}"
@@ -1674,7 +1698,9 @@
         "CreationTime":{"shape":"Instant"},
         "LastModifiedTime":{"shape":"Instant"},
         "BillingEntity":{"shape":"BillingEntity"},
-        "Tiering":{"shape":"Tiering"}
+        "Tiering":{"shape":"Tiering"},
+        "UsageType":{"shape":"UsageType"},
+        "Operation":{"shape":"Operation"}
       }
     },
     "PricingRuleName":{
@@ -1689,7 +1715,8 @@
       "enum":[
         "GLOBAL",
         "SERVICE",
-        "BILLING_ENTITY"
+        "BILLING_ENTITY",
+        "SKU"
       ]
     },
     "PricingRuleType":{
@@ -1963,7 +1990,9 @@
         "AssociatedPricingPlanCount":{"shape":"NumberOfPricingPlansAssociatedWith"},
         "LastModifiedTime":{"shape":"Instant"},
         "BillingEntity":{"shape":"BillingEntity"},
-        "Tiering":{"shape":"UpdateTieringInput"}
+        "Tiering":{"shape":"UpdateTieringInput"},
+        "UsageType":{"shape":"UsageType"},
+        "Operation":{"shape":"Operation"}
       }
     },
     "UpdateTieringInput":{
@@ -1972,6 +2001,12 @@
       "members":{
         "FreeTier":{"shape":"UpdateFreeTierConfig"}
       }
+    },
+    "UsageType":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"\\S+"
     },
     "ValidationException":{
       "type":"structure",
@@ -2057,7 +2092,11 @@
         "ILLEGAL_MODIFIER_PERCENTAGE",
         "ILLEGAL_TYPE",
         "ILLEGAL_ENDED_BILLINGGROUP",
-        "ILLEGAL_TIERING_INPUT"
+        "ILLEGAL_TIERING_INPUT",
+        "ILLEGAL_OPERATION",
+        "ILLEGAL_USAGE_TYPE",
+        "INVALID_SKU_COMBO",
+        "INVALID_FILTER"
       ]
     }
   }

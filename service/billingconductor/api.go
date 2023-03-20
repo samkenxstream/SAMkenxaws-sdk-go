@@ -5086,14 +5086,22 @@ type CreatePricingRuleInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
+	// Operation is the specific Amazon Web Services action covered by this line
+	// item. This describes the specific usage of the line item.
+	//
+	// If the Scope attribute is set to SKU, this attribute indicates which operation
+	// the PricingRule is modifying. For example, a value of RunInstances:0202 indicates
+	// the operation of running an Amazon EC2 instance.
+	Operation *string `min:"1" type:"string"`
+
 	// The scope of pricing rule that indicates if it's globally applicable, or
 	// it's service-specific.
 	//
 	// Scope is a required field
 	Scope *string `type:"string" required:"true" enum:"PricingRuleScope"`
 
-	// If the Scope attribute is set to SERVICE, the attribute indicates which service
-	// the PricingRule is applicable for.
+	// If the Scope attribute is set to SERVICE or SKU, the attribute indicates
+	// which service the PricingRule is applicable for.
 	Service *string `min:"1" type:"string"`
 
 	// A map that contains tag keys and tag values that are attached to a pricing
@@ -5107,6 +5115,10 @@ type CreatePricingRuleInput struct {
 	//
 	// Type is a required field
 	Type *string `type:"string" required:"true" enum:"PricingRuleType"`
+
+	// Usage type is the unit that each service uses to measure the usage of a specific
+	// type of resource.
+	UsageType *string `min:"1" type:"string"`
 }
 
 // String returns the string representation.
@@ -5139,6 +5151,9 @@ func (s *CreatePricingRuleInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
 	}
+	if s.Operation != nil && len(*s.Operation) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Operation", 1))
+	}
 	if s.Scope == nil {
 		invalidParams.Add(request.NewErrParamRequired("Scope"))
 	}
@@ -5150,6 +5165,9 @@ func (s *CreatePricingRuleInput) Validate() error {
 	}
 	if s.Type == nil {
 		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+	if s.UsageType != nil && len(*s.UsageType) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("UsageType", 1))
 	}
 	if s.Tiering != nil {
 		if err := s.Tiering.Validate(); err != nil {
@@ -5193,6 +5211,12 @@ func (s *CreatePricingRuleInput) SetName(v string) *CreatePricingRuleInput {
 	return s
 }
 
+// SetOperation sets the Operation field's value.
+func (s *CreatePricingRuleInput) SetOperation(v string) *CreatePricingRuleInput {
+	s.Operation = &v
+	return s
+}
+
 // SetScope sets the Scope field's value.
 func (s *CreatePricingRuleInput) SetScope(v string) *CreatePricingRuleInput {
 	s.Scope = &v
@@ -5220,6 +5244,12 @@ func (s *CreatePricingRuleInput) SetTiering(v *CreateTieringInput_) *CreatePrici
 // SetType sets the Type field's value.
 func (s *CreatePricingRuleInput) SetType(v string) *CreatePricingRuleInput {
 	s.Type = &v
+	return s
+}
+
+// SetUsageType sets the UsageType field's value.
+func (s *CreatePricingRuleInput) SetUsageType(v string) *CreatePricingRuleInput {
+	s.UsageType = &v
 	return s
 }
 
@@ -5678,6 +5708,9 @@ func (s *CustomLineItemPercentageChargeDetails) SetPercentageValue(v float64) *C
 type CustomLineItemVersionListElement struct {
 	_ struct{} `type:"structure"`
 
+	// A list of custom line item Amazon Resource Names (ARNs) to retrieve information.
+	Arn *string `type:"string"`
+
 	// The number of resources that are associated with the custom line item.
 	AssociationSize *int64 `type:"long"`
 
@@ -5719,6 +5752,9 @@ type CustomLineItemVersionListElement struct {
 
 	// The start billing period of the custom line item version.
 	StartBillingPeriod *string `type:"string"`
+
+	// The inclusive start time.
+	StartTime *int64 `type:"long"`
 }
 
 // String returns the string representation.
@@ -5737,6 +5773,12 @@ func (s CustomLineItemVersionListElement) String() string {
 // value will be replaced with "sensitive".
 func (s CustomLineItemVersionListElement) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *CustomLineItemVersionListElement) SetArn(v string) *CustomLineItemVersionListElement {
+	s.Arn = &v
+	return s
 }
 
 // SetAssociationSize sets the AssociationSize field's value.
@@ -5802,6 +5844,12 @@ func (s *CustomLineItemVersionListElement) SetProductCode(v string) *CustomLineI
 // SetStartBillingPeriod sets the StartBillingPeriod field's value.
 func (s *CustomLineItemVersionListElement) SetStartBillingPeriod(v string) *CustomLineItemVersionListElement {
 	s.StartBillingPeriod = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *CustomLineItemVersionListElement) SetStartTime(v int64) *CustomLineItemVersionListElement {
+	s.StartTime = &v
 	return s
 }
 
@@ -6476,6 +6524,10 @@ type ListAccountAssociationsFilter struct {
 	// The Amazon Web Services account ID to filter on.
 	AccountId *string `type:"string"`
 
+	// The list of Amazon Web Services IDs to retrieve their associated billing
+	// group for a given time range.
+	AccountIds []*string `min:"1" type:"list"`
+
 	// MONITORED: linked accounts that are associated to billing groups.
 	//
 	// UNMONITORED: linked accounts that are not associated to billing groups.
@@ -6503,9 +6555,28 @@ func (s ListAccountAssociationsFilter) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListAccountAssociationsFilter) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListAccountAssociationsFilter"}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // SetAccountId sets the AccountId field's value.
 func (s *ListAccountAssociationsFilter) SetAccountId(v string) *ListAccountAssociationsFilter {
 	s.AccountId = &v
+	return s
+}
+
+// SetAccountIds sets the AccountIds field's value.
+func (s *ListAccountAssociationsFilter) SetAccountIds(v []*string) *ListAccountAssociationsFilter {
+	s.AccountIds = v
 	return s
 }
 
@@ -6551,6 +6622,21 @@ func (s ListAccountAssociationsInput) String() string {
 // value will be replaced with "sensitive".
 func (s ListAccountAssociationsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListAccountAssociationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListAccountAssociationsInput"}
+	if s.Filters != nil {
+		if err := s.Filters.Validate(); err != nil {
+			invalidParams.AddNested("Filters", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetBillingPeriod sets the BillingPeriod field's value.
@@ -6784,6 +6870,10 @@ type ListBillingGroupsFilter struct {
 
 	// The pricing plan Amazon Resource Names (ARNs) to retrieve information.
 	PricingPlan *string `type:"string"`
+
+	// A list of billing groups to retrieve their current status for a specific
+	// time range
+	Statuses []*string `min:"1" type:"list" enum:"BillingGroupStatus"`
 }
 
 // String returns the string representation.
@@ -6810,6 +6900,9 @@ func (s *ListBillingGroupsFilter) Validate() error {
 	if s.Arns != nil && len(s.Arns) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Arns", 1))
 	}
+	if s.Statuses != nil && len(s.Statuses) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Statuses", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6826,6 +6919,12 @@ func (s *ListBillingGroupsFilter) SetArns(v []*string) *ListBillingGroupsFilter 
 // SetPricingPlan sets the PricingPlan field's value.
 func (s *ListBillingGroupsFilter) SetPricingPlan(v string) *ListBillingGroupsFilter {
 	s.PricingPlan = &v
+	return s
+}
+
+// SetStatuses sets the Statuses field's value.
+func (s *ListBillingGroupsFilter) SetStatuses(v []*string) *ListBillingGroupsFilter {
+	s.Statuses = v
 	return s
 }
 
@@ -8502,6 +8601,14 @@ type PricingRuleListElement struct {
 	// String and GoString methods.
 	Name *string `min:"1" type:"string" sensitive:"true"`
 
+	// Operation is the specific Amazon Web Services action covered by this line
+	// item. This describes the specific usage of the line item.
+	//
+	// If the Scope attribute is set to SKU, this attribute indicates which operation
+	// the PricingRule is modifying. For example, a value of RunInstances:0202 indicates
+	// the operation of running an Amazon EC2 instance.
+	Operation *string `min:"1" type:"string"`
+
 	// The scope of pricing rule that indicates if it is globally applicable, or
 	// if it is service-specific.
 	Scope *string `type:"string" enum:"PricingRuleScope"`
@@ -8515,6 +8622,10 @@ type PricingRuleListElement struct {
 
 	// The type of pricing rule.
 	Type *string `type:"string" enum:"PricingRuleType"`
+
+	// Usage type is the unit that each service uses to measure the usage of a specific
+	// type of resource.
+	UsageType *string `min:"1" type:"string"`
 }
 
 // String returns the string representation.
@@ -8583,6 +8694,12 @@ func (s *PricingRuleListElement) SetName(v string) *PricingRuleListElement {
 	return s
 }
 
+// SetOperation sets the Operation field's value.
+func (s *PricingRuleListElement) SetOperation(v string) *PricingRuleListElement {
+	s.Operation = &v
+	return s
+}
+
 // SetScope sets the Scope field's value.
 func (s *PricingRuleListElement) SetScope(v string) *PricingRuleListElement {
 	s.Scope = &v
@@ -8604,6 +8721,12 @@ func (s *PricingRuleListElement) SetTiering(v *Tiering) *PricingRuleListElement 
 // SetType sets the Type field's value.
 func (s *PricingRuleListElement) SetType(v string) *PricingRuleListElement {
 	s.Type = &v
+	return s
+}
+
+// SetUsageType sets the UsageType field's value.
+func (s *PricingRuleListElement) SetUsageType(v string) *PricingRuleListElement {
+	s.UsageType = &v
 	return s
 }
 
@@ -9951,6 +10074,14 @@ type UpdatePricingRuleOutput struct {
 	// String and GoString methods.
 	Name *string `min:"1" type:"string" sensitive:"true"`
 
+	// Operation refers to the specific Amazon Web Services covered by this line
+	// item. This describes the specific usage of the line item.
+	//
+	// If the Scope attribute is set to SKU, this attribute indicates which operation
+	// the PricingRule is modifying. For example, a value of RunInstances:0202 indicates
+	// the operation of running an Amazon EC2 instance.
+	Operation *string `min:"1" type:"string"`
+
 	// The scope of pricing rule that indicates if it's globally applicable, or
 	// it's service-specific.
 	Scope *string `type:"string" enum:"PricingRuleScope"`
@@ -9964,6 +10095,15 @@ type UpdatePricingRuleOutput struct {
 
 	// The new pricing rule type.
 	Type *string `type:"string" enum:"PricingRuleType"`
+
+	// Usage type is the unit that each service uses to measure the usage of a specific
+	// type of resource.
+	//
+	// If the Scope attribute is set to SKU, this attribute indicates which usage
+	// type the PricingRule is modifying. For example, USW2-BoxUsage:m2.2xlarge
+	// describes an M2 High Memory Double Extra Large instance in the US West (Oregon)
+	// Region.
+	UsageType *string `min:"1" type:"string"`
 }
 
 // String returns the string representation.
@@ -10026,6 +10166,12 @@ func (s *UpdatePricingRuleOutput) SetName(v string) *UpdatePricingRuleOutput {
 	return s
 }
 
+// SetOperation sets the Operation field's value.
+func (s *UpdatePricingRuleOutput) SetOperation(v string) *UpdatePricingRuleOutput {
+	s.Operation = &v
+	return s
+}
+
 // SetScope sets the Scope field's value.
 func (s *UpdatePricingRuleOutput) SetScope(v string) *UpdatePricingRuleOutput {
 	s.Scope = &v
@@ -10047,6 +10193,12 @@ func (s *UpdatePricingRuleOutput) SetTiering(v *UpdateTieringInput_) *UpdatePric
 // SetType sets the Type field's value.
 func (s *UpdatePricingRuleOutput) SetType(v string) *UpdatePricingRuleOutput {
 	s.Type = &v
+	return s
+}
+
+// SetUsageType sets the UsageType field's value.
+func (s *UpdatePricingRuleOutput) SetUsageType(v string) *UpdatePricingRuleOutput {
+	s.UsageType = &v
 	return s
 }
 
@@ -10347,6 +10499,9 @@ const (
 
 	// PricingRuleScopeBillingEntity is a PricingRuleScope enum value
 	PricingRuleScopeBillingEntity = "BILLING_ENTITY"
+
+	// PricingRuleScopeSku is a PricingRuleScope enum value
+	PricingRuleScopeSku = "SKU"
 )
 
 // PricingRuleScope_Values returns all elements of the PricingRuleScope enum
@@ -10355,6 +10510,7 @@ func PricingRuleScope_Values() []string {
 		PricingRuleScopeGlobal,
 		PricingRuleScopeService,
 		PricingRuleScopeBillingEntity,
+		PricingRuleScopeSku,
 	}
 }
 
@@ -10537,6 +10693,18 @@ const (
 
 	// ValidationExceptionReasonIllegalTieringInput is a ValidationExceptionReason enum value
 	ValidationExceptionReasonIllegalTieringInput = "ILLEGAL_TIERING_INPUT"
+
+	// ValidationExceptionReasonIllegalOperation is a ValidationExceptionReason enum value
+	ValidationExceptionReasonIllegalOperation = "ILLEGAL_OPERATION"
+
+	// ValidationExceptionReasonIllegalUsageType is a ValidationExceptionReason enum value
+	ValidationExceptionReasonIllegalUsageType = "ILLEGAL_USAGE_TYPE"
+
+	// ValidationExceptionReasonInvalidSkuCombo is a ValidationExceptionReason enum value
+	ValidationExceptionReasonInvalidSkuCombo = "INVALID_SKU_COMBO"
+
+	// ValidationExceptionReasonInvalidFilter is a ValidationExceptionReason enum value
+	ValidationExceptionReasonInvalidFilter = "INVALID_FILTER"
 )
 
 // ValidationExceptionReason_Values returns all elements of the ValidationExceptionReason enum
@@ -10595,5 +10763,9 @@ func ValidationExceptionReason_Values() []string {
 		ValidationExceptionReasonIllegalType,
 		ValidationExceptionReasonIllegalEndedBillinggroup,
 		ValidationExceptionReasonIllegalTieringInput,
+		ValidationExceptionReasonIllegalOperation,
+		ValidationExceptionReasonIllegalUsageType,
+		ValidationExceptionReasonInvalidSkuCombo,
+		ValidationExceptionReasonInvalidFilter,
 	}
 }

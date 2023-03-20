@@ -1340,6 +1340,8 @@ func (c *IAM) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectProvi
 //   - A list of client IDs (also known as audiences) that identify the application
 //     or applications allowed to authenticate using the OIDC provider
 //
+//   - A list of tags that are attached to the specified IAM OIDC provider
+//
 //   - A list of thumbprints of one or more server certificates that the IdP
 //     uses
 //
@@ -1349,8 +1351,8 @@ func (c *IAM) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectProvi
 // Amazon Web Services secures communication with some OIDC identity providers
 // (IdPs) through our library of trusted certificate authorities (CAs) instead
 // of using a certificate thumbprint to verify your IdP server certificate.
-// These OIDC IdPs include Google, and those that use an Amazon S3 bucket to
-// host a JSON Web Key Set (JWKS) endpoint. In these cases, your legacy thumbprint
+// These OIDC IdPs include Google, Auth0, and those that use an Amazon S3 bucket
+// to host a JSON Web Key Set (JWKS) endpoint. In these cases, your legacy thumbprint
 // remains in your configuration, but is no longer used for validation.
 //
 // The trust for the OIDC provider is derived from the IAM provider that this
@@ -3431,8 +3433,20 @@ func (c *IAM) DeleteRoleRequest(input *DeleteRoleInput) (req *request.Request, o
 
 // DeleteRole API operation for AWS Identity and Access Management.
 //
-// Deletes the specified role. The role must not have any policies attached.
-// For more information about roles, see Working with roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
+// Deletes the specified role. Unlike the Amazon Web Services Management Console,
+// when you delete a role programmatically, you must delete the items attached
+// to the role manually, or the deletion fails. For more information, see Deleting
+// an IAM role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html#roles-managingrole-deleting-cli).
+// Before attempting to delete a role, remove the following attached items:
+//
+//   - Inline policies (DeleteRolePolicy)
+//
+//   - Attached managed policies (DetachRolePolicy)
+//
+//   - Instance profile (RemoveRoleFromInstanceProfile)
+//
+//   - Optional – Delete instance profile after detaching from role for resource
+//     clean up (DeleteInstanceProfile)
 //
 // Make sure that you do not have any Amazon EC2 instances running with the
 // role you are about to delete. Deleting a role or instance profile that is
@@ -6761,7 +6775,7 @@ func (c *IAM) GetOrganizationsAccessReportRequest(input *GetOrganizationsAccessR
 // permissions using service last accessed data (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 // in the IAM User Guide.
 //
-// For each service that principals in an account (root users, IAM users, or
+// For each service that principals in an account (root user, IAM users, or
 // IAM roles) could access using SCPs, the operation returns details about the
 // most recent access attempt. If there was no attempt, the service is listed
 // without details about the most recent attempt to access the service. If the
@@ -13720,8 +13734,13 @@ func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) (req
 // If the output is long, you can use MaxItems and Marker parameters to paginate
 // the results.
 //
-// For more information about using the policy simulator, see Testing IAM policies
-// with the IAM policy simulator (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
+// The IAM policy simulator evaluates statements in the identity-based policy
+// and the inputs that you provide during simulation. The policy simulator results
+// can differ from your live Amazon Web Services environment. We recommend that
+// you check your policies against your live Amazon Web Services environment
+// after testing using the policy simulator to confirm that you have the desired
+// results. For more information about using the policy simulator, see Testing
+// IAM policies with the IAM policy simulator (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
 // the IAM User Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -13875,7 +13894,7 @@ func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput
 // specified as strings, use SimulateCustomPolicy instead.
 //
 // You can also optionally include one resource-based policy to be evaluated
-// with each of the resources included in the simulation.
+// with each of the resources included in the simulation for IAM users only.
 //
 // The simulation does not perform the API operations; it only checks the authorization
 // to determine if the simulated policies allow or deny the operations.
@@ -13893,8 +13912,13 @@ func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput
 // If the output is long, you can use the MaxItems and Marker parameters to
 // paginate the results.
 //
-// For more information about using the policy simulator, see Testing IAM policies
-// with the IAM policy simulator (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
+// The IAM policy simulator evaluates statements in the identity-based policy
+// and the inputs that you provide during simulation. The policy simulator results
+// can differ from your live Amazon Web Services environment. We recommend that
+// you check your policies against your live Amazon Web Services environment
+// after testing using the policy simulator to confirm that you have the desired
+// results. For more information about using the policy simulator, see Testing
+// IAM policies with the IAM policy simulator (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
 // the IAM User Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -14301,10 +14325,10 @@ func (c *IAM) TagOpenIDConnectProviderRequest(input *TagOpenIDConnectProviderInp
 //     Or search for all resources with the key name Cost Center and the value
 //     41200.
 //
-//   - Access control - Include tags in IAM user-based and resource-based policies.
-//     You can use tags to restrict access to only an OIDC provider that has
-//     a specified tag attached. For examples of policies that show how to use
-//     tags to control access, see Control access using IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
+//   - Access control - Include tags in IAM identity-based and resource-based
+//     policies. You can use tags to restrict access to only an OIDC provider
+//     that has a specified tag attached. For examples of policies that show
+//     how to use tags to control access, see Control access using IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
 //     in the IAM User Guide.
 //
 //   - If any one of the tags is invalid or if you exceed the allowed maximum
@@ -14946,13 +14970,13 @@ func (c *IAM) TagUserRequest(input *TagUserInput) (req *request.Request, output 
 //     Or search for all resources with the key name Cost Center and the value
 //     41200.
 //
-//   - Access control - Include tags in IAM user-based and resource-based policies.
-//     You can use tags to restrict access to only an IAM requesting user that
-//     has a specified tag attached. You can also restrict access to only those
-//     resources that have a certain tag attached. For examples of policies that
-//     show how to use tags to control access, see Control access using IAM tags
-//     (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in
-//     the IAM User Guide.
+//   - Access control - Include tags in IAM identity-based and resource-based
+//     policies. You can use tags to restrict access to only an IAM requesting
+//     user that has a specified tag attached. You can also restrict access to
+//     only those resources that have a certain tag attached. For examples of
+//     policies that show how to use tags to control access, see Control access
+//     using IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
+//     in the IAM User Guide.
 //
 //   - Cost allocation - Use tags to help track which individuals and teams
 //     are using which Amazon Web Services resources.
@@ -16375,8 +16399,8 @@ func (c *IAM) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDCo
 // Amazon Web Services secures communication with some OIDC identity providers
 // (IdPs) through our library of trusted certificate authorities (CAs) instead
 // of using a certificate thumbprint to verify your IdP server certificate.
-// These OIDC IdPs include Google, and those that use an Amazon S3 bucket to
-// host a JSON Web Key Set (JWKS) endpoint. In these cases, your legacy thumbprint
+// These OIDC IdPs include Google, Auth0, and those that use an Amazon S3 bucket
+// to host a JSON Web Key Set (JWKS) endpoint. In these cases, your legacy thumbprint
 // remains in your configuration, but is no longer used for validation.
 //
 // Trust for the OIDC provider is derived from the provider certificate and
@@ -17582,7 +17606,7 @@ type AccessDetail struct {
 	// from which an authenticated principal last attempted to access the service.
 	// Amazon Web Services does not report unauthenticated requests.
 	//
-	// This field is null if no principals (IAM users, IAM roles, or root users)
+	// This field is null if no principals (IAM users, IAM roles, or root user)
 	// in the reported Organizations entity attempted to access the service within
 	// the tracking period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	EntityPath *string `min:"19" type:"string"`
@@ -17619,7 +17643,7 @@ type AccessDetail struct {
 	// ServiceNamespace is a required field
 	ServiceNamespace *string `min:"1" type:"string" required:"true"`
 
-	// The number of accounts with authenticated principals (root users, IAM users,
+	// The number of accounts with authenticated principals (root user, IAM users,
 	// and IAM roles) that attempted to access the service in the tracking period.
 	TotalAuthenticatedEntities *int64 `type:"integer"`
 }
@@ -19346,7 +19370,7 @@ type CreateOpenIDConnectProviderInput struct {
 	//
 	// For more information about obtaining the OIDC provider thumbprint, see Obtaining
 	// the thumbprint for an OpenID Connect provider (https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html)
-	// in the IAM User Guide.
+	// in the IAM user Guide.
 	//
 	// ThumbprintList is a required field
 	ThumbprintList []*string `type:"list" required:"true"`
@@ -19882,8 +19906,18 @@ type CreateRoleInput struct {
 	// letters.
 	Path *string `min:"1" type:"string"`
 
-	// The ARN of the policy that is used to set the permissions boundary for the
-	// role.
+	// The ARN of the managed policy that is used to set the permissions boundary
+	// for the role.
+	//
+	// A permissions boundary policy defines the maximum permissions that identity-based
+	// policies can grant to an entity, but does not grant permissions. Permissions
+	// boundaries do not define the maximum permissions that a resource-based policy
+	// can grant to an entity. To learn more, see Permissions boundaries for IAM
+	// entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	//
+	// For more information about policy types, see Policy types (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
+	// in the IAM User Guide.
 	PermissionsBoundary *string `min:"20" type:"string"`
 
 	// The name of the role to create.
@@ -19891,6 +19925,10 @@ type CreateRoleInput struct {
 	// IAM user, group, role, and policy names must be unique within the account.
 	// Names are not distinguished by case. For example, you cannot create resources
 	// named both "MyResource" and "myresource".
+	//
+	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// a string of characters consisting of upper and lowercase alphanumeric characters
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// RoleName is a required field
 	RoleName *string `min:"1" type:"string" required:"true"`
@@ -20428,8 +20466,18 @@ type CreateUserInput struct {
 	// letters.
 	Path *string `min:"1" type:"string"`
 
-	// The ARN of the policy that is used to set the permissions boundary for the
-	// user.
+	// The ARN of the managed policy that is used to set the permissions boundary
+	// for the user.
+	//
+	// A permissions boundary policy defines the maximum permissions that identity-based
+	// policies can grant to an entity, but does not grant permissions. Permissions
+	// boundaries do not define the maximum permissions that a resource-based policy
+	// can grant to an entity. To learn more, see Permissions boundaries for IAM
+	// entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	//
+	// For more information about policy types, see Policy types (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
+	// in the IAM User Guide.
 	PermissionsBoundary *string `min:"20" type:"string"`
 
 	// A list of tags that you want to attach to the new user. Each tag consists
@@ -20584,8 +20632,8 @@ type CreateVirtualMFADeviceInput struct {
 	// of tags, then the entire request fails and the resource is not created.
 	Tags []*Tag `type:"list"`
 
-	// The name of the virtual MFA device. Use with path to uniquely identify a
-	// virtual MFA device.
+	// The name of the virtual MFA device, which must be unique. Use with path to
+	// uniquely identify a virtual MFA device.
 	//
 	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
@@ -33089,8 +33137,18 @@ func (s PutGroupPolicyOutput) GoString() string {
 type PutRolePermissionsBoundaryInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the policy that is used to set the permissions boundary for the
-	// role.
+	// The ARN of the managed policy that is used to set the permissions boundary
+	// for the role.
+	//
+	// A permissions boundary policy defines the maximum permissions that identity-based
+	// policies can grant to an entity, but does not grant permissions. Permissions
+	// boundaries do not define the maximum permissions that a resource-based policy
+	// can grant to an entity. To learn more, see Permissions boundaries for IAM
+	// entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	//
+	// For more information about policy types, see Policy types (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
+	// in the IAM User Guide.
 	//
 	// PermissionsBoundary is a required field
 	PermissionsBoundary *string `min:"20" type:"string" required:"true"`
@@ -33309,8 +33367,18 @@ func (s PutRolePolicyOutput) GoString() string {
 type PutUserPermissionsBoundaryInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the policy that is used to set the permissions boundary for the
-	// user.
+	// The ARN of the managed policy that is used to set the permissions boundary
+	// for the user.
+	//
+	// A permissions boundary policy defines the maximum permissions that identity-based
+	// policies can grant to an entity, but does not grant permissions. Permissions
+	// boundaries do not define the maximum permissions that a resource-based policy
+	// can grant to an entity. To learn more, see Permissions boundaries for IAM
+	// entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	//
+	// For more information about policy types, see Policy types (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
+	// in the IAM User Guide.
 	//
 	// PermissionsBoundary is a required field
 	PermissionsBoundary *string `min:"20" type:"string" required:"true"`
@@ -34208,7 +34276,7 @@ type Role struct {
 	// if your Region began supporting these features within the last year. The
 	// role might have been used more than 400 days ago. For more information, see
 	// Regions where data is tracked (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period)
-	// in the IAM User Guide.
+	// in the IAM user Guide.
 	RoleLastUsed *RoleLastUsed `type:"structure"`
 
 	// The friendly name that identifies the role.
@@ -34469,7 +34537,7 @@ func (s *RoleDetail) SetTags(v []*Tag) *RoleDetail {
 // if your Region began supporting these features within the last year. The
 // role might have been used more than 400 days ago. For more information, see
 // Regions where data is tracked (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period)
-// in the IAM User Guide.
+// in the IAM user Guide.
 //
 // This data type is returned as a response element in the GetRole and GetAccountAuthorizationDetails
 // operations.
@@ -35633,6 +35701,8 @@ type SimulateCustomPolicyInput struct {
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the Amazon Web Services General Reference.
+	//
+	// Simulation of resource-based policies isn't supported for IAM roles.
 	ResourceArns []*string `type:"list"`
 
 	// Specifies the type of simulation to run. Different API operations that support
@@ -35697,6 +35767,8 @@ type SimulateCustomPolicyInput struct {
 	//
 	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
 	//    return (\u000D)
+	//
+	// Simulation of resource-based policies isn't supported for IAM roles.
 	ResourcePolicy *string `min:"1" type:"string"`
 }
 
@@ -36012,6 +36084,8 @@ type SimulatePrincipalPolicyInput struct {
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the Amazon Web Services General Reference.
+	//
+	// Simulation of resource-based policies isn't supported for IAM roles.
 	ResourceArns []*string `type:"list"`
 
 	// Specifies the type of simulation to run. Different API operations that support
@@ -36072,6 +36146,8 @@ type SimulatePrincipalPolicyInput struct {
 	//
 	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
 	//    return (\u000D)
+	//
+	// Simulation of resource-based policies isn't supported for IAM roles.
 	ResourcePolicy *string `min:"1" type:"string"`
 }
 

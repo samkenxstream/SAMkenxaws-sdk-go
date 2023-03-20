@@ -71,7 +71,7 @@ func (c *QuickSight) CancelIngestionRequest(input *CancelIngestionInput) (req *r
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -190,7 +190,7 @@ func (c *QuickSight) CreateAccountCustomizationRequest(input *CreateAccountCusto
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -323,7 +323,7 @@ func (c *QuickSight) CreateAccountSubscriptionRequest(input *CreateAccountSubscr
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -414,7 +414,8 @@ func (c *QuickSight) CreateAnalysisRequest(input *CreateAnalysisInput) (req *req
 
 // CreateAnalysis API operation for Amazon QuickSight.
 //
-// Creates an analysis in Amazon QuickSight.
+// Creates an analysis in Amazon QuickSight. Analyses can be created either
+// from a template or from an AnalysisDefinition.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -517,8 +518,8 @@ func (c *QuickSight) CreateDashboardRequest(input *CreateDashboardInput) (req *r
 
 // CreateDashboard API operation for Amazon QuickSight.
 //
-// Creates a dashboard from a template. To first create a template, see the
-// CreateTemplate (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html)
+// Creates a dashboard from either a template or directly with a DashboardDefinition.
+// To first create a template, see the CreateTemplate (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html)
 // API operation.
 //
 // A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight
@@ -645,7 +646,7 @@ func (c *QuickSight) CreateDataSetRequest(input *CreateDataSetInput) (req *reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -755,7 +756,7 @@ func (c *QuickSight) CreateDataSourceRequest(input *CreateDataSourceInput) (req 
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -880,7 +881,7 @@ func (c *QuickSight) CreateFolderRequest(input *CreateFolderInput) (req *request
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - LimitExceededException
 //     A limit is exceeded.
@@ -969,7 +970,7 @@ func (c *QuickSight) CreateFolderMembershipRequest(input *CreateFolderMembership
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -1082,7 +1083,7 @@ func (c *QuickSight) CreateGroupRequest(input *CreateGroupInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -1189,7 +1190,7 @@ func (c *QuickSight) CreateGroupMembershipRequest(input *CreateGroupMembershipIn
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -1294,7 +1295,7 @@ func (c *QuickSight) CreateIAMPolicyAssignmentRequest(input *CreateIAMPolicyAssi
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -1406,7 +1407,7 @@ func (c *QuickSight) CreateIngestionRequest(input *CreateIngestionInput) (req *r
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -1517,7 +1518,7 @@ func (c *QuickSight) CreateNamespaceRequest(input *CreateNamespaceInput) (req *r
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -1611,8 +1612,9 @@ func (c *QuickSight) CreateTemplateRequest(input *CreateTemplateInput) (req *req
 
 // CreateTemplate API operation for Amazon QuickSight.
 //
-// Creates a template from an existing Amazon QuickSight analysis or template.
-// You can use the resulting template to create a dashboard.
+// Creates a template either from a TemplateDefinition or from an existing Amazon
+// QuickSight analysis or template. You can use the resulting template to create
+// additional dashboards, templates, or analyses.
 //
 // A template is an entity in Amazon QuickSight that encapsulates the metadata
 // required to create an analysis and that you can use to create s dashboard.
@@ -1638,7 +1640,7 @@ func (c *QuickSight) CreateTemplateRequest(input *CreateTemplateInput) (req *req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceExistsException
 //     The resource specified already exists.
@@ -1853,7 +1855,7 @@ func (c *QuickSight) CreateThemeRequest(input *CreateThemeInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -2065,7 +2067,7 @@ func (c *QuickSight) DeleteAccountCustomizationRequest(input *DeleteAccountCusto
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -2171,7 +2173,7 @@ func (c *QuickSight) DeleteAccountSubscriptionRequest(input *DeleteAccountSubscr
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -2480,7 +2482,7 @@ func (c *QuickSight) DeleteDataSetRequest(input *DeleteDataSetInput) (req *reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -2576,7 +2578,7 @@ func (c *QuickSight) DeleteDataSourceRequest(input *DeleteDataSourceInput) (req 
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -2677,7 +2679,7 @@ func (c *QuickSight) DeleteFolderRequest(input *DeleteFolderInput) (req *request
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceNotFoundException
 //     One or more resources can't be found.
@@ -2778,7 +2780,7 @@ func (c *QuickSight) DeleteFolderMembershipRequest(input *DeleteFolderMembership
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -2879,7 +2881,7 @@ func (c *QuickSight) DeleteGroupRequest(input *DeleteGroupInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -2981,7 +2983,7 @@ func (c *QuickSight) DeleteGroupMembershipRequest(input *DeleteGroupMembershipIn
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -3082,7 +3084,7 @@ func (c *QuickSight) DeleteIAMPolicyAssignmentRequest(input *DeleteIAMPolicyAssi
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -3187,7 +3189,7 @@ func (c *QuickSight) DeleteNamespaceRequest(input *DeleteNamespaceInput) (req *r
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -3484,7 +3486,7 @@ func (c *QuickSight) DeleteThemeRequest(input *DeleteThemeInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -3672,8 +3674,8 @@ func (c *QuickSight) DeleteUserRequest(input *DeleteUserInput) (req *request.Req
 // DeleteUser API operation for Amazon QuickSight.
 //
 // Deletes the Amazon QuickSight user that is associated with the identity of
-// the Identity and Access Management (IAM) user or role that's making the call.
-// The IAM user isn't deleted as a result of this call.
+// the IAM user or role that's making the call. The IAM user isn't deleted as
+// a result of this call.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3689,7 +3691,7 @@ func (c *QuickSight) DeleteUserRequest(input *DeleteUserInput) (req *request.Req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -3790,7 +3792,7 @@ func (c *QuickSight) DeleteUserByPrincipalIdRequest(input *DeleteUserByPrincipal
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -3934,7 +3936,7 @@ func (c *QuickSight) DescribeAccountCustomizationRequest(input *DescribeAccountC
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -4033,7 +4035,7 @@ func (c *QuickSight) DescribeAccountSettingsRequest(input *DescribeAccountSettin
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -4134,7 +4136,7 @@ func (c *QuickSight) DescribeAccountSubscriptionRequest(input *DescribeAccountSu
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -4238,7 +4240,7 @@ func (c *QuickSight) DescribeAnalysisRequest(input *DescribeAnalysisInput) (req 
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ThrottlingException
 //     Access is throttled.
@@ -4341,7 +4343,7 @@ func (c *QuickSight) DescribeAnalysisDefinitionRequest(input *DescribeAnalysisDe
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceExistsException
 //     The resource specified already exists.
@@ -4545,7 +4547,7 @@ func (c *QuickSight) DescribeDashboardRequest(input *DescribeDashboardInput) (re
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ThrottlingException
 //     Access is throttled.
@@ -4648,7 +4650,7 @@ func (c *QuickSight) DescribeDashboardDefinitionRequest(input *DescribeDashboard
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceExistsException
 //     The resource specified already exists.
@@ -4847,7 +4849,7 @@ func (c *QuickSight) DescribeDataSetRequest(input *DescribeDataSetInput) (req *r
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -4944,7 +4946,7 @@ func (c *QuickSight) DescribeDataSetPermissionsRequest(input *DescribeDataSetPer
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -5039,7 +5041,7 @@ func (c *QuickSight) DescribeDataSourceRequest(input *DescribeDataSourceInput) (
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -5134,7 +5136,7 @@ func (c *QuickSight) DescribeDataSourcePermissionsRequest(input *DescribeDataSou
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -5232,7 +5234,7 @@ func (c *QuickSight) DescribeFolderRequest(input *DescribeFolderInput) (req *req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceNotFoundException
 //     One or more resources can't be found.
@@ -5333,7 +5335,7 @@ func (c *QuickSight) DescribeFolderPermissionsRequest(input *DescribeFolderPermi
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceNotFoundException
 //     One or more resources can't be found.
@@ -5435,7 +5437,7 @@ func (c *QuickSight) DescribeFolderResolvedPermissionsRequest(input *DescribeFol
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceNotFoundException
 //     One or more resources can't be found.
@@ -5534,7 +5536,7 @@ func (c *QuickSight) DescribeGroupRequest(input *DescribeGroupInput) (req *reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -5637,7 +5639,7 @@ func (c *QuickSight) DescribeGroupMembershipRequest(input *DescribeGroupMembersh
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -5739,7 +5741,7 @@ func (c *QuickSight) DescribeIAMPolicyAssignmentRequest(input *DescribeIAMPolicy
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -5837,7 +5839,7 @@ func (c *QuickSight) DescribeIngestionRequest(input *DescribeIngestionInput) (re
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -5935,7 +5937,7 @@ func (c *QuickSight) DescribeIpRestrictionRequest(input *DescribeIpRestrictionIn
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -6030,7 +6032,7 @@ func (c *QuickSight) DescribeNamespaceRequest(input *DescribeNamespaceInput) (re
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -6131,7 +6133,7 @@ func (c *QuickSight) DescribeTemplateRequest(input *DescribeTemplateInput) (req 
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceExistsException
 //     The resource specified already exists.
@@ -6334,7 +6336,7 @@ func (c *QuickSight) DescribeTemplateDefinitionRequest(input *DescribeTemplateDe
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceExistsException
 //     The resource specified already exists.
@@ -6535,7 +6537,7 @@ func (c *QuickSight) DescribeThemeRequest(input *DescribeThemeInput) (req *reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -6736,7 +6738,7 @@ func (c *QuickSight) DescribeThemePermissionsRequest(input *DescribeThemePermiss
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -6837,7 +6839,7 @@ func (c *QuickSight) DescribeUserRequest(input *DescribeUserInput) (req *request
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -6962,7 +6964,7 @@ func (c *QuickSight) GenerateEmbedUrlForAnonymousUserRequest(input *GenerateEmbe
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -7101,7 +7103,7 @@ func (c *QuickSight) GenerateEmbedUrlForRegisteredUserRequest(input *GenerateEmb
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -7248,7 +7250,7 @@ func (c *QuickSight) GetDashboardEmbedUrlRequest(input *GetDashboardEmbedUrlInpu
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -7393,7 +7395,7 @@ func (c *QuickSight) GetSessionEmbedUrlRequest(input *GetSessionEmbedUrlInput) (
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -7966,7 +7968,7 @@ func (c *QuickSight) ListDataSetsRequest(input *ListDataSetsInput) (req *request
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -8119,7 +8121,7 @@ func (c *QuickSight) ListDataSourcesRequest(input *ListDataSourcesInput) (req *r
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -8268,7 +8270,7 @@ func (c *QuickSight) ListFolderMembersRequest(input *ListFolderMembersInput) (re
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceNotFoundException
 //     One or more resources can't be found.
@@ -8372,7 +8374,7 @@ func (c *QuickSight) ListFoldersRequest(input *ListFoldersInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceNotFoundException
 //     One or more resources can't be found.
@@ -8473,7 +8475,7 @@ func (c *QuickSight) ListGroupMembershipsRequest(input *ListGroupMembershipsInpu
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -8577,7 +8579,7 @@ func (c *QuickSight) ListGroupsRequest(input *ListGroupsInput) (req *request.Req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -8681,7 +8683,7 @@ func (c *QuickSight) ListIAMPolicyAssignmentsRequest(input *ListIAMPolicyAssignm
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -8781,7 +8783,7 @@ func (c *QuickSight) ListIAMPolicyAssignmentsForUserRequest(input *ListIAMPolicy
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -8889,7 +8891,7 @@ func (c *QuickSight) ListIngestionsRequest(input *ListIngestionsInput) (req *req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -9048,7 +9050,7 @@ func (c *QuickSight) ListNamespacesRequest(input *ListNamespacesInput) (req *req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -9203,7 +9205,7 @@ func (c *QuickSight) ListTagsForResourceRequest(input *ListTagsForResourceInput)
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -9864,7 +9866,7 @@ func (c *QuickSight) ListThemeVersionsRequest(input *ListThemeVersionsInput) (re
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidNextTokenException
 //     The NextToken value isn't valid.
@@ -10025,7 +10027,7 @@ func (c *QuickSight) ListThemesRequest(input *ListThemesInput) (req *request.Req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -10181,7 +10183,7 @@ func (c *QuickSight) ListUserGroupsRequest(input *ListUserGroupsInput) (req *req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -10282,7 +10284,7 @@ func (c *QuickSight) ListUsersRequest(input *ListUsersInput) (req *request.Reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -10370,8 +10372,16 @@ func (c *QuickSight) RegisterUserRequest(input *RegisterUserInput) (req *request
 
 // RegisterUser API operation for Amazon QuickSight.
 //
-// Creates an Amazon QuickSight user, whose identity is associated with the
-// Identity and Access Management (IAM) identity or role specified in the request.
+// Creates an Amazon QuickSight user whose identity is associated with the Identity
+// and Access Management (IAM) identity or role specified in the request. When
+// you register a new user from the Amazon QuickSight API, Amazon QuickSight
+// generates a registration URL. The user accesses this registration URL to
+// create their account. Amazon QuickSight doesn't send a registration email
+// to users who are registered from the Amazon QuickSight API. If you want new
+// users to receive a registration email, then add those users in the Amazon
+// QuickSight console. For more information on registering a new user in the
+// Amazon QuickSight console, see Inviting users to access Amazon QuickSight
+// (https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -10387,7 +10397,7 @@ func (c *QuickSight) RegisterUserRequest(input *RegisterUserInput) (req *request
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -10921,7 +10931,7 @@ func (c *QuickSight) SearchDataSetsRequest(input *SearchDataSetsInput) (req *req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidNextTokenException
 //     The NextToken value isn't valid.
@@ -11077,7 +11087,7 @@ func (c *QuickSight) SearchDataSourcesRequest(input *SearchDataSourcesInput) (re
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidNextTokenException
 //     The NextToken value isn't valid.
@@ -11220,7 +11230,7 @@ func (c *QuickSight) SearchFoldersRequest(input *SearchFoldersInput) (req *reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceNotFoundException
 //     One or more resources can't be found.
@@ -11326,7 +11336,7 @@ func (c *QuickSight) SearchGroupsRequest(input *SearchGroupsInput) (req *request
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -11457,7 +11467,7 @@ func (c *QuickSight) TagResourceRequest(input *TagResourceInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -11552,7 +11562,7 @@ func (c *QuickSight) UntagResourceRequest(input *UntagResourceInput) (req *reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -11654,7 +11664,7 @@ func (c *QuickSight) UpdateAccountCustomizationRequest(input *UpdateAccountCusto
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -11755,7 +11765,7 @@ func (c *QuickSight) UpdateAccountSettingsRequest(input *UpdateAccountSettingsIn
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -12356,7 +12366,7 @@ func (c *QuickSight) UpdateDataSetRequest(input *UpdateDataSetInput) (req *reque
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -12465,7 +12475,7 @@ func (c *QuickSight) UpdateDataSetPermissionsRequest(input *UpdateDataSetPermiss
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -12563,7 +12573,7 @@ func (c *QuickSight) UpdateDataSourceRequest(input *UpdateDataSourceInput) (req 
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -12661,7 +12671,7 @@ func (c *QuickSight) UpdateDataSourcePermissionsRequest(input *UpdateDataSourceP
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ConflictException
 //     Updating or deleting a resource can cause an inconsistent state.
@@ -12762,7 +12772,7 @@ func (c *QuickSight) UpdateFolderRequest(input *UpdateFolderInput) (req *request
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - ResourceExistsException
 //     The resource specified already exists.
@@ -12869,7 +12879,7 @@ func (c *QuickSight) UpdateFolderPermissionsRequest(input *UpdateFolderPermissio
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - LimitExceededException
 //     A limit is exceeded.
@@ -12970,7 +12980,7 @@ func (c *QuickSight) UpdateGroupRequest(input *UpdateGroupInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -13073,7 +13083,7 @@ func (c *QuickSight) UpdateIAMPolicyAssignmentRequest(input *UpdateIAMPolicyAssi
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -13180,7 +13190,7 @@ func (c *QuickSight) UpdateIpRestrictionRequest(input *UpdateIpRestrictionInput)
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -13285,7 +13295,7 @@ func (c *QuickSight) UpdatePublicSharingSettingsRequest(input *UpdatePublicShari
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -13691,7 +13701,7 @@ func (c *QuickSight) UpdateThemeRequest(input *UpdateThemeInput) (req *request.R
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -13912,7 +13922,7 @@ func (c *QuickSight) UpdateThemePermissionsRequest(input *UpdateThemePermissions
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -14016,7 +14026,7 @@ func (c *QuickSight) UpdateUserRequest(input *UpdateUserInput) (req *request.Req
 //     validated. You might not be authorized to carry out the request. Make sure
 //     that your account is authorized to use the Amazon QuickSight service, that
 //     your policies have the correct permissions, and that you are using the correct
-//     access keys.
+//     credentials.
 //
 //   - InvalidParameterValueException
 //     One or more parameters has a value that isn't valid.
@@ -14062,7 +14072,7 @@ func (c *QuickSight) UpdateUserWithContext(ctx aws.Context, input *UpdateUserInp
 // validated. You might not be authorized to carry out the request. Make sure
 // that your account is authorized to use the Amazon QuickSight service, that
 // your policies have the correct permissions, and that you are using the correct
-// access keys.
+// credentials.
 type AccessDeniedException struct {
 	_            struct{}                  `type:"structure"`
 	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
@@ -15019,6 +15029,7 @@ type AnalysisError struct {
 	// The type of the analysis error.
 	Type *string `type:"string" enum:"AnalysisErrorType"`
 
+	// Lists the violated entities that caused the analysis error
 	ViolatedEntities []*Entity `type:"list"`
 }
 
@@ -18957,7 +18968,9 @@ type CategoryFilter struct {
 	Column *ColumnIdentifier `type:"structure" required:"true"`
 
 	// The configuration for a CategoryFilter.
-	Configuration *CategoryFilterConfiguration `type:"structure"`
+	//
+	// Configuration is a required field
+	Configuration *CategoryFilterConfiguration `type:"structure" required:"true"`
 
 	// An identifier that uniquely identifies a filter within a dashboard, analysis,
 	// or template.
@@ -18989,6 +19002,9 @@ func (s *CategoryFilter) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CategoryFilter"}
 	if s.Column == nil {
 		invalidParams.Add(request.NewErrParamRequired("Column"))
+	}
+	if s.Configuration == nil {
+		invalidParams.Add(request.NewErrParamRequired("Configuration"))
 	}
 	if s.FilterId == nil {
 		invalidParams.Add(request.NewErrParamRequired("FilterId"))
@@ -22131,6 +22147,9 @@ type CreateAnalysisInput struct {
 	//
 	// A definition is the data model of all features in a Dashboard, Template,
 	// or Analysis.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	Definition *AnalysisDefinition `type:"structure"`
 
 	// A descriptive name for the analysis that you're creating. This name displays
@@ -22154,6 +22173,9 @@ type CreateAnalysisInput struct {
 	// A source entity to use for the analysis that you're creating. This metadata
 	// structure contains details that describe a source template and one or more
 	// datasets.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	SourceEntity *AnalysisSourceEntity `type:"structure"`
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned
@@ -22467,6 +22489,9 @@ type CreateDashboardInput struct {
 	//
 	// A definition is the data model of all features in a Dashboard, Template,
 	// or Analysis.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	Definition *DashboardVersionDefinition `type:"structure"`
 
 	// The display name of the dashboard.
@@ -22499,6 +22524,9 @@ type CreateDashboardInput struct {
 	// Use the DataSetReferences entity within SourceTemplate to list the replacement
 	// datasets for the placeholders listed in the original. The schema in each
 	// dataset must match its placeholder.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	SourceEntity *DashboardSourceEntity `type:"structure"`
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned
@@ -24768,6 +24796,9 @@ type CreateTemplateInput struct {
 	//
 	// A definition is the data model of all features in a Dashboard, Template,
 	// or Analysis.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	Definition *TemplateVersionDefinition `type:"structure"`
 
 	// A display name for the template.
@@ -24787,6 +24818,9 @@ type CreateTemplateInput struct {
 	// Use the DataSetReferences entity within SourceTemplate or SourceAnalysis
 	// to list the replacement datasets for the placeholders listed in the original.
 	// The schema in each dataset must match its placeholder.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	SourceEntity *TemplateSourceEntity `type:"structure"`
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned
@@ -26662,6 +26696,7 @@ type DashboardError struct {
 	// Type.
 	Type *string `type:"string" enum:"DashboardErrorType"`
 
+	// Lists the violated entities that caused the dashboard error.
 	ViolatedEntities []*Entity `type:"list"`
 }
 
@@ -26708,13 +26743,37 @@ type DashboardPublishOptions struct {
 	// Ad hoc (one-time) filtering option.
 	AdHocFilteringOption *AdHocFilteringOption `type:"structure"`
 
+	// The drill-down options of data points in a dashboard.
+	DataPointDrillUpDownOption *DataPointDrillUpDownOption `type:"structure"`
+
+	// The data point menu label options of a dashboard.
+	DataPointMenuLabelOption *DataPointMenuLabelOption `type:"structure"`
+
+	// The data point tool tip options of a dashboard.
+	DataPointTooltipOption *DataPointTooltipOption `type:"structure"`
+
 	// Export to .csv option.
 	ExportToCSVOption *ExportToCSVOption `type:"structure"`
+
+	// Determines if hidden fields are exported with a dashboard.
+	ExportWithHiddenFieldsOption *ExportWithHiddenFieldsOption `type:"structure"`
 
 	// Sheet controls option.
 	SheetControlsOption *SheetControlsOption `type:"structure"`
 
-	VisualPublishOptions *DashboardVisualPublishOptions `type:"structure"`
+	// The sheet layout maximization options of a dashbaord.
+	SheetLayoutElementMaximizationOption *SheetLayoutElementMaximizationOption `type:"structure"`
+
+	// The axis sort options of a dashboard.
+	VisualAxisSortOption *VisualAxisSortOption `type:"structure"`
+
+	// The menu options of a visual in a dashboard.
+	VisualMenuOption *VisualMenuOption `type:"structure"`
+
+	// The visual publish options of a visual in a dashboard.
+	//
+	// Deprecated: VisualPublishOptions property will reach its end of standard support in a future release. To perform this action, use ExportWithHiddenFields.
+	VisualPublishOptions *DashboardVisualPublishOptions `deprecated:"true" type:"structure"`
 }
 
 // String returns the string representation.
@@ -26741,15 +26800,57 @@ func (s *DashboardPublishOptions) SetAdHocFilteringOption(v *AdHocFilteringOptio
 	return s
 }
 
+// SetDataPointDrillUpDownOption sets the DataPointDrillUpDownOption field's value.
+func (s *DashboardPublishOptions) SetDataPointDrillUpDownOption(v *DataPointDrillUpDownOption) *DashboardPublishOptions {
+	s.DataPointDrillUpDownOption = v
+	return s
+}
+
+// SetDataPointMenuLabelOption sets the DataPointMenuLabelOption field's value.
+func (s *DashboardPublishOptions) SetDataPointMenuLabelOption(v *DataPointMenuLabelOption) *DashboardPublishOptions {
+	s.DataPointMenuLabelOption = v
+	return s
+}
+
+// SetDataPointTooltipOption sets the DataPointTooltipOption field's value.
+func (s *DashboardPublishOptions) SetDataPointTooltipOption(v *DataPointTooltipOption) *DashboardPublishOptions {
+	s.DataPointTooltipOption = v
+	return s
+}
+
 // SetExportToCSVOption sets the ExportToCSVOption field's value.
 func (s *DashboardPublishOptions) SetExportToCSVOption(v *ExportToCSVOption) *DashboardPublishOptions {
 	s.ExportToCSVOption = v
 	return s
 }
 
+// SetExportWithHiddenFieldsOption sets the ExportWithHiddenFieldsOption field's value.
+func (s *DashboardPublishOptions) SetExportWithHiddenFieldsOption(v *ExportWithHiddenFieldsOption) *DashboardPublishOptions {
+	s.ExportWithHiddenFieldsOption = v
+	return s
+}
+
 // SetSheetControlsOption sets the SheetControlsOption field's value.
 func (s *DashboardPublishOptions) SetSheetControlsOption(v *SheetControlsOption) *DashboardPublishOptions {
 	s.SheetControlsOption = v
+	return s
+}
+
+// SetSheetLayoutElementMaximizationOption sets the SheetLayoutElementMaximizationOption field's value.
+func (s *DashboardPublishOptions) SetSheetLayoutElementMaximizationOption(v *SheetLayoutElementMaximizationOption) *DashboardPublishOptions {
+	s.SheetLayoutElementMaximizationOption = v
+	return s
+}
+
+// SetVisualAxisSortOption sets the VisualAxisSortOption field's value.
+func (s *DashboardPublishOptions) SetVisualAxisSortOption(v *VisualAxisSortOption) *DashboardPublishOptions {
+	s.VisualAxisSortOption = v
+	return s
+}
+
+// SetVisualMenuOption sets the VisualMenuOption field's value.
+func (s *DashboardPublishOptions) SetVisualMenuOption(v *VisualMenuOption) *DashboardPublishOptions {
+	s.VisualMenuOption = v
 	return s
 }
 
@@ -27545,9 +27646,11 @@ func (s *DashboardVisualId) SetVisualId(v string) *DashboardVisualId {
 	return s
 }
 
+// The visual publish options of a visual in a dashboard
 type DashboardVisualPublishOptions struct {
 	_ struct{} `type:"structure"`
 
+	// Determines if hidden fields are included in an exported dashboard.
 	ExportHiddenFieldsOption *ExportHiddenFieldsOption `type:"structure"`
 }
 
@@ -27572,6 +27675,74 @@ func (s DashboardVisualPublishOptions) GoString() string {
 // SetExportHiddenFieldsOption sets the ExportHiddenFieldsOption field's value.
 func (s *DashboardVisualPublishOptions) SetExportHiddenFieldsOption(v *ExportHiddenFieldsOption) *DashboardVisualPublishOptions {
 	s.ExportHiddenFieldsOption = v
+	return s
+}
+
+// The options for data bars.
+type DataBarsOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The field ID for the data bars options.
+	//
+	// FieldId is a required field
+	FieldId *string `min:"1" type:"string" required:"true"`
+
+	// The color of the negative data bar.
+	NegativeColor *string `type:"string"`
+
+	// The color of the positive data bar.
+	PositiveColor *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataBarsOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataBarsOptions) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DataBarsOptions) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DataBarsOptions"}
+	if s.FieldId == nil {
+		invalidParams.Add(request.NewErrParamRequired("FieldId"))
+	}
+	if s.FieldId != nil && len(*s.FieldId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("FieldId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFieldId sets the FieldId field's value.
+func (s *DataBarsOptions) SetFieldId(v string) *DataBarsOptions {
+	s.FieldId = &v
+	return s
+}
+
+// SetNegativeColor sets the NegativeColor field's value.
+func (s *DataBarsOptions) SetNegativeColor(v string) *DataBarsOptions {
+	s.NegativeColor = &v
+	return s
+}
+
+// SetPositiveColor sets the PositiveColor field's value.
+func (s *DataBarsOptions) SetPositiveColor(v string) *DataBarsOptions {
+	s.PositiveColor = &v
 	return s
 }
 
@@ -28249,6 +28420,102 @@ func (s *DataPathValue) SetFieldId(v string) *DataPathValue {
 // SetFieldValue sets the FieldValue field's value.
 func (s *DataPathValue) SetFieldValue(v string) *DataPathValue {
 	s.FieldValue = &v
+	return s
+}
+
+// The drill down options for data points in a dashbaord.
+type DataPointDrillUpDownOption struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the drill down options of data points.
+	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataPointDrillUpDownOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataPointDrillUpDownOption) GoString() string {
+	return s.String()
+}
+
+// SetAvailabilityStatus sets the AvailabilityStatus field's value.
+func (s *DataPointDrillUpDownOption) SetAvailabilityStatus(v string) *DataPointDrillUpDownOption {
+	s.AvailabilityStatus = &v
+	return s
+}
+
+// The data point menu options of a dashboard.
+type DataPointMenuLabelOption struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the data point menu options.
+	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataPointMenuLabelOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataPointMenuLabelOption) GoString() string {
+	return s.String()
+}
+
+// SetAvailabilityStatus sets the AvailabilityStatus field's value.
+func (s *DataPointMenuLabelOption) SetAvailabilityStatus(v string) *DataPointMenuLabelOption {
+	s.AvailabilityStatus = &v
+	return s
+}
+
+// The data point tooltip options.
+type DataPointTooltipOption struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the data point tool tip options.
+	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataPointTooltipOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataPointTooltipOption) GoString() string {
+	return s.String()
+}
+
+// SetAvailabilityStatus sets the AvailabilityStatus field's value.
+func (s *DataPointTooltipOption) SetAvailabilityStatus(v string) *DataPointTooltipOption {
+	s.AvailabilityStatus = &v
 	return s
 }
 
@@ -34377,6 +34644,21 @@ type DescribeDashboardDefinitionOutput struct {
 	// The ID of the dashboard described.
 	DashboardId *string `min:"1" type:"string"`
 
+	// Options for publishing the dashboard:
+	//
+	//    * AvailabilityStatus for AdHocFilteringOption - This status can be either
+	//    ENABLED or DISABLED. When this is set to DISABLED, Amazon QuickSight disables
+	//    the left filter pane on the published dashboard, which can be used for
+	//    ad hoc (one-time) filtering. This option is ENABLED by default.
+	//
+	//    * AvailabilityStatus for ExportToCSVOption - This status can be either
+	//    ENABLED or DISABLED. The visual option to export data to .CSV format isn't
+	//    enabled when this is set to DISABLED. This option is ENABLED by default.
+	//
+	//    * VisibilityState for SheetControlsOption - This visibility state can
+	//    be either COLLAPSED or EXPANDED. This option is COLLAPSED by default.
+	DashboardPublishOptions *DashboardPublishOptions `type:"structure"`
+
 	// The definition of a dashboard.
 	//
 	// A definition is the data model of all features in a Dashboard, Template,
@@ -34437,6 +34719,12 @@ func (s DescribeDashboardDefinitionOutput) GoString() string {
 // SetDashboardId sets the DashboardId field's value.
 func (s *DescribeDashboardDefinitionOutput) SetDashboardId(v string) *DescribeDashboardDefinitionOutput {
 	s.DashboardId = &v
+	return s
+}
+
+// SetDashboardPublishOptions sets the DashboardPublishOptions field's value.
+func (s *DescribeDashboardDefinitionOutput) SetDashboardPublishOptions(v *DashboardPublishOptions) *DescribeDashboardDefinitionOutput {
+	s.DashboardPublishOptions = v
 	return s
 }
 
@@ -38517,9 +38805,11 @@ func (s *ExplicitHierarchy) SetHierarchyId(v string) *ExplicitHierarchy {
 	return s
 }
 
+// Determines if hidden fields are included in an exported dashboard.
 type ExportHiddenFieldsOption struct {
 	_ struct{} `type:"structure"`
 
+	// The status of the export hidden fields options of a dashbaord.
 	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
 }
 
@@ -38575,6 +38865,38 @@ func (s ExportToCSVOption) GoString() string {
 
 // SetAvailabilityStatus sets the AvailabilityStatus field's value.
 func (s *ExportToCSVOption) SetAvailabilityStatus(v string) *ExportToCSVOption {
+	s.AvailabilityStatus = &v
+	return s
+}
+
+// Determines whether or not hidden fields are visible on exported dashbaords.
+type ExportWithHiddenFieldsOption struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the export with hidden fields options.
+	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExportWithHiddenFieldsOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExportWithHiddenFieldsOption) GoString() string {
+	return s.String()
+}
+
+// SetAvailabilityStatus sets the AvailabilityStatus field's value.
+func (s *ExportWithHiddenFieldsOption) SetAvailabilityStatus(v string) *ExportWithHiddenFieldsOption {
 	s.AvailabilityStatus = &v
 	return s
 }
@@ -45008,8 +45330,8 @@ type GetSessionEmbedUrlInput struct {
 	//
 	// Invited nonfederated users
 	//
-	// Identity and Access Management (IAM) users and IAM role-based sessions authenticated
-	// through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation
+	// IAM users and IAM role-based sessions authenticated through Federated Single
+	// Sign-On using SAML, OpenID Connect, or IAM federation
 	//
 	// Omit this parameter for users in the third group, IAM users and IAM role-based
 	// sessions.
@@ -53615,7 +53937,8 @@ type LogicalTable struct {
 	// Alias is a required field
 	Alias *string `min:"1" type:"string" required:"true"`
 
-	// Transform operations that act on this logical table.
+	// Transform operations that act on this logical table. For this structure to
+	// be valid, only one of the attributes can be non-null.
 	DataTransforms []*TransformOperation `min:"1" type:"list"`
 
 	// Source of this logical table.
@@ -59023,6 +59346,11 @@ type PivotTableOptions struct {
 	// The table cell style of cells.
 	CellStyle *TableCellStyle `type:"structure"`
 
+	// The visibility setting of a pivot table's collapsed row dimension fields.
+	// If the value of this structure is HIDDEN, all collapsed columns in a pivot
+	// table are automatically hidden. The default value is VISIBLE.
+	CollapsedRowDimensionsVisibility *string `type:"string" enum:"Visibility"`
+
 	// The table cell style of the column header.
 	ColumnHeaderStyle *TableCellStyle `type:"structure"`
 
@@ -59099,6 +59427,12 @@ func (s *PivotTableOptions) Validate() error {
 // SetCellStyle sets the CellStyle field's value.
 func (s *PivotTableOptions) SetCellStyle(v *TableCellStyle) *PivotTableOptions {
 	s.CellStyle = v
+	return s
+}
+
+// SetCollapsedRowDimensionsVisibility sets the CollapsedRowDimensionsVisibility field's value.
+func (s *PivotTableOptions) SetCollapsedRowDimensionsVisibility(v string) *PivotTableOptions {
+	s.CollapsedRowDimensionsVisibility = &v
 	return s
 }
 
@@ -60106,6 +60440,615 @@ func (s *QueueInfo) SetQueuedIngestion(v string) *QueueInfo {
 // SetWaitingOnIngestion sets the WaitingOnIngestion field's value.
 func (s *QueueInfo) SetWaitingOnIngestion(v string) *QueueInfo {
 	s.WaitingOnIngestion = &v
+	return s
+}
+
+// The aggregated field well configuration of a RadarChartVisual.
+type RadarChartAggregatedFieldWells struct {
+	_ struct{} `type:"structure"`
+
+	// The aggregated field well categories of a radar chart.
+	Category []*DimensionField `type:"list"`
+
+	// The color that are assigned to the aggregated field wells of a radar chart.
+	Color []*DimensionField `type:"list"`
+
+	// The values that are assigned to the aggregated field wells of a radar chart.
+	Values []*MeasureField `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartAggregatedFieldWells) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartAggregatedFieldWells) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RadarChartAggregatedFieldWells) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RadarChartAggregatedFieldWells"}
+	if s.Category != nil {
+		for i, v := range s.Category {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Category", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Color != nil {
+		for i, v := range s.Color {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Color", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Values != nil {
+		for i, v := range s.Values {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Values", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCategory sets the Category field's value.
+func (s *RadarChartAggregatedFieldWells) SetCategory(v []*DimensionField) *RadarChartAggregatedFieldWells {
+	s.Category = v
+	return s
+}
+
+// SetColor sets the Color field's value.
+func (s *RadarChartAggregatedFieldWells) SetColor(v []*DimensionField) *RadarChartAggregatedFieldWells {
+	s.Color = v
+	return s
+}
+
+// SetValues sets the Values field's value.
+func (s *RadarChartAggregatedFieldWells) SetValues(v []*MeasureField) *RadarChartAggregatedFieldWells {
+	s.Values = v
+	return s
+}
+
+// The configured style settings of a radar chart.
+type RadarChartAreaStyleSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The visibility settings of a radar chart.
+	Visibility *string `type:"string" enum:"Visibility"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartAreaStyleSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartAreaStyleSettings) GoString() string {
+	return s.String()
+}
+
+// SetVisibility sets the Visibility field's value.
+func (s *RadarChartAreaStyleSettings) SetVisibility(v string) *RadarChartAreaStyleSettings {
+	s.Visibility = &v
+	return s
+}
+
+// The configuration of a RadarChartVisual.
+type RadarChartConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Determines the visibility of the colors of alternatign bands in a radar chart.
+	AlternateBandColorsVisibility *string `type:"string" enum:"Visibility"`
+
+	// The color of the even-numbered alternate bands of a radar chart.
+	AlternateBandEvenColor *string `type:"string"`
+
+	// The color of the odd-numbered alternate bands of a radar chart.
+	AlternateBandOddColor *string `type:"string"`
+
+	// The base sreies settings of a radar chart.
+	BaseSeriesSettings *RadarChartSeriesSettings `type:"structure"`
+
+	// The category axis of a radar chart.
+	CategoryAxis *AxisDisplayOptions `type:"structure"`
+
+	// The category label options of a radar chart.
+	CategoryLabelOptions *ChartAxisLabelOptions `type:"structure"`
+
+	// The color axis of a radar chart.
+	ColorAxis *AxisDisplayOptions `type:"structure"`
+
+	// The color label options of a radar chart.
+	ColorLabelOptions *ChartAxisLabelOptions `type:"structure"`
+
+	// The field well configuration of a RadarChartVisual.
+	FieldWells *RadarChartFieldWells `type:"structure"`
+
+	// The legend display setup of the visual.
+	Legend *LegendOptions `type:"structure"`
+
+	// The shape of the radar chart.
+	Shape *string `type:"string" enum:"RadarChartShape"`
+
+	// The sort configuration of a RadarChartVisual.
+	SortConfiguration *RadarChartSortConfiguration `type:"structure"`
+
+	// The start angle of a radar chart's axis.
+	StartAngle *float64 `type:"double"`
+
+	// The palette (chart color) display setup of the visual.
+	VisualPalette *VisualPalette `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RadarChartConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RadarChartConfiguration"}
+	if s.StartAngle != nil && *s.StartAngle < -360 {
+		invalidParams.Add(request.NewErrParamMinValue("StartAngle", -360))
+	}
+	if s.CategoryLabelOptions != nil {
+		if err := s.CategoryLabelOptions.Validate(); err != nil {
+			invalidParams.AddNested("CategoryLabelOptions", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ColorLabelOptions != nil {
+		if err := s.ColorLabelOptions.Validate(); err != nil {
+			invalidParams.AddNested("ColorLabelOptions", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.FieldWells != nil {
+		if err := s.FieldWells.Validate(); err != nil {
+			invalidParams.AddNested("FieldWells", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.SortConfiguration != nil {
+		if err := s.SortConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("SortConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.VisualPalette != nil {
+		if err := s.VisualPalette.Validate(); err != nil {
+			invalidParams.AddNested("VisualPalette", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAlternateBandColorsVisibility sets the AlternateBandColorsVisibility field's value.
+func (s *RadarChartConfiguration) SetAlternateBandColorsVisibility(v string) *RadarChartConfiguration {
+	s.AlternateBandColorsVisibility = &v
+	return s
+}
+
+// SetAlternateBandEvenColor sets the AlternateBandEvenColor field's value.
+func (s *RadarChartConfiguration) SetAlternateBandEvenColor(v string) *RadarChartConfiguration {
+	s.AlternateBandEvenColor = &v
+	return s
+}
+
+// SetAlternateBandOddColor sets the AlternateBandOddColor field's value.
+func (s *RadarChartConfiguration) SetAlternateBandOddColor(v string) *RadarChartConfiguration {
+	s.AlternateBandOddColor = &v
+	return s
+}
+
+// SetBaseSeriesSettings sets the BaseSeriesSettings field's value.
+func (s *RadarChartConfiguration) SetBaseSeriesSettings(v *RadarChartSeriesSettings) *RadarChartConfiguration {
+	s.BaseSeriesSettings = v
+	return s
+}
+
+// SetCategoryAxis sets the CategoryAxis field's value.
+func (s *RadarChartConfiguration) SetCategoryAxis(v *AxisDisplayOptions) *RadarChartConfiguration {
+	s.CategoryAxis = v
+	return s
+}
+
+// SetCategoryLabelOptions sets the CategoryLabelOptions field's value.
+func (s *RadarChartConfiguration) SetCategoryLabelOptions(v *ChartAxisLabelOptions) *RadarChartConfiguration {
+	s.CategoryLabelOptions = v
+	return s
+}
+
+// SetColorAxis sets the ColorAxis field's value.
+func (s *RadarChartConfiguration) SetColorAxis(v *AxisDisplayOptions) *RadarChartConfiguration {
+	s.ColorAxis = v
+	return s
+}
+
+// SetColorLabelOptions sets the ColorLabelOptions field's value.
+func (s *RadarChartConfiguration) SetColorLabelOptions(v *ChartAxisLabelOptions) *RadarChartConfiguration {
+	s.ColorLabelOptions = v
+	return s
+}
+
+// SetFieldWells sets the FieldWells field's value.
+func (s *RadarChartConfiguration) SetFieldWells(v *RadarChartFieldWells) *RadarChartConfiguration {
+	s.FieldWells = v
+	return s
+}
+
+// SetLegend sets the Legend field's value.
+func (s *RadarChartConfiguration) SetLegend(v *LegendOptions) *RadarChartConfiguration {
+	s.Legend = v
+	return s
+}
+
+// SetShape sets the Shape field's value.
+func (s *RadarChartConfiguration) SetShape(v string) *RadarChartConfiguration {
+	s.Shape = &v
+	return s
+}
+
+// SetSortConfiguration sets the SortConfiguration field's value.
+func (s *RadarChartConfiguration) SetSortConfiguration(v *RadarChartSortConfiguration) *RadarChartConfiguration {
+	s.SortConfiguration = v
+	return s
+}
+
+// SetStartAngle sets the StartAngle field's value.
+func (s *RadarChartConfiguration) SetStartAngle(v float64) *RadarChartConfiguration {
+	s.StartAngle = &v
+	return s
+}
+
+// SetVisualPalette sets the VisualPalette field's value.
+func (s *RadarChartConfiguration) SetVisualPalette(v *VisualPalette) *RadarChartConfiguration {
+	s.VisualPalette = v
+	return s
+}
+
+// The field wells of a radar chart visual.
+type RadarChartFieldWells struct {
+	_ struct{} `type:"structure"`
+
+	// The aggregated field wells of a radar chart visual.
+	RadarChartAggregatedFieldWells *RadarChartAggregatedFieldWells `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartFieldWells) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartFieldWells) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RadarChartFieldWells) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RadarChartFieldWells"}
+	if s.RadarChartAggregatedFieldWells != nil {
+		if err := s.RadarChartAggregatedFieldWells.Validate(); err != nil {
+			invalidParams.AddNested("RadarChartAggregatedFieldWells", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRadarChartAggregatedFieldWells sets the RadarChartAggregatedFieldWells field's value.
+func (s *RadarChartFieldWells) SetRadarChartAggregatedFieldWells(v *RadarChartAggregatedFieldWells) *RadarChartFieldWells {
+	s.RadarChartAggregatedFieldWells = v
+	return s
+}
+
+// The series settings of a radar chart.
+type RadarChartSeriesSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The area style settings of a radar chart.
+	AreaStyleSettings *RadarChartAreaStyleSettings `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartSeriesSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartSeriesSettings) GoString() string {
+	return s.String()
+}
+
+// SetAreaStyleSettings sets the AreaStyleSettings field's value.
+func (s *RadarChartSeriesSettings) SetAreaStyleSettings(v *RadarChartAreaStyleSettings) *RadarChartSeriesSettings {
+	s.AreaStyleSettings = v
+	return s
+}
+
+// The sort configuration of a RadarChartVisual.
+type RadarChartSortConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The category items limit for a radar chart.
+	CategoryItemsLimit *ItemsLimitConfiguration `type:"structure"`
+
+	// The category sort options of a radar chart.
+	CategorySort []*FieldSortOptions `type:"list"`
+
+	// The color items limit of a radar chart.
+	ColorItemsLimit *ItemsLimitConfiguration `type:"structure"`
+
+	// The color sort configuration of a radar chart.
+	ColorSort []*FieldSortOptions `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartSortConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartSortConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RadarChartSortConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RadarChartSortConfiguration"}
+	if s.CategorySort != nil {
+		for i, v := range s.CategorySort {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CategorySort", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ColorSort != nil {
+		for i, v := range s.ColorSort {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ColorSort", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCategoryItemsLimit sets the CategoryItemsLimit field's value.
+func (s *RadarChartSortConfiguration) SetCategoryItemsLimit(v *ItemsLimitConfiguration) *RadarChartSortConfiguration {
+	s.CategoryItemsLimit = v
+	return s
+}
+
+// SetCategorySort sets the CategorySort field's value.
+func (s *RadarChartSortConfiguration) SetCategorySort(v []*FieldSortOptions) *RadarChartSortConfiguration {
+	s.CategorySort = v
+	return s
+}
+
+// SetColorItemsLimit sets the ColorItemsLimit field's value.
+func (s *RadarChartSortConfiguration) SetColorItemsLimit(v *ItemsLimitConfiguration) *RadarChartSortConfiguration {
+	s.ColorItemsLimit = v
+	return s
+}
+
+// SetColorSort sets the ColorSort field's value.
+func (s *RadarChartSortConfiguration) SetColorSort(v []*FieldSortOptions) *RadarChartSortConfiguration {
+	s.ColorSort = v
+	return s
+}
+
+// A radar chart visual.
+type RadarChartVisual struct {
+	_ struct{} `type:"structure"`
+
+	// The list of custom actions that are configured for a visual.
+	Actions []*VisualCustomAction `type:"list"`
+
+	// The configuration settings of the visual.
+	ChartConfiguration *RadarChartConfiguration `type:"structure"`
+
+	// The column hierarchy that is used during drill-downs and drill-ups.
+	ColumnHierarchies []*ColumnHierarchy `type:"list"`
+
+	// The subtitle that is displayed on the visual.
+	Subtitle *VisualSubtitleLabelOptions `type:"structure"`
+
+	// The title that is displayed on the visual.
+	Title *VisualTitleLabelOptions `type:"structure"`
+
+	// The unique identifier of a visual. This identifier must be unique within
+	// the context of a dashboard, template, or analysis. Two dashboards, analyses,
+	// or templates can have visuals with the same identifiers.
+	//
+	// VisualId is a required field
+	VisualId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartVisual) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RadarChartVisual) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RadarChartVisual) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RadarChartVisual"}
+	if s.VisualId == nil {
+		invalidParams.Add(request.NewErrParamRequired("VisualId"))
+	}
+	if s.VisualId != nil && len(*s.VisualId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("VisualId", 1))
+	}
+	if s.Actions != nil {
+		for i, v := range s.Actions {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ChartConfiguration != nil {
+		if err := s.ChartConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ChartConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ColumnHierarchies != nil {
+		for i, v := range s.ColumnHierarchies {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ColumnHierarchies", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Subtitle != nil {
+		if err := s.Subtitle.Validate(); err != nil {
+			invalidParams.AddNested("Subtitle", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Title != nil {
+		if err := s.Title.Validate(); err != nil {
+			invalidParams.AddNested("Title", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetActions sets the Actions field's value.
+func (s *RadarChartVisual) SetActions(v []*VisualCustomAction) *RadarChartVisual {
+	s.Actions = v
+	return s
+}
+
+// SetChartConfiguration sets the ChartConfiguration field's value.
+func (s *RadarChartVisual) SetChartConfiguration(v *RadarChartConfiguration) *RadarChartVisual {
+	s.ChartConfiguration = v
+	return s
+}
+
+// SetColumnHierarchies sets the ColumnHierarchies field's value.
+func (s *RadarChartVisual) SetColumnHierarchies(v []*ColumnHierarchy) *RadarChartVisual {
+	s.ColumnHierarchies = v
+	return s
+}
+
+// SetSubtitle sets the Subtitle field's value.
+func (s *RadarChartVisual) SetSubtitle(v *VisualSubtitleLabelOptions) *RadarChartVisual {
+	s.Subtitle = v
+	return s
+}
+
+// SetTitle sets the Title field's value.
+func (s *RadarChartVisual) SetTitle(v *VisualTitleLabelOptions) *RadarChartVisual {
+	s.Title = v
+	return s
+}
+
+// SetVisualId sets the VisualId field's value.
+func (s *RadarChartVisual) SetVisualId(v string) *RadarChartVisual {
+	s.VisualId = &v
 	return s
 }
 
@@ -61156,9 +62099,59 @@ func (s *RegisterUserOutput) SetUserInvitationUrl(v string) *RegisterUserOutput 
 	return s
 }
 
+// The feature configurations of an embedded Amazon QuickSight console.
+type RegisteredUserConsoleFeatureConfigurations struct {
+	_ struct{} `type:"structure"`
+
+	// The state persistence configurations of an embedded Amazon QuickSight console.
+	StatePersistence *StatePersistenceConfigurations `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisteredUserConsoleFeatureConfigurations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisteredUserConsoleFeatureConfigurations) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegisteredUserConsoleFeatureConfigurations) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RegisteredUserConsoleFeatureConfigurations"}
+	if s.StatePersistence != nil {
+		if err := s.StatePersistence.Validate(); err != nil {
+			invalidParams.AddNested("StatePersistence", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetStatePersistence sets the StatePersistence field's value.
+func (s *RegisteredUserConsoleFeatureConfigurations) SetStatePersistence(v *StatePersistenceConfigurations) *RegisteredUserConsoleFeatureConfigurations {
+	s.StatePersistence = v
+	return s
+}
+
 // Information about the dashboard you want to embed.
 type RegisteredUserDashboardEmbeddingConfiguration struct {
 	_ struct{} `type:"structure"`
+
+	// The feature configurations of an embbedded Amazon QuickSight dashboard.
+	FeatureConfigurations *RegisteredUserDashboardFeatureConfigurations `type:"structure"`
 
 	// The dashboard ID for the dashboard that you want the user to see first. This
 	// ID is included in the output URL. When the URL in response is accessed, Amazon
@@ -61198,6 +62191,11 @@ func (s *RegisteredUserDashboardEmbeddingConfiguration) Validate() error {
 	if s.InitialDashboardId != nil && len(*s.InitialDashboardId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("InitialDashboardId", 1))
 	}
+	if s.FeatureConfigurations != nil {
+		if err := s.FeatureConfigurations.Validate(); err != nil {
+			invalidParams.AddNested("FeatureConfigurations", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -61205,9 +62203,62 @@ func (s *RegisteredUserDashboardEmbeddingConfiguration) Validate() error {
 	return nil
 }
 
+// SetFeatureConfigurations sets the FeatureConfigurations field's value.
+func (s *RegisteredUserDashboardEmbeddingConfiguration) SetFeatureConfigurations(v *RegisteredUserDashboardFeatureConfigurations) *RegisteredUserDashboardEmbeddingConfiguration {
+	s.FeatureConfigurations = v
+	return s
+}
+
 // SetInitialDashboardId sets the InitialDashboardId field's value.
 func (s *RegisteredUserDashboardEmbeddingConfiguration) SetInitialDashboardId(v string) *RegisteredUserDashboardEmbeddingConfiguration {
 	s.InitialDashboardId = &v
+	return s
+}
+
+// The feature configuration for an embedded dashboard.
+type RegisteredUserDashboardFeatureConfigurations struct {
+	_ struct{} `type:"structure"`
+
+	// The state persistence settings of an embedded dashboard.
+	StatePersistence *StatePersistenceConfigurations `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisteredUserDashboardFeatureConfigurations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisteredUserDashboardFeatureConfigurations) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegisteredUserDashboardFeatureConfigurations) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RegisteredUserDashboardFeatureConfigurations"}
+	if s.StatePersistence != nil {
+		if err := s.StatePersistence.Validate(); err != nil {
+			invalidParams.AddNested("StatePersistence", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetStatePersistence sets the StatePersistence field's value.
+func (s *RegisteredUserDashboardFeatureConfigurations) SetStatePersistence(v *StatePersistenceConfigurations) *RegisteredUserDashboardFeatureConfigurations {
+	s.StatePersistence = v
 	return s
 }
 
@@ -61449,6 +62500,9 @@ func (s *RegisteredUserQSearchBarEmbeddingConfiguration) SetInitialTopicId(v str
 type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// The embedding configuration of an embedded Amazon QuickSight console.
+	FeatureConfigurations *RegisteredUserConsoleFeatureConfigurations `type:"structure"`
+
 	// The initial URL path for the Amazon QuickSight console. InitialPath is required.
 	//
 	// The entry point URL is constrained to the following paths:
@@ -61493,11 +62547,22 @@ func (s *RegisteredUserQuickSightConsoleEmbeddingConfiguration) Validate() error
 	if s.InitialPath != nil && len(*s.InitialPath) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("InitialPath", 1))
 	}
+	if s.FeatureConfigurations != nil {
+		if err := s.FeatureConfigurations.Validate(); err != nil {
+			invalidParams.AddNested("FeatureConfigurations", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetFeatureConfigurations sets the FeatureConfigurations field's value.
+func (s *RegisteredUserQuickSightConsoleEmbeddingConfiguration) SetFeatureConfigurations(v *RegisteredUserConsoleFeatureConfigurations) *RegisteredUserQuickSightConsoleEmbeddingConfiguration {
+	s.FeatureConfigurations = v
+	return s
 }
 
 // SetInitialPath sets the InitialPath field's value.
@@ -62769,6 +63834,14 @@ type S3Parameters struct {
 	//
 	// ManifestFileLocation is a required field
 	ManifestFileLocation *ManifestFileLocation `type:"structure" required:"true"`
+
+	// Use the RoleArn structure to override an account-wide role for a specific
+	// S3 data source. For example, say an account administrator has turned off
+	// all S3 access with an account-wide role. The administrator can then use RoleArn
+	// to bypass the account-wide role and allow S3 access for the single S3 data
+	// source that is specified in the structure, even if the account-wide role
+	// forbidding S3 access is still active.
+	RoleArn *string `min:"20" type:"string"`
 }
 
 // String returns the string representation.
@@ -62795,6 +63868,9 @@ func (s *S3Parameters) Validate() error {
 	if s.ManifestFileLocation == nil {
 		invalidParams.Add(request.NewErrParamRequired("ManifestFileLocation"))
 	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 20))
+	}
 	if s.ManifestFileLocation != nil {
 		if err := s.ManifestFileLocation.Validate(); err != nil {
 			invalidParams.AddNested("ManifestFileLocation", err.(request.ErrInvalidParams))
@@ -62810,6 +63886,12 @@ func (s *S3Parameters) Validate() error {
 // SetManifestFileLocation sets the ManifestFileLocation field's value.
 func (s *S3Parameters) SetManifestFileLocation(v *ManifestFileLocation) *S3Parameters {
 	s.ManifestFileLocation = v
+	return s
+}
+
+// SetRoleArn sets the RoleArn field's value.
+func (s *S3Parameters) SetRoleArn(v string) *S3Parameters {
+	s.RoleArn = &v
 	return s
 }
 
@@ -66258,6 +67340,38 @@ func (s *SheetElementRenderingRule) SetExpression(v string) *SheetElementRenderi
 	return s
 }
 
+// The sheet layout maximization options of a dashbaord.
+type SheetLayoutElementMaximizationOption struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the sheet layout maximization options of a dashbaord.
+	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SheetLayoutElementMaximizationOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SheetLayoutElementMaximizationOption) GoString() string {
+	return s.String()
+}
+
+// SetAvailabilityStatus sets the AvailabilityStatus field's value.
+func (s *SheetLayoutElementMaximizationOption) SetAvailabilityStatus(v string) *SheetLayoutElementMaximizationOption {
+	s.AvailabilityStatus = &v
+	return s
+}
+
 // The theme display options for sheets.
 type SheetStyle struct {
 	_ struct{} `type:"structure"`
@@ -67018,6 +68132,54 @@ func (s SslProperties) GoString() string {
 // SetDisableSsl sets the DisableSsl field's value.
 func (s *SslProperties) SetDisableSsl(v bool) *SslProperties {
 	s.DisableSsl = &v
+	return s
+}
+
+// The state perssitence configuration of an embedded dashboard.
+type StatePersistenceConfigurations struct {
+	_ struct{} `type:"structure"`
+
+	// Determines if a Amazon QuickSight dashboard's state persistence settings
+	// are turned on or off.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StatePersistenceConfigurations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StatePersistenceConfigurations) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StatePersistenceConfigurations) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StatePersistenceConfigurations"}
+	if s.Enabled == nil {
+		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *StatePersistenceConfigurations) SetEnabled(v bool) *StatePersistenceConfigurations {
+	s.Enabled = &v
 	return s
 }
 
@@ -67936,6 +69098,9 @@ type TableConfiguration struct {
 	// The sort configuration for a TableVisual.
 	SortConfiguration *TableSortConfiguration `type:"structure"`
 
+	// A collection of inline visualizations to display within a chart.
+	TableInlineVisualizations []*TableInlineVisualization `type:"list"`
+
 	// The table options for a table visual.
 	TableOptions *TableOptions `type:"structure"`
 
@@ -67979,6 +69144,16 @@ func (s *TableConfiguration) Validate() error {
 			invalidParams.AddNested("SortConfiguration", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.TableInlineVisualizations != nil {
+		for i, v := range s.TableInlineVisualizations {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TableInlineVisualizations", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
 	if s.TableOptions != nil {
 		if err := s.TableOptions.Validate(); err != nil {
 			invalidParams.AddNested("TableOptions", err.(request.ErrInvalidParams))
@@ -68017,6 +69192,12 @@ func (s *TableConfiguration) SetPaginatedReportOptions(v *TablePaginatedReportOp
 // SetSortConfiguration sets the SortConfiguration field's value.
 func (s *TableConfiguration) SetSortConfiguration(v *TableSortConfiguration) *TableConfiguration {
 	s.SortConfiguration = v
+	return s
+}
+
+// SetTableInlineVisualizations sets the TableInlineVisualizations field's value.
+func (s *TableConfiguration) SetTableInlineVisualizations(v []*TableInlineVisualization) *TableConfiguration {
+	s.TableInlineVisualizations = v
 	return s
 }
 
@@ -68549,6 +69730,53 @@ func (s *TableFieldWells) SetTableAggregatedFieldWells(v *TableAggregatedFieldWe
 // SetTableUnaggregatedFieldWells sets the TableUnaggregatedFieldWells field's value.
 func (s *TableFieldWells) SetTableUnaggregatedFieldWells(v *TableUnaggregatedFieldWells) *TableFieldWells {
 	s.TableUnaggregatedFieldWells = v
+	return s
+}
+
+// The inline visualization of a specific type to display within a chart.
+type TableInlineVisualization struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration of the inline visualization of the data bars within a chart.
+	DataBars *DataBarsOptions `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TableInlineVisualization) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TableInlineVisualization) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TableInlineVisualization) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TableInlineVisualization"}
+	if s.DataBars != nil {
+		if err := s.DataBars.Validate(); err != nil {
+			invalidParams.AddNested("DataBars", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDataBars sets the DataBars field's value.
+func (s *TableInlineVisualization) SetDataBars(v *DataBarsOptions) *TableInlineVisualization {
+	s.DataBars = v
 	return s
 }
 
@@ -69503,6 +70731,7 @@ type TemplateError struct {
 	// Type of error.
 	Type *string `type:"string" enum:"TemplateErrorType"`
 
+	// An error path that shows which entities caused the template error.
 	ViolatedEntities []*Entity `type:"list"`
 }
 
@@ -69829,7 +71058,21 @@ type TemplateVersion struct {
 	// create this template.
 	SourceEntityArn *string `type:"string"`
 
-	// The HTTP status of the request.
+	// The status that is associated with the template.
+	//
+	//    * CREATION_IN_PROGRESS
+	//
+	//    * CREATION_SUCCESSFUL
+	//
+	//    * CREATION_FAILED
+	//
+	//    * UPDATE_IN_PROGRESS
+	//
+	//    * UPDATE_SUCCESSFUL
+	//
+	//    * UPDATE_FAILED
+	//
+	//    * DELETED
 	Status *string `type:"string" enum:"ResourceStatus"`
 
 	// The ARN of the theme associated with this version of the template.
@@ -73884,9 +75127,9 @@ type UpdateAccountSettingsInput struct {
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
 	// The default namespace for this Amazon Web Services account. Currently, the
-	// default is default. Identity and Access Management (IAM) users that register
-	// for the first time with Amazon QuickSight provide an email address that becomes
-	// associated with the default namespace.
+	// default is default. IAM users that register for the first time with Amazon
+	// QuickSight provide an email address that becomes associated with the default
+	// namespace.
 	//
 	// DefaultNamespace is a required field
 	DefaultNamespace *string `type:"string" required:"true"`
@@ -78187,7 +79430,7 @@ func (s *UploadSettings) SetTextQualifier(v string) *UploadSettings {
 type User struct {
 	_ struct{} `type:"structure"`
 
-	// The active status of user. When you create an Amazon QuickSight user that’s
+	// The active status of user. When you create an Amazon QuickSight user that's
 	// not an IAM user or an Active Directory user, that user is inactive until
 	// they sign in and provide a password.
 	Active *bool `type:"boolean"`
@@ -78530,6 +79773,12 @@ type Visual struct {
 	// in the Amazon QuickSight User Guide.
 	PivotTableVisual *PivotTableVisual `type:"structure"`
 
+	// A radar chart visual.
+	//
+	// For more information, see Using radar charts (https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html)
+	// in the Amazon QuickSight User Guide.
+	RadarChartVisual *RadarChartVisual `type:"structure"`
+
 	// A sankey diagram.
 	//
 	// For more information, see Using Sankey diagrams (https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html)
@@ -78668,6 +79917,11 @@ func (s *Visual) Validate() error {
 			invalidParams.AddNested("PivotTableVisual", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.RadarChartVisual != nil {
+		if err := s.RadarChartVisual.Validate(); err != nil {
+			invalidParams.AddNested("RadarChartVisual", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.SankeyDiagramVisual != nil {
 		if err := s.SankeyDiagramVisual.Validate(); err != nil {
 			invalidParams.AddNested("SankeyDiagramVisual", err.(request.ErrInvalidParams))
@@ -78801,6 +80055,12 @@ func (s *Visual) SetPivotTableVisual(v *PivotTableVisual) *Visual {
 	return s
 }
 
+// SetRadarChartVisual sets the RadarChartVisual field's value.
+func (s *Visual) SetRadarChartVisual(v *RadarChartVisual) *Visual {
+	s.RadarChartVisual = v
+	return s
+}
+
 // SetSankeyDiagramVisual sets the SankeyDiagramVisual field's value.
 func (s *Visual) SetSankeyDiagramVisual(v *SankeyDiagramVisual) *Visual {
 	s.SankeyDiagramVisual = v
@@ -78834,6 +80094,38 @@ func (s *Visual) SetWaterfallVisual(v *WaterfallVisual) *Visual {
 // SetWordCloudVisual sets the WordCloudVisual field's value.
 func (s *Visual) SetWordCloudVisual(v *WordCloudVisual) *Visual {
 	s.WordCloudVisual = v
+	return s
+}
+
+// The axis sort options for a visual.
+type VisualAxisSortOption struct {
+	_ struct{} `type:"structure"`
+
+	// The availaiblity status of a visual's axis sort options.
+	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VisualAxisSortOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VisualAxisSortOption) GoString() string {
+	return s.String()
+}
+
+// SetAvailabilityStatus sets the AvailabilityStatus field's value.
+func (s *VisualAxisSortOption) SetAvailabilityStatus(v string) *VisualAxisSortOption {
+	s.AvailabilityStatus = &v
 	return s
 }
 
@@ -79056,6 +80348,38 @@ func (s *VisualCustomActionOperation) SetSetParametersOperation(v *CustomActionS
 // SetURLOperation sets the URLOperation field's value.
 func (s *VisualCustomActionOperation) SetURLOperation(v *CustomActionURLOperation) *VisualCustomActionOperation {
 	s.URLOperation = v
+	return s
+}
+
+// The menu options for a visual.
+type VisualMenuOption struct {
+	_ struct{} `type:"structure"`
+
+	// The availaiblity status of a visual's menu options.
+	AvailabilityStatus *string `type:"string" enum:"DashboardBehavior"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VisualMenuOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VisualMenuOption) GoString() string {
+	return s.String()
+}
+
+// SetAvailabilityStatus sets the AvailabilityStatus field's value.
+func (s *VisualMenuOption) SetAvailabilityStatus(v string) *VisualMenuOption {
+	s.AvailabilityStatus = &v
 	return s
 }
 
@@ -82863,6 +84187,22 @@ func PrimaryValueDisplayType_Values() []string {
 		PrimaryValueDisplayTypeHidden,
 		PrimaryValueDisplayTypeComparison,
 		PrimaryValueDisplayTypeActual,
+	}
+}
+
+const (
+	// RadarChartShapeCircle is a RadarChartShape enum value
+	RadarChartShapeCircle = "CIRCLE"
+
+	// RadarChartShapePolygon is a RadarChartShape enum value
+	RadarChartShapePolygon = "POLYGON"
+)
+
+// RadarChartShape_Values returns all elements of the RadarChartShape enum
+func RadarChartShape_Values() []string {
+	return []string{
+		RadarChartShapeCircle,
+		RadarChartShapePolygon,
 	}
 }
 
