@@ -1,3 +1,206 @@
+Release v1.44.238 (2023-04-06)
+===
+
+### Service Client Updates
+* `service/cloudformation`: Updates service waiters
+  * Including UPDATE_COMPLETE as a failed status for DeleteStack waiter.
+* `service/greengrassv2`: Updates service API and documentation
+* `service/proton`: Updates service API and documentation
+* `service/rds`: Updates service API, documentation, waiters, paginators, and examples
+  * Adds and updates the SDK examples
+
+Release v1.44.237 (2023-04-05)
+===
+
+### Service Client Updates
+* `service/apprunner`: Updates service API
+* `service/config`: Updates service API and documentation
+* `service/ecs`: Updates service documentation
+  * This is a document only updated to add information about Amazon Elastic Inference (EI).
+* `service/identitystore`: Updates service documentation
+* `service/ivs-realtime`: Updates service API
+* `service/network-firewall`: Updates service API and documentation
+* `service/servicecatalog`: Updates service API
+  * removed incorrect product type value
+* `service/vpc-lattice`: Updates service documentation
+
+Release v1.44.236 (2023-04-04)
+===
+
+### Service Client Updates
+* `service/amplifyuibuilder`: Updates service API, documentation, and waiters
+* `service/autoscaling`: Updates service documentation
+  * Documentation updates for Amazon EC2 Auto Scaling
+* `service/dataexchange`: Updates service API
+* `service/ec2`: Updates service API
+  * C6in, M6in, M6idn, R6in and R6idn bare metal instances are powered by 3rd Generation Intel Xeon Scalable processors and offer up to 200 Gbps of network bandwidth.
+* `service/elastic-inference`: Updates service API and documentation
+* `service/runtime.sagemaker`: Updates service API and documentation
+* `service/sagemaker`: Updates service API and documentation
+  * Amazon SageMaker Asynchronous Inference now allows customer's to receive failure model responses in S3 and receive success/failure model responses in SNS notifications.
+* `service/wafv2`: Updates service API and documentation
+
+Release v1.44.235 (2023-04-03)
+===
+
+### Service Client Updates
+* `service/glue`: Updates service API and documentation
+  * Add support for database-level federation
+* `service/lakeformation`: Updates service API and documentation
+* `service/license-manager`: Updates service API and documentation
+* `service/mwaa`: Updates service API and documentation
+* `service/servicecatalog`: Updates service API and documentation
+  * This release introduces Service Catalog support for Terraform open source. It enables 1. The notify* APIs to Service Catalog. These APIs are used by the terraform engine to notify the result of the provisioning engine execution. 2. Adds a new TERRAFORM_OPEN_SOURCE product type in CreateProduct API.
+* `service/wafv2`: Updates service API and documentation
+
+Release v1.44.234 (2023-03-31)
+===
+
+### Service Client Updates
+* `service/ec2`: Updates service documentation
+  * Documentation updates for EC2 On Demand Capacity Reservations
+* `service/internetmonitor`: Updates service API and documentation
+* `service/resiliencehub`: Updates service documentation
+* `service/s3`: Updates service documentation and examples
+  * Documentation updates for Amazon S3
+* `service/sagemaker-featurestore-runtime`: Updates service API and documentation
+* `service/sms`: Updates service API
+  * Deprecating AWS Server Migration Service.
+
+Release v1.44.233 (2023-03-30)
+===
+
+### Service Client Updates
+* `service/athena`: Updates service API
+  * Make DefaultExecutorDpuSize and CoordinatorDpuSize  fields optional  in StartSession
+* `service/autoscaling`: Updates service API, documentation, paginators, and examples
+  * Amazon EC2 Auto Scaling now supports Elastic Load Balancing traffic sources with the AttachTrafficSources, DetachTrafficSources, and DescribeTrafficSources APIs. This release also introduces a new activity status, "WaitingForConnectionDraining", for VPC Lattice to the DescribeScalingActivities API.
+* `service/batch`: Updates service API and documentation
+  * This feature allows Batch on EKS to support configuration of Pod Labels through Metadata for Batch on EKS Jobs.
+* `service/compute-optimizer`: Updates service API and documentation
+* `service/drs`: Updates service API and documentation
+* `service/ec2`: Updates service API and documentation
+  * This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates.
+* `service/elasticmapreduce`: Updates service API and documentation
+  * Updated DescribeCluster and ListClusters API responses to include ErrorDetail that specifies error code, programmatically accessible error data,and an error message. ErrorDetail provides the underlying reason for cluster failure and recommends actions to simplify troubleshooting of EMR clusters.
+* `service/glue`: Updates service API and documentation
+  * This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+* `service/guardduty`: Updates service API, documentation, and paginators
+  * Added EKS Runtime Monitoring feature support to existing detector, finding APIs and introducing new Coverage APIs
+* `service/imagebuilder`: Updates service API, documentation, and paginators
+* `service/ivs`: Updates service API and documentation
+* `service/kendra`: Updates service API and documentation
+  * AWS Kendra now supports featured results for a query.
+* `service/network-firewall`: Updates service API, documentation, and paginators
+* `service/sagemaker-geospatial`: Updates service API and documentation
+* `service/vpc-lattice`: Adds new service
+* `service/wellarchitected`: Updates service API, documentation, and paginators
+
+### SDK Bugs
+
+* `aws/session`: Fix `AWS_USE_FIPS_ENDPOINT` not being inferred on resolved credentials.
+  * Defer resolving default credentials chain until after other config is resolved.
+
+Release v1.44.232 (2023-03-29)
+===
+
+### Service Client Updates
+* `service/opensearchserverless`: Updates service API and documentation
+* `service/rds`: Updates service API, documentation, waiters, paginators, and examples
+  * Add support for creating a read replica DB instance from a Multi-AZ DB cluster.
+
+Release v1.44.231 (2023-03-28)
+===
+
+### Service Client Updates
+* `service/iot-data`: Adds new service
+* `service/ssm-contacts`: Updates service API, documentation, paginators, and examples
+* `service/ssm-incidents`: Updates service API and documentation
+
+Release v1.44.230 (2023-03-27)
+===
+
+### Service Client Updates
+* `service/athena`: Updates service API and documentation
+  * Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries.
+* `service/chime-sdk-voice`: Updates service documentation
+* `service/connect`: Updates service API and documentation
+* `service/connectparticipant`: Updates service documentation
+* `service/iotwireless`: Updates service API and documentation
+* `service/medialive`: Updates service API and documentation
+  * AWS Elemental MediaLive now supports ID3 tag insertion for audio only HLS output groups. AWS Elemental Link devices now support tagging.
+* `service/sagemaker`: Updates service documentation
+  * Fixed some improperly rendered links in SDK documentation.
+* `service/securityhub`: Updates service API and documentation
+* `service/servicecatalog-appregistry`: Updates service API and documentation
+* `service/voice-id`: Updates service API, documentation, and paginators
+
+Release v1.44.229 (2023-03-24)
+===
+
+### Service Client Updates
+* `service/comprehend`: Updates service API and documentation
+* `service/monitoring`: Updates service documentation
+  * Doc-only update to correct alarm actions list
+* `service/rds`: Updates service API, documentation, waiters, paginators, and examples
+  * Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.
+
+Release v1.44.228 (2023-03-23)
+===
+
+### Service Client Updates
+* `service/batch`: Updates service API and documentation
+  * This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE
+* `service/chime-sdk-identity`: Updates service API, documentation, and paginators
+* `service/chime-sdk-media-pipelines`: Updates service API, documentation, and paginators
+* `service/chime-sdk-messaging`: Updates service API and documentation
+* `service/chime-sdk-voice`: Updates service API, documentation, and paginators
+* `service/codeartifact`: Updates service API and documentation
+* `service/guardduty`: Updates service API and documentation
+  * Adds AutoEnableOrganizationMembers attribute to DescribeOrganizationConfiguration and UpdateOrganizationConfiguration APIs.
+* `service/ivs-realtime`: Adds new service
+* `service/mediaconvert`: Updates service API and documentation
+  * AWS Elemental MediaConvert SDK now supports passthrough of ID3v2 tags for audio inputs to audio-only HLS outputs.
+* `service/sagemaker`: Updates service API and documentation
+  * Amazon SageMaker Autopilot adds two new APIs - CreateAutoMLJobV2 and DescribeAutoMLJobV2. Amazon SageMaker Notebook Instances now supports the ml.geospatial.interactive instance type.
+* `service/servicediscovery`: Updates service API
+* `service/textract`: Updates service API and documentation
+
+Release v1.44.227 (2023-03-22)
+===
+
+### Service Client Updates
+* `service/iam`: Updates service documentation
+  * Documentation updates for AWS Identity and Access Management (IAM).
+* `service/iottwinmaker`: Updates service API and documentation
+* `service/networkmanager`: Updates service documentation
+* `service/pipes`: Updates service API
+* `service/resiliencehub`: Updates service API and documentation
+* `service/ssm`: Updates service API and documentation
+  * This Patch Manager release supports creating, updating, and deleting Patch Baselines for AmazonLinux2023, AlmaLinux.
+
+Release v1.44.226 (2023-03-21)
+===
+
+### Service Client Updates
+* `service/chime-sdk-messaging`: Updates service API and documentation
+* `service/cleanrooms`: Updates service API and documentation
+* `service/ec2`: Updates service API and documentation
+  * This release adds support for AWS Network Firewall, AWS PrivateLink, and Gateway Load Balancers to Amazon VPC Reachability Analyzer, and it makes the path destination optional as long as a destination address in the filter at source is provided.
+* `service/iotsitewise`: Updates service API and documentation
+* `service/mgn`: Updates service API, documentation, and paginators
+
+Release v1.44.225 (2023-03-20)
+===
+
+### Service Client Updates
+* `service/application-autoscaling`: Updates service API, documentation, and examples
+* `service/neptune`: Updates service API and documentation
+  * This release makes following few changes. db-cluster-identifier is now a required parameter of create-db-instance. describe-db-cluster will now return PendingModifiedValues and GlobalClusterIdentifier fields in the response.
+* `service/s3outposts`: Updates service API and documentation
+* `service/workdocs`: Updates service API, documentation, and paginators
+  * This release adds a new API, SearchResources, which enable users to search through metadata and content of folders, documents, document versions and comments in a WorkDocs site.
+
 Release v1.44.224 (2023-03-17)
 ===
 
@@ -1032,6 +1235,9 @@ Release v1.44.143 (2022-11-21)
 
 Release v1.44.142 (2022-11-18)
 ===
+
+### Notes
+* Removes old model file for ssm sap and uses the new model file to regenerate client
 
 Release v1.44.141 (2022-11-18)
 ===
